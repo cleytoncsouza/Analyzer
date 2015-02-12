@@ -1,0 +1,39 @@
+@relation questions
+
+@attribute question_topic {TECHNOLOGY, ENTERTAINMENT, HOME_AND_FAMILY, PROFESSIONAL, PLACES, RESTAURANTS, CURRENT_EVENTS, SHOPPING, ETHICS_AND_PHILOSOPHY}
+@attribute interrogative_particle {O_QUE, QUEM, QUAL, PORQUE, ONDE, COMO, QUANDO, QUANTO, UNKNOWN}
+@attribute amount_number_expressions numeric
+@attribute amount_measure_expressions numeric
+@attribute amount_timestamp_expressions numeric
+@attribute amount_address_expressions numeric
+@attribute amount_people_expressions numeric
+@attribute amount_place_expressions numeric
+@attribute amount_product_expressions numeric
+@attribute is_opinion {YES, NO}
+
+@data
+TECHNOLOGY, UNKNOWN, 0, 0, 0, 0, 0, 0, 0, NO
+TECHNOLOGY, QUAL, 0, 0, 0, 0, 0, 0, 2, YES
+TECHNOLOGY, UNKNOWN, 0, 0, 0, 0, 1, 1, 0, YES
+TECHNOLOGY, O_QUE, 0, 0, 0, 0, 0, 1, 0, YES
+TECHNOLOGY, QUAL, 0, 0, 0, 0, 0, 0, 2, YES
+TECHNOLOGY, UNKNOWN, 0, 0, 0, 0, 0, 0, 2, YES
+TECHNOLOGY, QUAL, 0, 0, 0, 0, 0, 0, 0, NO
+TECHNOLOGY, UNKNOWN, 0, 0, 0, 0, 0, 0, 2, YES
+TECHNOLOGY, QUAL, 0, 0, 0, 0, 0, 0, 2, YES
+TECHNOLOGY, QUAL, 0, 0, 0, 0, 0, 0, 0, NO
+TECHNOLOGY, QUAL, 0, 0, 0, 0, 0, 0, 0, NO
+TECHNOLOGY, COMO, 0, 0, 0, 0, 0, 0, 1, NO
+TECHNOLOGY, COMO, 0, 0, 0, 0, 0, 0, 1, NO
+TECHNOLOGY, O_QUE, 0, 0, 0, 0, 0, 0, 1, NO
+TECHNOLOGY, QUAL, 0, 0, 0, 0, 0, 0, 2, YES
+TECHNOLOGY, QUAL, 0, 0, 0, 0, 0, 0, 2, YES
+TECHNOLOGY, UNKNOWN, 0, 0, 0, 0, 0, 0, 2, YES
+TECHNOLOGY, COMO, 0, 0, 0, 0, 0, 0, 0, NO
+TECHNOLOGY, UNKNOWN, 0, 0, 0, 0, 0, 0, 0, NO
+TECHNOLOGY, QUAL, 0, 0, 0, 0, 0, 0, 0, NO
+TECHNOLOGY, UNKNOWN, 0, 0, 0, 0, 0, 0, 2, YES
+TECHNOLOGY, COMO, 0, 0, 0, 0, 0, 1, 0, NO
+
+
+ 

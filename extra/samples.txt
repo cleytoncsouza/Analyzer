@@ -1,0 +1,10 @@
+TECHNOLOGY=vocês estão recebendo email?
+TECHNOLOGY=o que faço para baixar vídeos do youtube sem programa no pc?
+TECHNOLOGY=qual navegador é melhor mozilla ou google chrome?
+TECHNOLOGY=o site de compras mercado livre é de confiança?
+TECHNOLOGY=me indiquem um antivírus gratuito?
+TECHNOLOGY=troco o processador ou coloca mais memória ram?
+TECHNOLOGY=quais jogos rodam nessas configurações : processador : i5 3570k memoria: 8 HD: 1Tb placa de video: gtx 760 4G gigabyte?
+TECHNOLOGY=estou muito viciado no Facebook, o que fazer?
+TECHNOLOGY=e agora sem o thepiratebay onde baixar torrents?
+TECHNOLOGY=notebook ou computador, qual é o melhor ?
