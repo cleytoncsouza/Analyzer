@@ -6,8 +6,8 @@ public class ExistsVocativeAnalyser implements Analyser {
 
 	@Override
 	public Boolean analyse(String question) {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO Ainda falta implementar
+		return true;
 	}
 
 	@Override
