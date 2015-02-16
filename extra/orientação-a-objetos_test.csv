@@ -1,0 +1,1543 @@
+title,body,tags
+Como funciona e como implementar o Design Pattern Observer?,"<p>Estou na dúvida em relação Design Pattern Observer, quando ao seu funcionamento e como utilizar(apresentar exemplo prático).</p>
+",<java><orientação-a-objetos><design-pattern><observer-pattern>
+Problemas com modelagem de permissões RBAC,"<p>Estou a desenvolver um sistema em que suas permissões de usuários serão baseadas no modelo RBAC, </p>
+
+<p><img src=""http://i.stack.imgur.com/j27Ss.jpg"" alt=""inserir a descrição da imagem aqui""></p>
+
+<p>um usuário poderia estar em diversos regras de permissões que dariam ou não privilégios ao sistema, ao cadastrar um novo usuário o usuário a ser cadastrado herdaria as permissões do usuário que esta cadastrando, como impedir que o usuário que esta sendo cadastrado não possa excluir um usuário que esta em uma hierarquia acima da dele(segundo o negocio) ou remover este usuário de regras que influencia em sua hierarquia no sistema.
+Por exemplo</p>
+
+<pre><code> João(Usuário)
+    -&gt;Diretoria(Regra)
+       -&gt;cadastrar usuários(Permissão)
+       -&gt;excluir usuários(Permissão)
+
+ Fernando(Usuário)
+    -&gt;RH(Regra)
+       -&gt;cadastrar usuários(Permissão)
+       -&gt;excluir usuários(Permissão)
+</code></pre>
+
+<p>Do ponto de vista do negocio(Mundo real) <strong>Diretoria</strong> esta acima de <strong>RH</strong> na hierarquia mas no modelo RBAC é uma abstração interpretada pelo usuário que os criou! como impedir por exemplo que Fernando exclua o <strong>diretor</strong> João? simplesmente por ambos terem a mesma <strong>permissão</strong>(excluir usuários)! uma solução seria escrever no programa que o usuário só excluísse ou modificasse os usuários da mesma regra, mas neste caso o <strong>diretor</strong> da empresa não poderia excluir ninguém! ou ele teria que estar em todos as regras e se ele estivesse também poderia ser excluído por outro usuário, outra solução seria registrar um histórico para cada usuário informando quem é seu <strong>pai</strong>(usuário que o criou) e assim por diante neste caso eu escreveria no programa que o usuário não pode tirar privilégios de seus pais, este seria um jeito de representar a hierarquia, mas ainda sim não ficaria perfeita pois um diretor poderia ser cadastrado paralelamente a um usuário comum e esta regra não se aplicaria a ele.</p>
+
+<p>existe algum modelo ou solução que possa ser combinado com este para dar alguma hierarquia(do ponto de vista do negocio) as regras, como poderia ser representado no banco de dados relacional?</p>
+",<banco-de-dados><orientação-a-objetos><modelagem>
+Qual o conceito e como implementar um Modelo de Domínio Anêmico?,"<p>Gostaria de resolver as seguintes dúvidas acerca do Modelo Anêmico:</p>
+
+<ol>
+<li>O que é o <strong>Modelo de Domínio Anêmico</strong>?</li>
+<li>Quais são a diferenças de <strong>implementação</strong> desse modelo em comparação com o <strong>Modelo Orientado a Objeto</strong>? Se possível, apresentar um pequeno exemplo dos dois modelos na linguagem java.</li>
+</ol>
+",<java><orientação-a-objetos><modelagem>
+Quando usar self vs $this em PHP?,"<p>Vejo como uma dúvida muito frequente:</p>
+
+<p>Quando devemos usar o <code>self</code>, ou o <code>$this</code> no PHP qual forma mais adequada para o uso, e qual a diferença das 2 situações?</p>
+",<php><self><this><orientação-a-objetos>
+Onde devo declarar uma variável de instância em JavaScript?,"<p>Estou com dúvida sobre a criação de variáveis de instância em uma classe/função construtora JavaScript. Já li em vários lugares que a declaração de uma variável de instância é feita dentro do corpo da classe como no exemplo abaixo:</p>
+
+<pre class=""lang-javascript prettyprint-override""><code>function Spam() {
+    this.foo = ""foo""
+}
+</code></pre>
+
+<p>Mas percebi que também posso declarar a variável no <code>prototype</code> da classe como no exemplo abaixo:</p>
+
+<pre class=""lang-javascript prettyprint-override""><code>Spam.prototype.bar = ""bar"";
+</code></pre>
+
+<p>E no final acabo obtendo o mesmo resultado:</p>
+
+<pre class=""lang-javascript prettyprint-override""><code>var mySpam = new Spam();
+mySpam.foo    // =&gt; ""foo"": declarado no corpo da classe
+mySpam.bar    // =&gt; ""bar"": declarado no prototype da classe
+</code></pre>
+
+<p>Qual a diferença entre os dois métodos de declarar uma variável de instância?</p>
+",<javascript><orientação-a-objetos><classes><variáveis-de-instância>
+É possível criar uma 'classe abstrata' em Javascript?,"<p>Ao criar uma classe em Javascript cujos atributos e métodos são todos estáticos (por exemplo, para o armazenamento de configurações predefinidas para um jogo), eu gostaria de saber se é possível definir a classe como abstrata de forma similar ao que pode ser realizado em outras linguagens (em que a cláusula '<em>abstract</em>' está disponível ou em que se pode simplesmente definir o construtor como protegido).</p>
+
+<p>Em outras palavras: considerando <a href=""http://jsfiddle.net/luigivieira/yrJ5x/2/"">este exemplo disponível no JSFiddle</a>, é possível impedir a construção de instâncias da classe 'StaticTest' (na linha 36)? Se o construtor (linha 7) não for definido, o código não executa (gerando a exceção ""Uncaught ReferenceError: StaticTest is not defined"").</p>
+
+<pre class=""lang-js prettyprint-override""><code>// INICIO - Apenas para evitar poluir o espaço global
+(function(){
+
+    /**
+     * Construtor da classe (é realmente necessário?).
+     */
+    var AbstractTest = function() {
+    };
+
+    /**
+     * Atributo com o texto de teste.
+     */
+    AbstractTest.Attribute = ""O atributo diz: Olá Planeta!"";
+
+    /**
+     * Método que retorna o texto do teste.
+     * @return String com o texto de teste.
+     */
+    AbstractTest.Method = function() {
+        return ""O método diz: Olá Mundo!"";
+    }
+
+    // Atribui a classe ao escopo global 'window'
+    window.AbstractTest = AbstractTest;
+
+// FIM - Apenas para evitar poluir o espaço global
+}());
+
+/**
+ * Função de teste de instanciação.
+ * @return String com o texto de teste de uma instância criada.
+ */
+window.testInstantiation = function() {
+
+    // A dúvida é sobre a possibilidade de impedir a execução dessa linha:
+    var oTest = new AbstractTest();
+
+    oTest.Attribute = ""O atributo na nova instância diz: Olá Brasil!"";
+    return oTest.Attribute + "" e "" + AbstractTest.Attribute;
+}
+</code></pre>
+
+<p>Observação: a pergunta é apenas uma curiosidade sobre as características da linguagem; não que a possibilidade de instanciação da classe seja necessariamente um problema.</p>
+
+<p>EDIT: Alterado para corrigir e usar o termo ""abstrato"" no lugar de ""estático"".</p>
+",<javascript><classes><orientação-a-objetos><classes-abstratas>
+"Onde criar uma classe própria, e como instanciá-la depois?","<p>Tenho uma classe própria (i.e. externa às bibliotecas padrão do PHP e do Laravel) que faz algumas conexões com equipamentos da minha rede e além disso preciso criar rotinas de notificações por e-mail e SMS.</p>
+
+<p>Para referência, <a href=""http://wiki.mikrotik.com/wiki/API_PHP_class"" rel=""nofollow"">esta é a classe</a>:</p>
+
+<pre class=""lang-php prettyprint-override""><code>&lt;?php
+/*****************************
+ *
+ * RouterOS PHP API class v1.5
+ * Author: Denis Basta
+ * Contributors:
+ *    Nick Barnes
+ *    Ben Menking (ben [at] infotechsc [dot] com)
+ *    Jeremy Jefferson (http://jeremyj.com)
+ *    Cristian Deluxe (djcristiandeluxe [at] gmail [dot] com)
+ *
+ * http://www.mikrotik.com
+ * http://wiki.mikrotik.com/wiki/API_PHP_class
+ *
+ ******************************/
+
+class routeros_api
+{
+    ...
+}
+?&gt;
+</code></pre>
+
+<h1>Pergunta</h1>
+
+<p>Onde colocar os arquivos da classe, e como chamá-la depois a partir da aplicação? </p>
+
+<p>E, se existe mais de uma opção viável, quais seriam as boas práticas <em>para manter organizado o código de terceiros</em>?</p>
+",<php><orientação-a-objetos><laravel4><classes>
+Diferenças no momento de instanciar uma classe,"<p>Utilizando o <code>PHP</code> ao instanciar um objeto eu o faço da seguinte forma:</p>
+
+<pre class=""lang-php prettyprint-override""><code>$obj = NEW my_class_exemplo;
+</code></pre>
+
+<p>porém sempre o auto complete do netbeans me da a opção de colocar com parenteses assim:</p>
+
+<pre class=""lang-php prettyprint-override""><code>$obj = NEW my_class_exemplo();
+</code></pre>
+
+<p><strong>Pergunta:</strong> Existe alguma diferença na utilização de alguma das opções em termos de performance e mecânica?</p>
+",<php><orientação-a-objetos><classes><instanciar-objeto>
+"Em orientação a objetos, por que interfaces são úteis?","<p>Alguém pode dar uma explicação prática sobre motivos para se usar interfaces e por que elas são úteis para nós desenvolvedores?</p>
+",<orientação-a-objetos><interface>
+Como criar validação de usuários com níveis de acesso em codeigniter?,"<p>tenho esse model e controle que verifica e valida os usuários cadastrados na tabela <strong>tb_users</strong> do banco de dados. Preciso de um script que verifica se o usuário é <strong>0 ou 1</strong> na coluna <strong>nv_nivel</strong>. Se o usuário for igual a <strong>0</strong> ele direciona para <code>redirect('usuario/home', 'refresh');</code> se for igual a <strong>1</strong> direciona para <code>redirect('admin/home', 'refresh');</code></p>
+
+<p>Segue abaixo o código <strong>Model</strong> e <strong>Controller</strong>.</p>
+
+<p><strong>-> Model</strong></p>
+
+<pre><code>   class Login_model extends CI_Model {
+
+    function ValidaLogin() {
+        $this-&gt;db-&gt;where('hl_email', $this-&gt;input-&gt;post('email'));
+        $this-&gt;db-&gt;where('pw_password', md5($this-&gt;input-&gt;post('senha')));
+        $query = $this-&gt;db-&gt;get('tb_user');
+        if ($query-&gt;num_rows == 1) {
+            return true;
+        }
+    }
+}
+</code></pre>
+
+<p><strong>-> controller</strong></p>
+
+<pre><code>public function valida() {
+
+        $this-&gt;load-&gt;model('login_model'); //Carrega o model
+        $query = $this-&gt;login_model-&gt;ValidaLogin(); //Chama a função da Model que checa o usuário no BD
+
+        if ($query) { //Se o Usuário e senha existir no mesmo registro...
+            $data = array(
+                'login' =&gt; $this-&gt;input-&gt;post('email'),
+                'is_logged_in' =&gt; true
+            );
+            $this-&gt;session-&gt;set_userdata($data);
+            redirect('usuario/home', 'refresh');
+        } else { // incorreto username ou password
+            $info['msg'] = ""Informações incorretas"";
+            $this-&gt;load-&gt;view('header_html');
+            $this-&gt;load-&gt;view('header_view');
+            $this-&gt;load-&gt;view('login/login_view', $info);
+            $this-&gt;load-&gt;view('footer_view');
+            $this-&gt;load-&gt;view('footer_html');
+        }
+    }
+</code></pre>
+",<php><codeigniter><validação><orientação-a-objetos>
+Qual é a vantagem de esconder o construtor da classe a favor de um método estático (no .NET)?,"<p>Meu líder usa este padrão em TODAS as suas classes (darei os exemplos em C#, mas vale para qualquer linguagem do .NET):</p>
+
+
+
+<pre class=""lang-cs prettyprint-override""><code>public class MeuTipo
+{
+    private MeuTipo() { } // esconder o construtor
+
+    public static MeuTipo CriarMeuTipo()
+    {
+        MeuTipo meuTipo = new MeuTipo();
+        return meuTipo;
+    }
+}
+</code></pre>
+
+<p>Eu realmente não entendo o porquê disso. Suas classes sequer são imutáveis (apesar de que eu também não acho que existiria uma vantagem mesmo que a classe fosse imutável), então, além de isso me parecer um padrão sem muita utilidade, também nos previne de usar construtores com propriedades, como por exemplo... (Usarei uma suposta classe <code>Pessoa</code>)</p>
+
+<pre class=""lang-cs prettyprint-override""><code>new Pessoa { Nome = ""João"", Sobrenome = ""Doe"", (...) } // não é possível nesse padrão
+</code></pre>
+
+<p>Por isso, somos obrigados a imaginar todos os cenários em que um construtor seria possível. Por exemplo, supondo que em uma ocasião a <code>Pessoa</code> pode iniciar sem nenhum dado, ou só com o primeiro nome, ou com ambos os nomes, somos obrigados a fazer a classe assim:</p>
+
+<pre class=""lang-cs prettyprint-override""><code>public class Pessoa {
+    private string _nome;
+    public string nome {
+        get { return this._nome; }
+        set { this._nome = value; }
+    }
+
+    private string _sobrenome;
+    public string sobrenome {
+        get { return this._sobrenome; }
+        set { this._sobrenome = value; }
+    }
+
+    private Pessoa() { }
+    public static Pessoa CriarPessoa() {
+        return CriarPessoa(null);
+    }
+    public static Pessoa CriarPessoa(string nome) {
+        return CriarPessoa(null, null);
+    }
+    public static Pessoa CriarPessoa(string nome, string sobrenome) {
+        Pessoa pessoa = new Pessoa();
+        pessoa.nome = nome;
+        pessoa.sobrenome = nome;
+        return pessoa;
+    }
+}
+</code></pre>
+
+<p>Enquanto poderíamos fazer assim:</p>
+
+<pre class=""lang-cs prettyprint-override""><code>public class Pessoa {
+    public string Nome { get; set; }
+    public string Sobrenome { get; set; }
+}
+</code></pre>
+
+<p>Eu realmente não consigo entender o porquê de fazer tanto trabalho para perder um recurso da linguagem, então não consigo deixar de pensar que possa existir um motivo pra isso. Se há um motivo, sejam Design Patterns ou algum tipo de motivo por legacy code, alguém pode me esclarecer?</p>
+
+<p><strong>Nota</strong>: Eu <strong>NÃO</strong> quero opiniões aqui, porque este não é um site de opiniões. Eu fiz essa pergunta porque creio que algum programador de mais tempo que eu, ou que tenha trabalhado com Orientação a Objetos fora do .NET me dê uma resposta para o porquê isso seria uma vantagem.</p>
+
+<p>Aliás, meu líder usou Java no passado. Por isso eu acho que exista uma resposta <em>certa</em> pra essa pergunta.</p>
+",<c#><.net><orientação-a-objetos>
+Composição: usar @class ou #import?,"<p>Recentemente tive um problema de <code>Unknow type name 'Class'</code>, pois estava fazendo <em>import</em> no <em>header</em> de 2 classes. Descobri que esse é um erro clássico de <em>headers</em> importando <em>headers</em>.</p>
+
+<p>Fui orientado a mudar o <code>import</code> de uma das classes para @class e na classe de implementação (.m) fazer a importação.</p>
+
+<p>Minha pergunta é: quando usar <code>@class</code> ou <code>#import</code>? Eu poderia apagar os <em>imports</em> de todas minhas classes que fazem referência a outras classes e simplesmente escrever <code>@class</code> e aí sim importá-las no <em>implementation file</em>?</p>
+",<orientação-a-objetos><objective-c>
+Por que o C# não permite heranças multiplas?,"<p>No C# podemos implementar diversas interfaces. Porém, porque não podemos herdar de mais de uma classe base?</p>
+",<c#><orientação-a-objetos><herança>
+O que é uma classe wrapper?,"<p><strong>O que é uma classe wrapper?</strong></p>
+
+<p><strong>Como elas podem ser úteis?</strong></p>
+
+<p>Citar exemplos de uso em <a href=""/questions/tagged/php"" class=""post-tag"" title=""mostrar perguntas com a tag &#39;php&#39;"" rel=""tag"">php</a> ou <a href=""/questions/tagged/c%23"" class=""post-tag"" title=""mostrar perguntas com a tag &#39;c#&#39;"" rel=""tag"">c#</a>, bem como quando se deve usar ou não.</p>
+",<php><c#><orientação-a-objetos><classes><design-pattern>
+Classe Abstrata X Interface,"<p>Qual a diferença entre uma classe abstrata e uma interface?
+Não entendo quando eu deveria utilizar uma ou outra.</p>
+",<c#><orientação-a-objetos><interface><classes-abstratas>
+Undefined reference ao compilar múltiplos arquivos,"<p>Estou aprendendo C++, e tenho uma dúvida a respeito de criar as classes em diferentes arquivos. Criei o header com protótipos de funções, depois como funções membro em outro arquivo cpp.</p>
+
+<p>Quando vou testar os arquivos junto a um main tenho o seguinte erro:</p>
+
+<pre><code>undefined reference to GradeBook::GradeBook(std::string) linha 14
+undefined reference to GradeBook::getNomeCurso() linha 16
+</code></pre>
+
+<p>Este é o header com a classe gradebook : gradebook.h</p>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+class GradeBook
+{
+public:
+    GradeBook( string );
+    void setNomeCurso(string);
+    string getNomeCurso();
+    void mostrarMensagem();
+
+private:
+    string nome_curso;
+};
+</code></pre>
+
+<p>Este é o arquivo chamado gradebook.cpp com as funções membro nele: </p>
+
+<pre><code>#include &lt;iostream&gt;
+#include ""gradebook.h""
+
+using namespace std;
+
+GradeBook::GradeBook( string z ){
+   setNomeCurso(z);
+}
+
+void GradeBook::setNomeCurso( string nome ){
+    nome_curso = nome;
+}
+
+string GradeBook::getNomeCurso(){
+    return nome_curso;
+}
+
+void GradeBook::mostrarMensagem(){
+    cout &lt;&lt; ""Bem vindo ao Livro de "" &lt;&lt; getNomeCurso() &lt;&lt; ""!"" &lt;&lt; endl;
+}
+</code></pre>
+
+<p>E este é o arquivo teste.cpp com a funcao Main:</p>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include ""gradebook.h""
+
+using namespace std;
+
+int main() {
+    string curso;
+
+    cout &lt;&lt; ""Entre com o nome do curso : "";
+    getline(cin, curso);
+    cout &lt;&lt; endl;
+
+    GradeBook Livro( curso );
+
+    cout &lt;&lt; ""Bem vindo ao curso de "" &lt;&lt; Livro.getNomeCurso() &lt;&lt; endl;
+
+}
+</code></pre>
+",<c++><orientação-a-objetos>
+Programação Orientada a Objeto,"<p>Eu venho desenvolvendo projetos em delphi desde a época do pascal, mas meu grande problema eh que eu nunca me mantive muito atualizado as mudanças e sempre usei uma linguagem processual e agora eu preciso aprender a programar com objetos porque na firma que estou trabalhando todos os códigos usam essa filosofia.</p>
+
+<p>Eu estou tentando aprender mas tem sido difícil encontrar bom material que explique a programação orientada objeto voltada a Delphi e também algo que não comece explicando variáveis, laços e condições porque não exite motivos para isso.</p>
+
+<p>Alguém aqui sabe alguma boa indicação de livro, tutorial ou pagina para me indicar?</p>
+",<orientação-a-objetos><delphi>
+Como realizar a persistência de objetos em banco de dados no Delphi?,"<p>Trabalho com Delphi, mas sempre de maneira procedural e utilizando componentes Data-Aware. Recentemente comecei ler algumas coisas sobre como trabalhar com POO no Delphi, e fiz alguns exemplos bastantes básicos, minha dúvidas são estas:</p>
+
+<p>Como posso trabalhar com uma classe (TClientes por exemplo) fazendo persistência na base de dados?<br>
+Como restaurar esses dados para visualização utilizando OO?<br>
+Como ficam os componentes Data-Aware?</p>
+",<banco-de-dados><delphi><orientação-a-objetos>
+Por que em algumas situações if's são considerados ruins?,"<p>Li em alguns lugares que não é recomendado o uso exagerado do <code>if</code>, pois ele torna seu código difícil de ler e de dar manutenção, logo não é uma boa prática.</p>
+
+<p>O que seria o uso exagerado de <code>if</code> em um código? Quais são as boas práticas em um código para evitar muitos <code>if</code>s?</p>
+
+<p><strong>EDIT</strong></p>
+
+<p>A idéia da <em>campanha anti if</em> na verdade não é exterminar o <em>if</em>, e sim estimular o uso correto da programação orientada a objetos, que deixa o código mais limpo e de fácil manutenção. A minha pergunta é na verdade saber como eu devo substituir os zilhões de <em>if</em> s por uma boa diagramação de classes. Que conceitos da programação orientada a objetos são utilizados para atingir tal objetivo?</p>
+
+<p>Entre outras palavras: Porque trocar o condicional imperativo, pelo polimorfismo ou outra forma que facilite o entendimento e organização do código?</p>
+
+<p>Fonte(s) de motivação / leitura:</p>
+
+<p><a href=""http://rodrigonormandia.com/?p=108%5D"">Campanha anti if</a></p>
+
+<p><a href=""http://www.antiifcampaign.com/"">Anti if campaign(Inglês)</a></p>
+",<orientação-a-objetos><if>
+"Há alguma vantagem num ""self"" explícito em vez do ""this"" implícito?","<p>Ao contrário da maioria das linguagens [mais populares] orientadas por objeto, que usam uma palavra-chave para se referir ao objeto que é ""alvo"" de uma chamada de método (normalmente denominado <code>this</code>), a linguagem Python exige que todo método possua um parâmetro adicional (o primeiro, e por convenção usualmente chamado <code>self</code>) para representar esse objeto. Isso me parece um caso de <a href=""http://en.wikipedia.org/wiki/Boilerplate_code"">código <em>boilerplate</em></a>, que você tem de escrever sempre mas que não acrescenta muita coisa...</p>
+
+<p>(Nota: esse é um caso particular do uso de ""pronomes"" no código, algo <a href=""http://dunsmor.com/lisp/onlisp/onlisp_18.html"">possível na linguagem Lisp</a> e <a href=""http://www.kichwa.com/quik_ref/spec_variables.html"">usado extensivamente na linguagem Perl</a>)</p>
+
+<p>Há alguma razão concreta para <strong>não se usar</strong> um <code>this</code> implícito [no design de uma linguagem de propósito geral ou <a href=""http://pt.wikipedia.org/wiki/Linguagem_de_dom%C3%ADnio_espec%C3%ADfico"">DSL]</a>? Algum caso de uso em que o parâmetro explícito permite/facilita algo que seria inviável caso ele fosse implícito?</p>
+
+<p>Observações:</p>
+
+<ul>
+<li><p>Mesmo em Python, se você obtém uma referência para um método de um objeto ele vem como um <code>bound method</code>, e você o chama omitindo o primeiro argumento:</p>
+
+<pre class=""lang-python prettyprint-override""><code>class Foo(object):
+    def bar(self, a, b):
+        return self.x + a + b
+
+foo = Foo()
+bar = foo.bar
+bar(10, 20) # 10 é ""a"" e 20 é ""b""; o ""self"" já está atribuído para você
+</code></pre>
+
+<p>...sendo necessário o uso de <a href=""http://pt.stackoverflow.com/a/1517/215"">uma função especial</a> para se ""reatribuir"" o mesmo a um objeto diferente:</p>
+
+<pre class=""lang-python prettyprint-override""><code>foo2 = Foo()
+bar.__func__(foo2, 10, 20)
+</code></pre></li>
+<li><p>Nada impede que uma função ""normal"" seja transformada num método através de uma operação semelhante ao <a href=""http://pt.wikipedia.org/wiki/Currying""><em>currying</em></a>:</p>
+
+<pre class=""lang-python prettyprint-override""><code>def encadear(a, b):
+    a.proximo = b
+
+class Foo(object):
+    append   = lambda self, b: encadear(self, b)
+    appendTo = lambda self, a: encadear(a, self)
+</code></pre>
+
+<p>(através de uma sintaxe mais amigável, claro... e nesse caso, proibir o uso do <code>this</code> em funções declaradas fora do contexto de um objeto seria desejável - ao contrário do que ocorre com JavaScript por exemplo)</p></li>
+<li><p>...ou que um método seja transformado numa função normal através de uma operação inversa:</p>
+
+<pre class=""lang-js prettyprint-override""><code>var foo = {
+    bar:function(a, b) {
+        return this.x + a + b;
+    }
+};
+
+var bar = foo.bar;
+var foo2 = { x:10 };
+bar.call(foo2, 20, 30); // O método original mantém o this explícito,
+                        // mas ainda podemos atribuí-lo explicitamente
+</code></pre></li>
+</ul>
+
+<p>Diante disso, não vejo razão para se explicitar o <code>self</code>, apenas código desnecessário... Há algum argumento forte a favor, talvez vindo do(s) próprio(s) autor(es) da linguagem Python? (ou de outra linguagem que use estratégia semelhante)</p>
+",<orientação-a-objetos><funções><design-de-linguagem>
+Como usar arrays em Java?,"<p>É uma pergunta bem iniciante (sou novo em Java, vim do C++). Tenho que fazer um programa que pega 4 notas de 10 alunos, mas quando vou mexer com os ""ponteiros"" (arrays), o meu programa devolve uma exception:</p>
+
+<pre><code>import java.util.Scanner;
+class Aluno
+{
+    public int[] nota;
+}
+
+class Nota
+{
+    private Aluno[] aluno;
+    private int totalAlunos;
+    private int NumeroNotas;
+    public Nota(int numero_alunos, int numero_notas)
+    {
+        this.totalAlunos = numero_alunos;
+        this.NumeroNotas = numero_notas;
+        this.aluno = new Aluno[numero_alunos];
+        for(int i = 0; i &lt; totalAlunos; i++)
+        {
+            this.aluno = new Aluno[numero_notas];
+        }
+        for(int numero_de_alunos = 0; numero_de_alunos &lt; numero_alunos; numero_de_alunos++)
+        {
+            System.out.print(""Aluno "" + (numero_de_alunos+1) + "":\n"");
+            Scanner Scan = new Scanner(System.in);
+            for(int i = 0; i &lt; NumeroNotas; i++)
+            {
+                System.out.print(""Digite a nota número "" + (i+1) + "": "");
+                this.aluno[numero_de_alunos].nota[i] = Scan.nextInt();
+                System.out.print(""\n"");
+            }
+        }
+    }
+    public int PegarMedia(int NumeroAluno)
+    {
+        int stack = 0;
+        for(int i = 0; i &lt; NumeroNotas; i++)
+        {
+            stack += this.aluno[NumeroAluno].nota[i];
+        }
+        return stack / NumeroNotas;
+
+    }
+    public void MostrarMedia()
+    {
+        for(int i = 0; i &lt; totalAlunos; i++)
+        {
+            System.out.print(""Media do aluno "" + i + "":"");
+            System.out.print(PegarMedia(i) + ""\n"");
+        }
+     System.out.print(""\n"");
+    }
+}
+//Fim das classes
+
+class Test
+{
+    public static void main(String args[])
+    {
+        Nota notas = new Nota(10,4);
+        notas.MostrarMedia();
+    }
+}
+</code></pre>
+
+<p>Devolve:</p>
+
+<blockquote>
+  <p>run: Aluno 1: Exception in thread ""main""
+  java.lang.NullPointerException Digite a nota número 1:    at
+  Nota.(Test.java:28)     at Test.main(Test.java:59) Java Result: 1</p>
+</blockquote>
+
+<p>O que eu estou fazendo errado? O que eu devo fazer?</p>
+",<java><orientação-a-objetos><classes><exceção>
+Como fazer um ponteiro polimórfico com o ponteiro this no parâmetro?,"<p>Por exemplo, em Qt (me corrijam, se a lógica estiver errada, não mexo com Qt faz tempo), você pode fazer isso:</p>
+
+<pre><code>QLabel label = new QLabel(this);
+</code></pre>
+
+<p>Agora vamos supor:</p>
+
+<pre><code>#include &lt;iostream&gt;
+class AbstractBase
+{
+    public:
+        virtual void A() = 0;
+};
+
+class DerivedClass : public AbstractBase
+{
+public:
+    void A()
+    {
+        std::cout &lt;&lt; ""ClassA"";
+    }
+    DerivedClass(AbstractBase* Base)
+    {
+        A();
+    }
+};
+int main()
+{
+    AbstractBase* A = new DerivedClass(this);
+}
+</code></pre>
+
+<p>Mas o compilador devolve: ""invalid use of this in non-member function"".
+Qual a maneira correta de adicionar o parâmetro 'this' nesse caso? (<code>AbstactClass*</code>, por que ele é derivado.) Isso é possível (referenciar o A como o parâmetro)?</p>
+",<c++><orientação-a-objetos><classes><ponteiro><classes-abstratas>
+Por que criar um objeto usando a superclasse?,"<p>Dado o seguinte código:</p>
+
+<pre><code>public class Musico {
+
+    public void tocaInstrumento() {
+        // faz algo
+    }
+}
+</code></pre>
+
+<p>.</p>
+
+<pre><code>public class Baterista extends Musico {
+
+    public void giraBaqueta() {
+        // faz algo
+    }
+}
+</code></pre>
+
+<p>.</p>
+
+<pre><code>public class Violonista extends Musico {
+
+    public void trocaCordas() {
+    }
+}
+</code></pre>
+
+<p>Eu posso me valer do polimorfismo para fazer o seguinte:</p>
+
+<pre><code>    Musico musico1 = new Violonista();
+    Musico musico2 = new Baterista();
+
+    musico1 = musico2;
+</code></pre>
+
+<p>Porém, eu não consigo enxergar os métodos da subclasse:</p>
+
+<pre><code>    musico1.trocaCordas(); //ERRO DE COMPILAÇÃO!
+</code></pre>
+
+<p>Se eu utilizar:</p>
+
+<pre><code>Violonista musico1 = new Violonista();
+</code></pre>
+
+<p>Não seria melhor? Qual a vantagem em utilizar tipo Musico para referenciar um objeto de uma subclasse? Seria simplesmente a possibilidade de eu conseguir atribuir <code>musico1 = musico2;</code>, por exemplo? Ou há outras vantagens?</p>
+",<java><orientação-a-objetos>
+Até que ponto é interessante usar o APC? É recomendável usá-lo com objetos?,"<p>Tenho lido sobre o cache de opcode do PHP, o APC. A maioria dos materiais que achei para ler, apesar de bons, somente explicam a instalação/utilização das funções do APC.</p>
+
+<p>O que gostaria de saber é:</p>
+
+<ul>
+<li>Até que ponto é interessante usar o APC?</li>
+<li>É recomendável usar o APC com objetos? </li>
+</ul>
+
+<p>Exemplo:</p>
+
+<pre><code>&lt;?php
+class Test
+{
+    private $someAttribute;
+
+    public function __construct( $someAttribute )
+    {
+        $this-&gt;someAttribute = $someAttribute;
+    }
+
+    public function getSomeAttribute()
+    {
+        return $this-&gt;someAttribute;
+    }
+}
+
+if ( !apc_exists( 'test' ) ) {
+    $data = new Test( 'testing...' );
+    apc_add( 'test', $data, 120 );
+} else {
+    $data = apc_fetch( 'test' );
+}
+</code></pre>
+
+<p>Imaginando que eu possa criar mais de uma instancia do meu objeto, como por exemplo, para persistir os dados em métodos de <code>update()</code>, <code>insert()</code>, etc,
+isso ""mataria"" a ideia do cache neste exemplo?</p>
+
+<p>Estou confuso com a utilização do APC;</p>
+",<php><apc><orientação-a-objetos>
+Como fazer um construtor igual ao do QObject?,"<p>Surgindo uma nova dúvida de uma questão antiga, quero saber como criar uma classe igual ao <code>QObject</code>. Basicamente, quero saber:</p>
+
+<ul>
+<li>Como fazer um copy constructor que não aceite ""assignment operators""?</li>
+<li>Como fazer uma classe que possa deletar outras?</li>
+<li>Como fazer uma classe parecida com o <code>QObject</code>?</li>
+</ul>
+",<c++><orientação-a-objetos><classes><qt>
+Qual a diferença entre static e self em PHP?,"<p>Qual é a diferença entre <code>static</code> e <code>self</code>? Exemplifique com situações que justifiquem seus diferentes usos. O que isso tem a ver com <em>late static binding</em>?</p>
+",<php><orientação-a-objetos>
+Problema com timer em Java,"<h1>Explicação:</h1>
+
+<p>Possuo um componente <code>JTextField</code> que seria um contador regressivo, porém quando eu utilizo o <code>ActionListener</code> desta forma:</p>
+
+<pre class=""lang-java prettyprint-override""><code> public static ActionListener alredBGolem = new ActionListener() {
+  public void actionPerformed(ActionEvent evt) {
+      redBGolem.setText(String.valueOf(tempoRedBGolem));
+      tempoRedBGolem--;
+  }
+};
+</code></pre>
+
+<p>Ele funciona corretamente, mas quando chama uma função:</p>
+
+<pre class=""lang-java prettyprint-override""><code>public static JTextField redBGolem = new JTextField();
+private static int tempoRedBGolem = 300;
+private static Timer timerRedBGolem = new Timer(1000, alredBGolem);
+
+
+ public static ActionListener alredBGolem = new ActionListener() {
+  public void actionPerformed(ActionEvent evt) {
+      count(redBGolem,timerRedBGolem,tempoRedBGolem,1);
+  }
+};
+public static void count(JTextField Field, Timer cTimer, int Tempo, int Type){
+    Field.setText(String.valueOf(Tempo));
+    Tempo--;
+    System.out.println(Tempo);
+}
+</code></pre>
+
+<p>Ele apenas imprime <code>299</code> repetidamente e o <code>JTextField</code> não sai do <code>300</code>.</p>
+
+<p>Como resolver este problema?</p>
+",<java><orientação-a-objetos><jtextfield><actionlistener>
+Background transparente em java,"<p>Estou com um problema com o <code>background</code> transparente de um <code>JTextField</code>, ao mudar o conteúdo do <code>JTextField</code> ele parece que sobrepõe o texto e fica tudo misturado:</p>
+
+<p><img src=""http://i.stack.imgur.com/nFwGL.jpg"" alt=""exemplo do erro""></p>
+
+<p>Estou setando o background assim:</p>
+
+<pre><code> Field.setBackground(new Color(1.0f,1.0f,1.0f,0f));
+</code></pre>
+
+<p>//EDIT</p>
+
+<p>Consegui fazer usando a dica do @utluiz porem os numeros ficam com uns pixels brancos em volta:</p>
+
+<p><img src=""http://imgur.com/pbqw8aV.jpg"" alt=""""></p>
+
+<p>Tem como deixar o fundo totalmente transparente também?</p>
+",<java><orientação-a-objetos><jtextfield>
+Porque é que isto viola os Strict Standards?,"<p>Tenham em conta as seguintes definições de classes:</p>
+
+<pre><code>class SuperDate {}
+class SubDate extends SuperDate {}
+
+class Foo
+{
+    public function setDate(SubDate $date) {}
+}
+
+class Bar extends Foo
+{
+    public function setDate(SuperDate $date){}
+}
+
+$foo = new Foo();
+$bar = new Bar();
+$bar-&gt;setDate(new SubDate());
+$foo-&gt;setDate(new SubDate());
+</code></pre>
+
+<p>Este código dá o seguinte erro:</p>
+
+<pre><code>Strict standards: Declaration of Bar::setDate() should be compatible with Foo::setDate(SubDate $date)
+</code></pre>
+
+<p>Obviamente, a causa é o facto da assinatura de <code>Bar::setDate</code> ser diferente da de <code>Foo:setDate</code>. <a href=""http://stackoverflow.com/questions/21092605/php-strict-standards-declaration-of-should-be-compatible/21092699"">No StackOverflow em inglês existe uma pergunta similar</a> que refere uma violação do <a href=""http://pt.wikipedia.org/wiki/Princ%C3%ADpio_da_substitui%C3%A7%C3%A3o_de_Liskov"" rel=""nofollow"">Princípio de Substituição de Liskov</a> como causa do ""strict warning"", mas a situação é ligeiramente diferente porque a subclasse é mais restritiva que a classe mãe.</p>
+
+<p>No entanto, no meu caso, a assinatura em Bar é mais ""larga"" que em Foo e, por isso, completamente intersubstituivel. Isto é, sendo Bar um subtipo de Foo, então os objetos do tipo Foo podem ser substituídos pelos objetos de tipo Bar sem ser necessário alterar as propriedades do programa.</p>
+
+<p>Por isso, a minha pergunta é: <strong>Porque é que este código viola os ""Strict Standards""?</strong></p>
+",<php><orientação-a-objetos><solid>
+Estender classes com construtor privado,"<p>Porque não posso estender classes com construtor privado?</p>
+
+<p>Consirando as classes <strong>A:</strong></p>
+
+<pre><code>public class A {
+    private A(){}
+    public static void limao(){}
+}
+</code></pre>
+
+<p>e <strong>B:</strong></p>
+
+<pre><code>public class B extends A {
+    private B(){}
+    public static void banana(){}
+}
+</code></pre>
+
+<p>Por que <strong>B</strong> não pode estender <strong>A</strong>?</p>
+
+<p><em>There is no default constructor available my.package.name.A</em></p>
+
+<p>Meu objetivo é ter algumas classes que contém apenas membros estáticos e gostaria de garantir que elas sejam utilizadas da maneira correta (sem instâncias) mas que também herdam de outras classes por terem métodos em comum. Atualmente faço isso em C# atráves de classes estáticas mas não consigo aplicar algo parecido no meu projeto Android.</p>
+",<java><android><orientação-a-objetos>
+Este é um exemplo correto de herança em JavaScript?,"<p>Estou estudando formas de aplicar Orientação a Objeto em JavaScript.
+Encontrei uma solução para utilizar herança. Gostaria de saber se existem melhores maneiras e como encapsular minhas classes.</p>
+
+<p>O que eu tenho feito:</p>
+
+<pre><code>People = function(name){
+ this.name = name
+ this.age = null; 
+};
+
+Employee = function(name){
+ People.call(this,name);
+ this.IdentificationCode = null;
+ this.salary = null;
+}
+
+Jonh = new Employee(""Jonh Smith"");
+Jonh.age = 25;
+Jonh.IdentificationCode = 35632;
+Jonh.salary = 3500;
+</code></pre>
+",<javascript><orientação-a-objetos><herança>
+Performance em objetos Javascript,"<p>Através de qual meio se obtêm a melhor performance de objetos Javascript.</p>
+
+<pre><code>var Objeto = { 
+    propriedade:'valorPropriedade',
+    init:function() {
+       //Inicia Objetos  
+    }
+}
+var obj = Objeto.init();
+</code></pre>
+
+<p>ou:</p>
+
+<pre><code>function Objeto() {
+   this.propriedade = 'valorPropriedade';
+   this.init = function(){
+        //Função para iniciar o Objeto
+   }
+}
+
+var obj = new Objeto();
+obj.init();
+</code></pre>
+",<javascript><orientação-a-objetos>
+Dúvida sobre herança em classes,"<p>Como fazer o <code>if</code> do controller retornar <code>TRUE</code> ou <code>FALSE</code> de acordo com o <code>check()</code> do Validator?</p>
+
+<p>Atualmente ele retorna booleano para o <code>validate();</code>, mas eu queria que ele continuasse até o fim do código, para então retornar o booleano.</p>
+
+<pre><code>&lt;?php
+# relatorio venda controller
+class RelatorioVendaController {
+    public function __construct() {
+        $form['nome'] = 'Ricardo';
+        $form['idade'] = 24;
+
+        if(RelatorioVenda::validate($form)){
+            print 'Nenhum erro.';
+        }
+    }
+}
+
+# relatorio venda model
+class RelatorioVendaModel extends RelatorioModel {
+    public static function validate($form){
+        $validators = array(
+            ""nome"" =&gt; ""required"",
+            ""idade"" =&gt; ""required""
+        );
+        parent::rules($form, $validators);
+    }
+}
+
+# relatorio model
+class RelatorioModel {
+    public static function rules($form, $validators){
+        // junta os arrays foreach e executa a validacao
+        Validator::check($field, $map['field'], $map['validator']);
+    }
+}
+
+class Validator {
+    public static function check($field, $value, $validator){
+        // execute validator(field, value)
+
+        if(no erros)
+            return true;
+    }
+    public function required($field, $value){
+        // validator
+    }
+}
+?&gt;
+</code></pre>
+",<php><orientação-a-objetos><classes>
+Como fazer casting entre classes base e derivadas?,"<p>Eu tenho um exercício que diz que eu tenho que criar uma base. Essa base tem duas derivadas. Eu tenho que fazer um cast da classe derivada(1) para a classe derivada(2) e da classe derivada(2) para a classe base. Como eu devo fazer um exercício como este <strong>sem utilizar referências</strong>?</p>
+",<c++><orientação-a-objetos><classes><cast><tarefa>
+Como posso passar um valor de uma classe para uma Listbox,"<p>Estou envolvido num pequeno projecto pessoal, composto por algumas classes e muitas forms. Necessito de enviar um valor que é obtido quando acedo a determinado botão, para a listbox que está numa dessas forms. Para isso optei por construir um método chamado <strong>beverageclick</strong> com o seguinte código</p>
+
+<pre><code> public void beverageclick(object sender, EventArgs e)
+        {
+            Button b = (Button)sender;//button sender
+
+        string value = (string)b.Tag;// value = b.tag (tag of sended button tag = value (value of  AddBeverageDrinkstoTabbedPanel) method)
+        beverages.Add(value);
+        //get value
+
+
+        //MessageBox.Show(value);
+        ListBox lstbox = new ListBox();
+        lstbox.Items.Add(value);
+
+
+
+        } 
+</code></pre>
+
+<p>Como posso alterar o código acima indicado por forma a que ao aceder a um botão, o valor desse botão (texto) seja inserido na listbox.</p>
+",<c#><orientação-a-objetos><winforms><classes>
+Uso do `self->` ao invés de `self.`,"<p>Estou trabalhando em um app que não foi eu que iniciei o código e estou com problemas em relação ao uso do comando <strong><code>self-&gt;</code></strong>. 
+Em alguns ponto do código estou encontrando variáveis declaradas com <strong><em><code>self-&gt;</code></em></strong> ao invés de <strong><code>self.</code></strong>.</p>
+
+<pre class=""lang-objc prettyprint-override""><code>@interface UNBill ()
+{
+    NSMutableArray *billArray;
+}
+@end
+...
+- (void)payment:(id)billArray people:(int)peopleRow value:(NSString *)amountPay
+{
+    [[self-&gt;billArray objectAtIndex:peopleRow] setObject:amountPay forKey:columnPayment];
+}
+</code></pre>
+
+<p>Pelo que identifiquei até agora o <code>self-&gt;</code> esta informando ao compilador que é o <code>billArray</code> global está sendo usado e não o <code>billArray</code> do método, mas agora preciso utilizar o <code>billArray</code> do método, e informando apenas <code>[billArray objectAtIndex:i]</code> estou tomando warning. </p>
+
+<p>Alguém sabe me explicar como funciona?</p>
+",<orientação-a-objetos><ios><objective-c>
+Quando usar variáveis de instância vs parâmetros?,"<p>Assumindo que uma classe <code>A</code> utilize uma classe <code>B</code> (diretamente ou através de uma interface <code>C</code> para desacoplar <code>A</code> de <code>C</code>).</p>
+
+<p>Deixando claro que <code>A</code> e <code>B</code> são partes independentes, <em>i.e.</em>, a relação entre as duas classes não é de composição ou uma agregação óbvia, porém existe uma associação ""fraca"" em que <code>A</code> usa <code>B</code> (nesse caso, através do contrato estabelecido por <code>C</code>). </p>
+
+<p>Considere os dois exemplos (em Java):</p>
+
+<p><em><strong>Exemplo 1</strong> - C como Variável de instância</em>:</p>
+
+<pre class=""lang-java prettyprint-override""><code>public class A {
+    private C c;
+
+    // Não estou discutindo injeção através de construtores vs. getters and setters
+    // Apenas assuma que `c` foi inicializado de alguma maneira
+    public A(C c) {
+        this.c = c;
+    }
+
+    public metodo1() {
+       // faz algo com c   
+    }
+
+    public metodo2() {
+       // faz algo com c   
+    }
+
+    public metodo3() { 
+      // não faz nada com c
+    }
+}
+</code></pre>
+
+<p><em><strong>Exemplo 2</strong> - C como parâmetro</em>:</p>
+
+<pre class=""lang-java prettyprint-override""><code>public class A {
+
+    public metodo1(C c) {
+       // faz algo com c   
+    }
+
+    public metodo2(C c) {
+       // faz algo com c   
+    }
+
+    public metodo3() { 
+       // não faz nada com c
+    }
+}
+</code></pre>
+
+<p>A minha pergunta é em que situação devo fazer com que <code>A</code> possua uma variável de instância do tipo <code>C</code> <em>vs.</em> quando devo passar uma instância do tipo <code>C</code> como parâmetro para os métodos de <code>A</code>? </p>
+
+<p>Em outras palavras: Em que situações a API exposta no <em>Exemplo 1</em> seria ""melhor"" do que a API exposta no <em>Exemplo 2</em> e vice-versa? Quais seriam as justificativas para apoiar essa decisão? </p>
+
+<p>Após muitos anos como desenvolvedor eu ainda tomo essa decisão na base do <em>feeling</em>. Também reparei que com o passar do tempo a construção do exemplo <em>2</em> (que era rara, e prontamente refatorada para <em>1</em> no meu código) começou a se tornar mais aceitável e até preferível em boa parte das situações. Porém, até hoje tenho dificuldade em formalizar os motivos que me levam a escolher uma construção ou outra.</p>
+",<orientação-a-objetos><arquitetura-de-software>
+Por que o polimorfismo não funciona com Genéricos?,"<p>Ao tentar compilar o seguinte código obtive um erro.</p>
+
+<pre><code>import java.util.*;
+class Animal { }
+class Cachorro extends Animal { }
+public class TestePoli {
+    public static void main(String[] args) {
+        List&lt;Animal&gt; cachorros = new ArrayList&lt;Cachorro&gt;();
+    }
+}
+</code></pre>
+
+<blockquote>
+  <p>Type mismatch: cannot convert from ArrayList to List</p>
+</blockquote>
+
+<p>O seguinte exemplo também faz uso de polimorfismo entretanto sem o uso de Genéricos, e funciona perfeitamente:</p>
+
+<pre><code>class Animal { }
+class Cachorro extends Animal { }
+public class TestePoli {
+    public static void main(String[] args) {
+        Animal cachorro = new Cachorro();      //polimorfismo
+        Animal[] cachorros = new Cachorro[10]; //polimorfismo com Arrays
+    }
+}
+</code></pre>
+
+<p>Inclusive nesse exemplo se usa o polimorfismo com Arrays, que seria algo similar ao List, e roda sem problemas.</p>
+
+<p>Por que não é possível fazer uso do polimorfismo com Genéricos?</p>
+",<java><orientação-a-objetos><genéricos><collection><polimorfismo>
+Referenciação no padrão de projeto Flyweight,"<p>Há uma coisa no Desing Pattern Flyweight que está me deixando realmente confuso.
+Resumidamente, o padrão diz que para economizar memória numa situação em que se usa vários objetos parecidos, usa-se uma fábrica que devolve referências para um mesmo objeto num pool de flyweights ao invés de se instanciar milhares de objetos diferentes.</p>
+
+<p>Eu também vi que para gerar independência de dados entre cada objeto, é necessário entender dois conceitos nesse padrão: Dado extrínseco e intrínseco, da qual eu também não entendi muito bem.</p>
+
+<p>Se usando esse padrão eu estou usando referências a um mesmo objeto, não se terão problemas ao alterar o estado de apenas um objeto e acabar alterando o estado de todos? Por exemplo:  Eu desenvolvi um jogo em que, usando este padrão, eu possuo o objeto porta que é compartilhado entre todas as ""portas"" do jogo; o jogador controla um personagem que pode abrir ou fechar portas. Se todas as portas no jogo estão referenciando a um mesmo objeto, o jogo não terá o bug de quando o personagem abrir uma porta, inexplicavelmente todas as portas no mesmo cenário se abrem?</p>
+
+<p>Eu vi que este problema poderia ser resolvido com o conceito de dado extrínseco e intrínseco, mas em todos os exemplos que eu li, eu não entendi como isso é implementado. Como, realmente é implementado um estado de independência de estado entre vários flyweights?</p>
+",<orientação-a-objetos><design-pattern>
+Como acessar jTextField estatico criado com swing?,"<p>Então galera eu tenho um <code>jTextField</code> que funciona normalmente porém quando eu coloco ele como <code>static</code> o <code>setText</code> não funciona mais, e preciso dele estático pois passo o mesmo para uma função, fiz isso sem o <code>swing</code> e funcionou não sei o que esta acontecendo agora.</p>
+
+<p>Segue abaixo o codigo:</p>
+
+<pre><code>//Codigo gerado automaticamento pelo swing
+
+public static javax.swing.JTextField blueBGolem;
+
+blueBGolem.setEditable(false);
+blueBGolem.setFont(new java.awt.Font(""Tahoma"", 0, 14)); // NOI18N
+blueBGolem.setForeground(new java.awt.Color(255, 255, 255));
+blueBGolem.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+blueBGolem.setText(""5:00"");
+blueBGolem.setBorder(null);
+blueBGolem.setOpaque(false);
+Painel.add(blueBGolem);
+blueBGolem.setBounds(0, 0, 70, 17);
+
+
+private void blueBGolemStartActionPerformed(java.awt.event.ActionEvent evt) {                                                
+    //timerBlueBGolem.start();
+    blueBGolem.setText(""ooi"");
+} 
+</code></pre>
+
+<h2>EDIT</h2>
+
+<p>Acho que é algo no meu codigo mais não consigo achar o que.. </p>
+
+<p>segue o codigo completo</p>
+
+<p><a href=""http://pastebin.com/Rat9QA9j"" rel=""nofollow"">http://pastebin.com/Rat9QA9j</a></p>
+",<java><orientação-a-objetos><swing><jtextfield>
+Criação de classes em C++,"<p>Estou desenvolvendo um projeto e preciso criar uma classe interna. Sou obrigado a criar um .cpp e um .h?</p>
+",<c++><orientação-a-objetos><classes>
+"Dúvida teórica - Interface, responsabilidade única","<h1><strong>Apresentação:</strong></h1>
+
+<p>Criei uma classe fotografia.cs essa deverá ser responsável por:</p>
+
+<ul>
+<li>Calcular o ângulo de visão da lente;</li>
+<li>Receber o zoom da lente (em mm)</li>
+<li>Receber o fator de corte (valor que multiplicado pelo zoom da lente mostra o valor da lente real)</li>
+<li>Dimensoes do sensor da câmera, etc.</li>
+</ul>
+
+<p>Pensei em criar a interface, mais para fins acadêmicos do que práticos.</p>
+
+<p><strong>Interface</strong></p>
+
+<pre><code>namespace fotografia
+{
+    public enum _CamerasFabricante { Canon=0, Nikon = 1, Sony = 2 };
+    public interface IFotografia
+    {
+        int CameraFabricante(_CamerasFabricante _value);
+        double FatordeCorte { get; set; }
+        int ObjetivaMM { get; set; }
+
+        double SensorHmm { get; set; }
+        double SensorVmm { get; set; }
+        double CalculoAnguloVisaoH();
+        double CalculoAnguloVisaoV();
+    }
+}
+</code></pre>
+
+<p>ai criei a classe para essa interface:</p>
+
+<pre><code>using System;
+
+namespace fotografia
+{
+    internal class fotografia : IFotografia
+    {
+        public double FatordeCorte { get; set; }
+
+        public int ObjetivaMM { get; set; }
+
+        public int CameraFabricante(_CamerasFabricante _value)
+        {
+            return (int)_value;
+        }
+
+        private double _MMFinalObjetiva()
+        {
+            return (Convert.ToDouble(ObjetivaMM) * FatordeCorte);
+        }
+
+        public double SensorHmm
+        {
+            get;
+            set;
+        }
+
+        private double myVar;
+
+        public double SensorVmm
+        {
+            get { return myVar; }
+            set { myVar = value; }
+        }
+
+        public double CalculoAnguloVisaoH()
+        {
+            double fov = SensorHmm / (2 * _MMFinalObjetiva());
+
+            double arctan = 2 * Math.Atan(fov)  * 180.0 / Math.PI;
+            return arctan;
+        }
+
+        private double CalculoAnguloVisaoV()
+        {
+            double fov = SensorVmm / (2 * _MMFinalObjetiva());
+
+            double arctan = 2 * Math.Atan(fov) * 180.0 / Math.PI;
+            return arctan;
+        }
+    }
+}
+</code></pre>
+
+<h1><strong>Dúvidas:</strong></h1>
+
+<ol>
+<li>Essa classe esta fazendo mais coisas do que deveria? pois cada método realmente faz apenas 1 única coisa, porém a classe fotografia faz tudo em relação a fotografia. Sobre a responsabilidade única esta correto?</li>
+<li>Implementei a Interface e a classe corretamente?</li>
+</ol>
+
+<p>Estou chamando assim no programa</p>
+
+<pre><code>IFotografia ft = new fotografia();
+            ft.CameraFabricante(_CamerasFabricante.Canon);
+            ft.ObjetivaMM = 50;
+            ft.SensorHmm = 22.3;
+            ft.FatordeCorte = 1.6;
+            var t = ft.CalculoAnguloVisaoH();
+</code></pre>
+",<c#><orientação-a-objetos><interface><solid>
+Padrão de Projeto Observer no Android,"<p>Alguém teria como me mostrar uma estrutura Observer dentro do android?</p>
+
+<p>Estava tentando montar uma igual a do java, porém não tive sucesso.</p>
+
+<p>Meu teste foi feito da seguinte forma:</p>
+
+<ul>
+<li>Criei uma <code>class Banco</code> e uma <code>class ClienteObservable</code>; </li>
+<li>No banco eu tenho os métodos de notificação, e de <code>adicionarObserver</code> (que eu passo a bola pro <code>clienteObservable</code>); </li>
+<li>Na <code>class ClienteObservable</code> eu tenho o método <code>update</code>, que vai realizar um ação ao ser notificado.</li>
+</ul>
+
+<p>Essa é a lógica que tenho sobre Padrão de Projeto Observer, porém não sei como estruturar isso no <a href=""/questions/tagged/android"" class=""post-tag"" title=""mostrar perguntas com a tag &#39;android&#39;"" rel=""tag"">android</a>, alguém poderia desenvolver algo bem básico para me mostrar?</p>
+
+<p>Segue abaixo o Código:</p>
+
+<p>Na Class Banco
+<img src=""http://i.stack.imgur.com/CkKFC.png"" alt=""inserir a descrição da imagem aqui""></p>
+
+<p>Na Class clienteObservable
+<img src=""http://i.stack.imgur.com/3wBAz.png"" alt=""inserir a descrição da imagem aqui""></p>
+",<java><android><orientação-a-objetos>
+subtração de duas propriedades double[],"<p>Tenho uma classe chamada funcoes.cs</p>
+
+<p>Preciso criar uma propriedade que armazene os valores X,Y iniciais e X,Y finais, pensei em:</p>
+
+<pre><code>    public  double[] PosicaoInicialXY { get; set; }
+    public  double[] PosicaoFinallXY { get; set; }
+</code></pre>
+
+<p>então enviaria os parametros assim:</p>
+
+<pre><code>double[] valoresFinalXY = new double[2];
+            valoresFinalXY[0] = 40;
+            valoresFinalXY[1] = 5;
+            funcoes.PosicaoFinallXY = valoresFinalXY;
+</code></pre>
+
+<p>e também para a posição incial</p>
+
+<p><strong>Dúvida:</strong>
+Como poderia criar uma nova propriedade que fizesse a subtração de X,Y inicial - X,Y final ?</p>
+
+<pre><code> double[] resultado = this.PosicaoInicialXY - this.PosicaoFinallXY; //??? não deu certo
+</code></pre>
+",<c#><classes><orientação-a-objetos>
+Chamada de método direto na instância,"<p>Me deparei com algo que parece não fazer sentido, quando tento fazer a chamada do método de um objeto direto em sua instância parece não funcionar.</p>
+
+<pre><code>class Pessoa{
+        private $Nome;
+        private $Idade;
+        public function __construct($nome){
+            $this-&gt;Nome = $nome;
+        }
+        public function getNome(){
+            return $this-&gt;Nome;
+        }
+}
+
+print new Pessoa(""Vinicius"")-&gt;getNome();
+</code></pre>
+
+<blockquote>
+  <p>Parse error: syntax error, unexpected T_OBJECT_OPERATOR</p>
+</blockquote>
+
+<p>Entretanto quando eu uso uma variável para referenciar o objeto a chamada funciona</p>
+
+<pre><code>$eu = new Pessoa(""Vinicius"");
+print $eu-&gt;getNome();
+</code></pre>
+
+<p>Existe algum erro na sintaxe do primeiro exemplo?</p>
+",<php><orientação-a-objetos>
+Duvida sobre android utilizando classes,"<p>Tenho o seguinte método implementado e irei usar ele em varias Activities</p>
+
+<pre><code>private int dia, mes, ano;
+String data;
+String dd, mm;
+
+int hora, minuto;
+static final int TIME_DIALOG_ID = 0;
+String horas;
+
+@Override
+public void onCreate(Bundle savedInstaceState){
+    super.onCreate(savedInstaceState);
+    setContentView(R.layout.sub_casa_quarto);
+
+    Calendar c = Calendar.getInstance();
+    ano = c.get(Calendar.YEAR);
+    mes = c.get(Calendar.MONTH);
+    dia = c.get(Calendar.DAY_OF_MONTH);
+
+    hora=c.get(Calendar.HOUR);
+    minuto=c.get(Calendar.MINUTE);
+
+    if (mes &gt;=1 &amp;&amp; mes&lt;10){
+        mm = ""0""+String.valueOf(mes);
+    }
+    else
+        mm = String.valueOf(mes);
+
+    if (dia&gt;= 1 &amp;&amp; dia&lt;10){
+        dd = ""0""+String.valueOf(dia);
+    }
+    else
+        dd = String.valueOf(dia);
+
+    data = String.valueOf(ano) + ""-"" + mm + ""-""+dd;
+}
+
+//Data
+public void onCLickteste(View v){
+    final DatePickerDialog dialogo = new DatePickerDialog(this, mDataSetListener, ano, mes, dia);
+    dialogo.show();
+}
+
+private OnDateSetListener mDataSetListener = new OnDateSetListener(){
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth){
+        int a = year;
+        int m = monthOfYear;
+        int d = dayOfMonth;
+        if (m &gt;= 1 &amp;&amp; m&lt;10){
+            mm = ""0""+String.valueOf(m);
+        }else
+            mm = String.valueOf(m);
+        if (d&gt;=1 &amp;&amp; d&lt;10){
+            dd = ""0"" + String.valueOf(d);
+        }else
+            dd = String.valueOf(d);
+
+        data = String.valueOf(ano) + ""-"" +mm+ ""-"" +dd;
+        mostrarData();
+    }
+};
+
+private void mostrarData(){
+    Toast.makeText(this, ""Data Selecionada"" + data,Toast.LENGTH_LONG).show();
+}
+</code></pre>
+
+<p>Gostaria de criar uma class e colocar ele lá para não precisar repetir o código. Alguém poderia me ajudar ou explicar como fazer isso? Preciso do retorno (resultado) para salvar no banco de dados.</p>
+",<android><orientação-a-objetos><classes>
+Qual a definição do termo acoplamento?,"<p>Qual o significado dos termos alto/baixo acoplamento em desenvolvimento de sistemas orientados a objetos ou programação orientada a objetos (POO)?</p>
+",<orientação-a-objetos><modelagem><design-pattern>
+Dúvidas sobre o método toString() da classe Object,"<p>Olá! Eu estive fazendo alguns testes com o método <code>toString()</code> da classe <code>java.lang.Object</code> e descobri que o resultado obtido muda a cada execução, conforme o exemplo abaixo:</p>
+
+<p><strong>Trecho do código testado</strong></p>
+
+<pre><code>public class Teste {
+    public static void main(String[] args) {
+        NovaClasse NC = new NovaClasse();
+        System.out.println(NC.toString());
+    } 
+}
+</code></pre>
+
+<p><strong>Saídas obtidas</strong></p>
+
+<pre><code>NovaClasse@1f1fba0
+NovaClasse@1befab0
+NovaClasse@13c5982
+</code></pre>
+
+<p>Descobri que o método <code>toString()</code> retorna o nome da classe ao qual o objeto pertence + @ + 7 caracteres hexadecimais que primeiramente pensei que fossem referentes ao endereço da memória em que o objeto foi armazenado, más parece que eles são um <code>hashCode</code>.</p>
+
+<p><strong>Dúvidas</strong></p>
+
+<p>O que é e qual a utilidade desse <code>hashCode</code>? Por que o seu valor varia de uma execução para a outra se o meu código continua o mesmo? </p>
+",<java><orientação-a-objetos><classes>
+É correto dar maior preferência a composição do que herança?,"<p>Eu já li em vários artigos e livros de <em>Designer Patterns</em> a expressão <code>Prefira composição em vez de herança</code>. Acredito que é um tema bastante polêmico devido aos pontos de vista discutidos.</p>
+
+<p>A meu ver, composição e herança são usadas para resolver problemas diferentes, certo?</p>
+
+<pre><code>class Carro {  
+    private Motor motor;      
+}
+</code></pre>
+
+<p>O exemplo acima é bem coerente pois um carro deve ter um motor. Entretanto se substituirmos a herança por composição em alguns casos a estrutura fica um pouco estranha, por exemplo.</p>
+
+<pre><code>class Carro {
+    private Veiculo veiculo;
+}
+</code></pre>
+
+<p>É estranho pensar que Veiculo virá um atributo de Carro. Nesse contexto, Veiculo serve apenas para a reutilização de código pois não segue uma hierarquia e não agrega polimorfismo.</p>
+
+<p>Desculpem minha ignorância mas as classes herdadas mantém o acoplamento que é necessário entre elas (a herança em si), certo?</p>
+
+<p>Quais as vantagens de se usar composição em vez de herança? É possível especificar um momento certo de usá-las? Seguindo a opinião do título, a melhor combinação seria composição + interface? </p>
+",<design-pattern><orientação-a-objetos>
+É errado usar herança de classes para agrupar comportamentos e atributos comuns?,"<h1>O que nos ensinam sobre Herança</h1>
+
+<p>A esmagadora maioria* dos materiais que tratam sobre Herança de Classes a exemplificam como um mero mecanismo de agrupamento de atributos ou ações comuns. No máximo, como um meio de representar uma hierarquia análoga a algo que observamos na vida real. Como amostra**, veja <a href=""http://www.dca.fee.unicamp.br/cursos/POOCPP/node15.html"">esta apostila da Unicamp</a> e <a href=""http://www.caelum.com.br/apostila-java-orientacao-objetos/heranca-reescrita-e-polimorfismo/"">esta outra da Caelum</a>.</p>
+
+<p>O mesmo se aplica às aulas que assisti sobre o assunto. Ainda lembro quando aprendi que a ""orientação a objetos possibilita representarmos o que vemos na vida real"". A herança é comumente definida como um relacionamento do tipo ""é um"". Exemplos clássicos como <code>Cachorro</code> e <code>Gato</code> estendem <code>Animal</code> ilustram isso. </p>
+
+<p>O problema é que, quando aprendemos dessa forma, a nossa preocupação recai em classificar os ""objetos da vida real"" para agrupar em hierarquias e então procurar atributos e ações comuns para colocarmos na superclasse. </p>
+
+<p>Posso dizer que passei muito tempo usando herança como forma de agrupar coisas parecidas e evitar repetição de código, não considerando pontos importantes como acoplamento e coesão. </p>
+
+<h1>Herança na prática</h1>
+
+<p>Contudo, parece que na prática isso simplesmente não funciona tão bem como na teoria, como exemplificado na questão ""<a href=""http://pt.stackoverflow.com/q/11378/227"">Prefira composição em vez de herança</a>"". A <a href=""http://pt.stackoverflow.com/a/11380/227"">excelente resposta aceita</a> diz:</p>
+
+<blockquote>
+  <p>Somente use herança se o subtipo puder perfeitamente substituir o tipo base.</p>
+</blockquote>
+
+<p>Essa afirmação, que considero correta, nos leva à consequência lógica que de que o exemplo dos bichos não representa adequadamente o modo como devemos encarar a herança. <code>Gato</code> é um <code>Animal</code>, mas cada <code>Animal</code> exibe um comportamento muito distinto dos demais. <code>Gato</code> não é exatamente uma especialização de <code>Animal</code>, ou seja, um <code>Animal</code> que tem alguma coisa a mais, ele é um tipo único de <code>Animal</code> que dificilmente pode ser substituído por outro sem impacto.</p>
+
+<p>Como foi explicado na resposta citada, usar a herança simplesmente para exibir um comportamento comum ou reaproveitar código não é, em geral, uma solução adequada. Para isso existem interfaces e delegação.</p>
+
+<h1>Conclusão</h1>
+
+<p>Enfim, minha dúvida é: <strong>existem situações onde seria apropriado usar a herança simplesmente para agrupar objetos com comportamentos e atributos comuns? Ou ainda para criar hierarquias de objetos que representam a ""vida real""?</strong> (se possível, dê um exemplo)</p>
+
+<p>Pergunta bônus: será que vale a pena começar a utilizar outros exemplos para herança e não deixar que as pessoas descubram por si mesmas que ""na prática a coisa não é bem assim""?</p>
+
+<hr>
+
+<p><strong>Atualização:</strong> considere ""apropriado"" ou ""certo"" o uso da herança que beneficie o sistema a longo prazo, isto é, evite problemas de manutenção e evolução do produto. Por exemplo, usar herança para uma hierarquia pode causar um grande problema se os filhos dessa hierarquia passarem a ter características diferentes dos pais e o código polimórfico começar a ""quebrar"" ou ficar com vários <code>if</code>s para tratar casos específicos.</p>
+
+<hr>
+
+<p><sup>* Por ""esmagadora maioria"" quero dizer quase todos os livros, apostilas e aulas que conheço.</sup></p>
+
+<p><sup>** Note que não estou dizendo que elas estão totalmente erradas, mas que transmitem um aspecto de forma equivocada.</sup></p>
+
+<p><sub>Observação: eu entendo que muitos podem considerar esta questão baseada em opiniões. Se acharem que ela não é adequada ao formato do site, comentem que eu ajustarei ou excluirei conforme o caso.</sub></p>
+",<orientação-a-objetos><herança>
+Diferenças na criação dinâmica de um objeto,"<p>Quando crio um objeto dinamicamente, por exemplo um formulário, faço desta forma:  </p>
+
+<pre><code>Formulario := TFormulario.Create(nil);  
+try  
+    Formulario.ShowModal;  
+finally  
+    Formulario.Free;  
+end;  
+</code></pre>
+
+<p>Qual a diferença em criar um objeto passando os seguintes valores para o parâmetro <strong>AOwner</strong> no método <strong>Create</strong>?  </p>
+
+<pre><code>Formulario := TFormulario.Create(Application);  
+Formulario := TFormulario.Create(nil);  
+Formulario := TFormulario.Create(Self);  
+</code></pre>
+",<delphi><orientação-a-objetos><delphi-7><parâmetros>
+Acessar variáveis de config.php,"<p>Eu sou iniciante em php e estou com um problema, eu tenho uma arquivo config.php dessa maneira:</p>
+
+<pre><code>&lt;?php
+$config['dbHostname'] = 'localhost';
+$config['dbUser'] = 'teste';
+$config['dbPassword'] = 'passteste';
+</code></pre>
+
+<p>Porem tenho uma classe com funções de conexão e manipulação do banco de dados que utilizariam essas variáveis do <code>config.php</code> porém não consegui acessa-las de maneira alguma, por favor alguem poderia me ajudar?</p>
+",<php><orientação-a-objetos><classes><require>
+Criar um array com objetos no Javascript,"<p>Tenho definido o objeto, e o array no escopo.</p>
+
+<pre><code>//Define o array que deve ser preenchido com os objetos
+var itensList = [];
+
+//Define os argumentos do objeto
+var oItem = {
+    Codig: 0,
+    Desc: """",
+    Unid: ""KG"",
+    Quant: 0,
+    Custo: 0,
+    IL: """",
+    Centro: """",
+    Saldo: o
+}
+</code></pre>
+
+<p>Então, para cada linha do DHTMLX Grid, inclui os resultados no objeto...</p>
+
+<pre><code>        //Para cada linha do grid, busca os resultados
+        mygrid.forEachRow(function (id) {
+            //Se o Codigo do item for maior que zero..
+            if (mygrid.cells(id, 0).getValue() != 0) {
+                // .. adiciona os valores ao objeto
+                oItem.Codig = mygrid.cells(id, 0).getValue();
+                oItem.Desc = mygrid.cells(id, 1).getValue();
+                oItem.Unid = mygrid.cells(id, 2).getValue();
+                oItem.Quant = mygrid.cells(id, 3).getValue();
+                oItem.Custo = mygrid.cells(id, 4).getValue();
+                oItem.IL = mygrid.cells(id, 5).getValue();
+                oItem.Centro = mygrid.cells(id, 6).getValue();
+                oItem.Saldo = mygrid.cells(id, 7).getValue();
+                // Adiciona o objeto a lista
+                itensList.push(oItem);
+            }
+        });
+</code></pre>
+
+<p>No final deste programa, se eu tenho duas linhas preenchidas no Grid, ele vai ter um array, com dois objetos, cada um com os parâmetros listados acima, mas, os dois ficam com os mesmso valores, os valores da última linha varrida pelo código, ou seja, dois objetos iguais, quando as linhas são diferentes. Debugando, vi que ao adicionar o objeto ao array com <code>itensList.push(oItem);</code>, ele faz o objeto que já estar lá ter os mesmos valores.</p>
+
+<p>Como fazer com que cada objeto tenho os valores de cada linha?</p>
+",<javascript><array><orientação-a-objetos>
+Como implementar um método abstrato em uma classe filha?,"<p>Eu abstraí um método de uma classe também abstrata.</p>
+
+<p>Mas não estou sabendo como implementar este método na classe filha. </p>
+
+<p>Tá aqui o meu código, o que eu arrumo?</p>
+
+<pre><code>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Banco_Exercicio1
+{
+    public class Cliente
+    {
+
+
+        public string Nome { get ; set ;}
+        public string Rg { get ; set ;}
+        public string Cpf {get ; set ;}
+
+        public Cliente(string nome)
+        {            
+            this.Nome = nome;
+        }
+    }
+
+    public abstract class Conta
+    {
+        public Cliente Titular { get; set; }
+        public double Saldo { get; set; }
+        public int Numero { get; set; }
+
+        public Conta(Cliente nome)
+        {
+            this.Titular = nome;
+        }
+
+        public Conta() {}
+
+        public abstract void Depositar(double Valor) ;
+
+
+        public abstract void Saca(double Valor);   
+
+    }
+
+    public class ContaPoupanca : Conta // Essa linha apresenta erro: does not implement inherited abstract member
+    {
+        public ContaPoupanca(Cliente nome) : base(nome) { }
+
+        public ContaPoupanca() {}
+
+        public override void Saca(double Valor)
+        {
+            base.Saca(Valor + 0.10);     //Error: Cannot Call an abstract member
+        }      
+    }
+
+    public class ContaCorrente : Conta
+    {
+        public ContaCorrente(Cliente nome) : base(nome) { }
+
+        public ContaCorrente() {}
+
+        public override void Saca(double Valor)
+        {
+            base.Saca(Valor + 0.05);    //Error: Cannot Call an abstract member
+        }
+
+        public override void Depositar(double Valor)
+        {
+            base.Depositar(Valor - 0.10);   //Error: Cannot Call an abstract member
+        }
+    }
+
+    public class TotalizadordeContas 
+    {
+        public double ValorTotal {get ; private set ;}
+
+        public double Soma (Conta conta)
+        {
+            ValorTotal += conta.Saldo;
+            return ValorTotal; 
+        }
+    }
+
+}
+</code></pre>
+
+<p>Como resolver e consertar estes erros?</p>
+
+<p><a href=""http://social.technet.microsoft.com/Forums/pt-BR/054bda3b-40a6-4723-82ba-7c119ffdccd3/como-implementar-um-mtodo-abstrato-em-uma-classe-filha?forum=cermicrosoftpt#054bda3b-40a6-4723-82ba-7c119ffdccd3"" rel=""nofollow"">http://social.technet.microsoft.com/Forums/pt-BR/054bda3b-40a6-4723-82ba-7c119ffdccd3/como-implementar-um-mtodo-abstrato-em-uma-classe-filha?forum=cermicrosoftpt#054bda3b-40a6-4723-82ba-7c119ffdccd3</a></p>
+",<c#><orientação-a-objetos>
+Quando devemos declarar um método como estático?,"<p>Como regra geral é considerada má pratica de programação usar métodos estáticos. Mas em que situações ela se justifica (ou não se justifica)?</p>
+
+<hr>
+
+<p><strong>Por exemplo</strong>: se eu fosse criar um método simples para ler um arquivo de texto:</p>
+
+<p>Criando esse método no tipo de instância eu teria que instanciar a classe apenas para poder executá-lo, o que não faz muito sentido (código em portugol):</p>
+
+<pre><code>variavel texto = novo Arquivo().lerArquivo('C:/arquivo.txt')
+</code></pre>
+
+<p>Já na forma estática eu chamaria o método diretamente:</p>
+
+<pre><code>variavel texto = Arquivo.lerArquivo('C:/arquivo.txt')
+</code></pre>
+",<orientação-a-objetos><algoritmo>

@@ -1,0 +1,2675 @@
+title,body,tags
+Criar um objeto a partir de outra classe,"<p>Possuo a classe <code>Endereco</code> e a classe <code>Cliente</code>, construi 2 construtores para a <code>Cliente</code>, e em um deles é pra ser inserido o nome do cliente e um objeto do tipo <code>Endereco</code>, o que funciona perfeitamente, mas no outro construtor é pra ser inserido o nome do <code>Cliente</code> e criar um objeto do tipo <code>Endereco</code> junto, o problema é que após digitar os dados do <code>Endereco</code>, dou inspect e <code>Endereco</code> é considerado <strong>null</strong>.</p>
+
+<p>Parte essencial(2 construtores) da classe Endereco:</p>
+
+<pre><code>public class Endereco{
+    private String logradouro;
+    private String numero;
+    private String complemento;
+    private String telefone;
+    private String celular;
+    private String email;
+
+    public Endereco(String log, String num, String comp, String tel, String cel, String mail){
+        logradouro = log;
+        numero = num;
+        complemento = comp;
+        telefone = tel;
+        celular = cel;
+        email = mail;
+    }    
+    public Endereco(){
+        Teclado t = new Teclado();
+        logradouro = t.leString(""Informe o logradouro: "");
+        numero = t.leString(""Informe o numero: "");
+        complemento = t.leString(""Informe o complemento: "");
+        telefone = t.leString(""Informe o telefone: "");
+        celular = t.leString(""Informe o celular: "");
+        email = t.leString(""Informe o e-mail: "");
+    }
+}
+</code></pre>
+
+<p>Parte essencial da classe Cliente:</p>
+
+<pre><code>public class Cliente{
+
+    private String nome;
+    private Endereco endereco;
+    private int pontos;
+
+    public Cliente(String nm, Endereco ed){
+        nome = nm;
+        endereco = ed;
+        pontos = 0;
+    }
+    public Cliente(String nm){
+        nome = nm;
+        Endereco e = new Endereco();
+    }
+}
+</code></pre>
+",<java><orientação-a-objetos>
+Programação Funcional e Programação Orientada a Objetos. O que são e quais suas principais diferenças?,"<p>O que são e quais as principais diferenças entre Programação Funcional e Programação Orientada a Objetos? </p>
+",<orientação-a-objetos><programação-funcional><paradigmas>
+Qual a melhor maneira de criar métodos acessíveis a qualquer activity?,"<p>Olá. Quando eu preciso criar um método para uma Activity eu simplesmente escrevo ele no código da minha Activity. Por exemplo:</p>
+
+<pre><code>package com.pcriot.maxsoft.testapplication;
+
+import android.os.Bundle;
+import android.app.Activity;
+
+public class MainActivity extends Activity {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+    private void MeuMetodo() {
+        // Código aqui
+    }
+}
+</code></pre>
+
+<p>Mas agora, digamos que este método que eu criei precise ser chamado em todas as outras activities. Seria aconselhável criar uma classe para escrever os métodos que seriam utilizados pelas activities?</p>
+
+<p>Uma classe como esta:</p>
+
+<pre><code>package com.pcriot.maxsoft.testapplication;
+
+import android.content.Context;
+
+public class Functions {
+    private Context context = null;
+
+    public Functions(Context context) {
+        this.context = context;
+    }
+
+    public void MeuMetodo1() {
+        // Código aqui
+    }
+
+    public void MeuMetodo2() {
+        // Código aqui
+    }
+
+    public void MeuMetodo3() {
+        // Código aqui
+    }
+}
+</code></pre>
+
+<p>Depois eu poderia chamar cada um deles assim:</p>
+
+<pre><code>package com.pcriot.maxsoft.testapplication;
+
+import android.os.Bundle;
+import android.app.Activity;
+
+public class MainActivity extends Activity {
+    private Functions Functions = new Functions(MainActivity.this);
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Functions.MeuMetodo1();
+    }
+}
+</code></pre>
+
+<p>Então? A maneira que estou fazendo está correta? Ou existe algum outro jeito e que tenha alguma vantagem que eu ainda não saiba.</p>
+",<android><orientação-a-objetos><classes>
+Duvida orientação a objeto + ORM java,"<p>Estou querendo armazenar os dados do meu programa via ORM e estou separando bonitinho cada objeto.</p>
+
+<p>Meu objeto Usuario por exemplo, tem seus atributos basicos e também é composto por outros objetos como Endereco,Contato e Acesso.</p>
+
+<p>Cada objeto tem um atributo ID, para identificação e associação...</p>
+
+<p>Minha duvida é a seguinte, no metodo construtor de cada classe(Usuario,Endereco,Contato e Acesso) Eu devo passar o id correspondente ou apenas os demais atributos? Porque eu acho, que de repente o hibernate possa atribuir o ID correto.</p>
+
+<pre><code>Public Class Cliente
+   private long Id;
+   private String Nome;
+
+   Public Cliente(Long id,String Nome){} 
+   'ou
+   Public Cliente(String Nome){}  
+   '?
+</code></pre>
+",<java><orientação-a-objetos>
+Passar lista de objetos entre arquivos,"<p>Como passar uma lista de objetos através de dois arquivos JavaScript?</p>
+
+<p>Tenho uma lista:</p>
+
+<pre><code>var elementsList = [];
+</code></pre>
+
+<p>E esta lista é populada com N objetos:</p>
+
+<pre><code>var oElement = {
+    elem: """",
+    emin: 0.0000,
+    emax: 0.0000
+}
+</code></pre>
+
+<p>Eu preciso passar isto tudo para uma janela modal:</p>
+
+<pre><code>var oElem = {
+            ""id"": ""FCADELEM"",
+            ""data-height"": ""558"",
+            ""data-width"": ""320"",
+            ""data-name"": ""Elementos Químicos"",
+            ""data-url"": ""FCADELEM.aspx?returnToForm=ifr_FCADQUAL"",
+            ""data-module"": ""Elementos Químicos"",
+            ""attr"": function (param) {
+                return this[param];
+            }
+        }
+        parent.createDialog(oElem);
+</code></pre>
+
+<p>Como posso passar esta lista de objetos para a outra janela sem usar o C#?</p>
+
+<p>INFORMAÇÕES COMPLEMENTARES</p>
+
+<ul>
+<li><p>As duas janelas em questão são iframes Modal, da biblioteca jQuery.</p></li>
+<li><p>Não é possível armazenar os dados no js da página 'mãe'.</p></li>
+<li><p>As duas janelas são do mesmo domínio.</p></li>
+</ul>
+",<javascript><array><orientação-a-objetos><objetos>
+Criar instância da classe dinamicamente PHP com Namespace,"<pre><code>$class = ucfirst(strtolower($_GET['type'])) . ""Controller"";    
+include $class . "".php"";    
+$item = new $class();   
+</code></pre>
+
+<hr>
+
+<p>Porém se coloco nome da classe sem ser dinamicamente, por exemplo:</p>
+
+<pre><code>$item = new PessoaController();
+</code></pre>
+
+<p>Está aceitando normalmente. Gostaria de saber como resolver e porque dinamicamente ele diz que a classe não existe?</p>
+",<php><orientação-a-objetos><classes>
+O que fazer se cliente pode ser tanto PF quanto PJ?,"<p>Estou desenvolvendo um sistema com orientação a objetos. que precisa manter um cadastro de clientes. Ocorre que esses clientes podem ser tanto pessoas físicas quanto jurídicas. Se os clientes fossem só pessoas jurídicas seria fácil: eu criaria uma classe abstrata <code>PessoaJuridica</code> e a classe cliente herdaria dela e implementaria outros membros específicos. Se os clientes fossem só pessoas físicas seria análogo, herdando de uma classe <code>PessoaFisica</code>.</p>
+
+<p>Se um cliente, porém, pode ser qualquer um deles fica complicado. Minha primeira ideia foi ter duas classes <code>ClienteFisico</code> e <code>ClienteJuridico</code> cada uma herdando respectivamente de <code>PessoaFisica</code> e <code>PessoaJuridica</code>. Mas isso não me pareceu uma boa ideia.</p>
+
+<p>Então pensei em uma segunda opção: definir <code>Cliente</code> como pessoa física <em>sempre</em> e então criar uma classe <code>Empresa</code>, sendo que um cliente pode possuir nenhuma ou várias empresas. Dessa forma, se não há empresas, os únicos dados relevantes são os dados de pessoa física do cliente. Se há empresas, então temos os dados de pessoa física do responsável por ela e junto uma lista com as informações das empresas.</p>
+
+<p>O que eu gostaria de saber é: essa segunda abordagem que eu tomei é uma abordagem padrão? Digo isso no sentido de ser uma abordagem comum para resolver esse tipo de situação. Existem formas melhores para se modelar conceitos como esse em orietnação a objetos?</p>
+",<orientação-a-objetos>
+Como identificar classes em um sistema orientado a objetos?,"<p>Ao trabalharmos com orientação a objetos é preciso saber identificar quais classes são necessárias para uma certa aplicação. Algumas classes costumam ser ""óbvias"" em certo sentido: em um sistema de gerenciamento de produtos é intuitivamente claro que vamos precisar de classes <code>Produto</code>, <code>Fornecedor</code>, etc.</p>
+
+<p>Inclusive, para ""detectar"" essas classes mais ""óbvias"" até ouvi falar de uma técnica: escrever casos de uso e então olhar os substantivos nesses casos de uso. Depois disso então filtramos essa lista de substantivos que obtemos pra ver quais realmente devem ser classes, ou seja, quais realmente representam conceitos importantes do problema tratado.</p>
+
+<p>Mas existem classes que não são tão obvias e que eu acredito que não apareçam nos casos de uso. Por exemplo, considerando ASP.NET WebAPI, ao criarmos o projeto padrão no VS 2013 temos a classe <code>ApplicationOAuthProvider</code>, a classe <code>ChallengeResult</code> e além disso temos de criar os controllers.</p>
+
+<p>Isso que falei é só um exemplo, porque realmente não sei uma forma melhor de expressar isso. O fato principal é que essas classes todas <em>não</em> me parecem óbvias, e me parece muito pouco provavel que elas apareçam nos casos de uso.</p>
+
+<p>Dessa forma, como podemos identificar as classes necessárias em um sistema orientado a objetos? Além da técnica de analisar os casos de uso, como podemos achar essas classes ""menos óbvias""? Eu sei que esse assunto é <em>muito</em> extenso, por isso se possível peço referências para estudar mais sobre isso.</p>
+",<orientação-a-objetos>
+Como lidar com frameworks e tecnologias prontas?,"<p>Estou com uma dúvida faz um tempo e acho que pode até ser uma dúvida comum. Não sei muito bem como colocar a pergunta, mas vou tentar. Quando comecei a programar eu lidei com linguagens como PHP, C, C++. O que usei mais na prática mesmo foi o PHP. Basicamente eu tinha que desenvolver <em>tudo</em>, os códigos para autenticação/autorização e segurança, os códigos para interação com MySQL, etc.</p>
+
+<p>Depois de 3 anos trabalhando com PHP aprendi o C# e comecei a trabalhar com o framework .NET desde então. Gosto muito das funcionalidades do framework e da linguagem também, que é ""mais"" orientada a objetos que o PHP, além de ser fortemente tipada e etc.</p>
+
+<p>O problema é que esse tempo todo eu tenho uma dúvida bastante grande. Como existe todo um framework disponível, muitas coisas já estão prontas. Então, se eu preciso de bancos de dados, já tenho o EF ou o NHibernate, se eu preciso utilizar serviços REST já tenho o WebAPI, se eu preciso de autenticação/autorização em aplicações web já tenho o ASP.NET Identity.</p>
+
+<p>E quando vou ler sobre como usar essas tecnologias todas basicamente encontro tutoriais e artigos dizendo: ""faça assim"" e então é sempre daquele jeito que as coisas funcionam e pronto. Isso tudo deixa uma dúvida do tipo: ""tendo <em>tanta</em> coisa pronta e tudo já explicado exatamente <em>como</em> usar, o que eu tenho que programar de verdade?""</p>
+
+<p>E essa pergunta é muito estranha, porque afinal, se eu estou trabalhando no projeto eu deveria saber o que preciso programar. Só que com tanta coisa disponível eu costumo me perder e quando vejo estou simplesmente replicando códigos que li sobre como aplicar determinadas tecnologias.</p>
+
+<p>Sei que existe o modelo de domínio a ser desenvolvido. Mas isso é tudo? Quando lidamos com frameworks como o .NET só desenvolvemos o modelo de domínio e o integramos à tecnologia do jeito que é eplicado em tutoriais e etc? Como se lida com esse tipo de situação?</p>
+",<orientação-a-objetos><framework>
+Como funcionam protótipos em JavaScript?,"<p>Me parece que o conceito de protótipo é fundamental em JavaScript e inclusive em vários lugares tenho lido que é um de seus pontos fortes. Entretanto, este não parece um conceito tão simples de entender para quem vem de outras linguagens.</p>
+
+<p>Assim, pergunto: como funcionam protótipos em JavaScript? </p>
+",<javascript><orientação-a-objetos><protótipo>
+É uma boa prática lançar exceção nesses casos?,"<p>Estou resolvendo alguns exercícios de orientação à objetos. Um dos exercícios pede pra escrever uma classe que representa um voo de avião, contendo a data, o número e métodos para verificar status de assentos.</p>
+
+<p>As requisições pedem um método <code>ocupa</code> que seja responsável por tomar um número de assento entre 1 e 100 e caso esteja livre, ocupar o assento (basicamente isso seria somente seta-lo como ocupado). O exercício pede pra retornar true se o assento puder ser usado e false caso ele já esteja ocupado.</p>
+
+<p>Não sei se gosto muito dessa abordagem. Na realidade, pensando sobre o método não acho natural ele retornar nada. Por isso implementei diferente. Se o assento pode ser ocupado, tudo correu bem e não precisa se fazer nada. Caso o assento já esteja ocupado estou lançando uma <code>InvalidOperationException</code> com uma mensagem apropriada.</p>
+
+<p>O exercício também pede um método <code>proximoLivre</code> capaz de encontrar o número do próximo assento livre. Nesse caso o exercício não diz o que fazer se não houver mais assentos livres e então eu também estou lançando uma <code>InvalidOperationException</code>.</p>
+
+<p>São boas práticas em casos como esse lançar exceções? Fiquei em dúvida se exceções deveriam ser usadas em casos assim também, ou somente pra lidar com erros mesmo da aplicação.</p>
+",<orientação-a-objetos><exceção>
+Métodos e propriedades em C# - vantagens e desvantagens,"<p>Em C# temos propriedades com getters e setters, o que facilita a inserção e leitura de dados em um objeto quando alguma lógica deve ser realizada. Em outras linguagens, como o Java essas tarefas são feitas com métodos: quando precisamos de lógica para ler um campo ou para escrever nele usamos métodos <code>getCampo</code> e <code>setCampo</code>, coisas do tipo.</p>
+
+<p>Essa abordagem com métodos também pode ser feita no C# e é ai que ta minha dúvida. Quais são as vantagens e desvantagens no C# dessas duas abordagens? Minha preocupação com essa questão é a seguinte: estive resolvendo exercícios de orientação a objetos e notei que a grande maioria dos métodos que os exercícios pedem pra codificar <em>podem</em> se tornar propriedades no C#. O problema é que isso faz a classe parecer anêmica, ou seja, tendo só propriedades e sem lógica.</p>
+
+<p>Dessa forma, existem diferenças entre as duas abordagens? Existe algum tipo de recomendação sobre qual técnica usar?</p>
+
+<p><strong>EDIÇÃO</strong>: A resposta do @bigown é muito boa e esclarece algumas coisas com relação a esse tipo de decisão, mas vou adicionar alguns exemplos para ilustar o que estou falando, só pra completar um ponto. Os exemplos são de exercícios em Java. Um dos exercícios que resolvi pedia uma classe <code>Data</code> com métodos <code>getDia</code>, <code>getMes</code>, <code>getAno</code> e <code>isBissexto</code> para decidir se o ano é bissexto. Os métodos <code>get</code> claramente em C# poderiam ser implementados como getters. </p>
+
+<p>Acontece que o <code>isBissexto</code> também poderia. Afinal ele devolve uma <em>característica</em> do objeto invés de executar um comportamento. Claro que existe uma lógica pra verificar isso, mas me pergunto se isso não seria uma propriedade.</p>
+
+<p>Outro exercício pede uma classe <code>Prova</code> que deve ter métodos <code>respostaAluno</code> para inserir a alternativa da próxima questão, <code>acertos</code> para retornar o número de acertos, <code>nota</code> para retornar a nota e <code>maior</code> para comparar com outra prova.</p>
+
+<p>Novamente, os métodos <code>acertos</code> e <code>nota</code> me parecem naturalmente propriedades. Eles são características da prova. Existe novamente uma lógica pra verificar isso, basicamente é preciso comparar cada questão com os dados provenientes de um gabarito informado no construtor, mas por conta de parecerem características achei que deveriam ser propriedades.</p>
+
+<p>Acontece que tirando esses métodos e transformando em propriedades essas classes ficam quase sem funcionalidades, e não só elas mas muitas outras que já vi por ai. Isso indicaria o problema que ouvi dizer se chama ""modelo anêmico"". </p>
+
+<p>Dessa forma, a decisão de algo como propriedade não depende somente de ser uma característica do objeto? Depende também de haver ou não uma lógica a ser utilizada para ler ou escrever aquele dado? Em casos então como esses que citei, é mais interessante então realmente utilizar métodos?</p>
+",<c#><.net><orientação-a-objetos><encapsulamento><propriedade>
+Criar Array de Objetos em java e acessar os objetos diretamente,"<p>Então preciso fazer o seguinte tenho uma classe com alguns atributos e metodos, preciso gerar uma <code>array</code> de objetos dessa classe, porem eu queria poder acessa-los diretamente, atualmente o que consegui fazer é joga-los em um <code>arraylist</code> e usar o <code>get(posição)</code> pra atribui-los em uma variavel temporaria para poder acessar seus metodos e atributos.</p>
+
+<p>Classe a qual quero criar um array de objetos</p>
+
+<pre><code>public class BlocoView {
+    private MemoriaTextField enderecoMemoria;
+    private MemoriaTextField palavras;
+    public BlocoView(boolean selected){
+        if(selected){
+            this.enderecoMemoria = new MemoriaTextField(""0"", true);
+            this.palavras = new MemoriaTextField(""???"", true);
+        }else{
+            this.enderecoMemoria = new MemoriaTextField(""0"", false);
+            this.palavras = new MemoriaTextField(""???"", false);            
+        }
+    }
+    public MemoriaTextField getEndereco(){
+        return this.enderecoMemoria;
+    }
+}
+</code></pre>
+
+<p>Classe que contem o arraylist de objetos da classe acima</p>
+
+<pre><code>public class MemoriaView extends JPanel {
+    private ArrayList listadeBlocos;
+    public MemoriaView(){
+        super();
+        this.listadeBlocos = new ArrayList();
+        this.listadeBlocos.add(new BlocoView(false));
+        this.setLayout(new MigLayout());
+        //Aqui que tenho que acessar os atributos ou metodos diretamente
+        this.add(this.listadeBlocos.get(0));
+    }
+
+}
+</code></pre>
+
+<p>Ao tentar fazer algo do tipo</p>
+
+<pre><code>this.add(this.listadeBlocos.get(0).getEndereco);
+</code></pre>
+
+<p>o java nao consegue encontrar o metodo get endereco</p>
+",<java><array><orientação-a-objetos>
+Dúvida em exercício de herança em C#,"<p>Estou tentando resolver um exercício de herança e encontrei uma dúvida que vi que tem chance de aparecer em outros lugares e por isso achei que devia perguntar aqui. O exercício pedia pra primeiro criar uma classe <code>Voo</code> que representa um voo de avião e é capaz de manipular informações sobre ocupação de assentos, sendo que parte dos requerimentos é o fato de cada voo ter no máximo 100 assentos.</p>
+
+<p>Depois é pedido pra criar uma classe herdeira que permite a definição do número de cadeiras máximo e dividir o avião em fumantes e não fumantes. Com relação a parte dos fumantes eu sei implementar. O que eu não sei é o número variável de cadeiras por causa da forma que implementei a classe base.</p>
+
+<p>Como há 100 assentos, eu criei um array de bool de tamanho 100 na classe base em que a <code>i</code>-ésima entrada é <code>true</code> se o assento <code>i</code> está ocupado. Basicamente eu fiz isso inicializando o array no construtor da seguinte forma:</p>
+
+<pre><code>public class Voo
+{
+    private bool[] ocupacaoAssentos;
+
+    public int Numero { get; private set; }
+
+    public Data Data { get; private set; }
+
+    public Voo(int numeroVoo, Data data)
+    {
+        this.Numero = numeroVoo;
+
+        this.Data = data;
+
+        this.ocupacaoAssentos = new bool[100];
+    }
+}
+</code></pre>
+
+<p>Então os métodos manipulam esse array. O problema é que a classe herdeira não teria como modificar isso. Até onde eu sei, no C# o construtor da classe herdeira sempre chama o construtor da classe base.</p>
+
+<p>Uma solução possível (em C#) seria implementar isso com uma classe de coleção que não tem tamanho fixo e então criar um campo readonly estático que diz o máximo de assentos e então modificar ele na classe herdeira e a partir daí fazer verificações pra que tudo fique dentro dos limites. Não sei se do ponto do exercício seria válida, porque o exercício é em Java e não sei se o Java tem essas classes de coleção como o C#.</p>
+
+<p>Mas e se eu não tivesse como modificar a classe base por alguma razão ou por algum outro detalhe do problema eu simplesmente não tivesse como aplicar uma solução desse tipo? Como eu poderia lidar com isso? Esse é um caso que me parece que a classe base é mais geral que a classe herdeira.</p>
+",<c#><orientação-a-objetos><herança>
+Como comunicar entre classes?,"<p>Estou iniciando no JavaFX e estou com dúvidas.</p>
+
+<p>A classe principal cria um HBox com um botão. Esse botão tem a ação de criar uma <code>TableView</code> no Center da <code>bdPrincipal</code>. Só que estão em classes/packages diferentes.</p>
+
+<p>Qual a melhor maneira de buscar a <code>bdPrincipal</code> pra adicionar a <code>addTabela()</code>?</p>
+
+<pre><code>BorderPane bpPrincipal;
+public void start(Stage primaryStage) {
+        bpPrincipal = new BorderPane();
+        bpPrincipal.setLeft(Menu.addMenu());
+        scPrincipal = new Scene(bpPrincipal);
+        primaryStage.setScene(scPrincipal);
+        primaryStage.centerOnScreen(); 
+        primaryStage.setHeight(Screen.getPrimary().getVisualBounds().getHeight()); 
+        primaryStage.setWidth(Screen.getPrimary().getVisualBounds().getWidth());        
+        primaryStage.show();
+    }    
+
+
+public class Menu {
+    public static HBox addMenu() {
+
+        HBox hbox = new HBox();
+        hbox.setPadding(new Insets(15, 12, 15, 12));
+        hbox.setSpacing(20);
+        hbox.setStyle(""-fx-background-color: #336699;"");
+
+        Button btnListar = new Button(""Listar"");
+        btnListar.setPrefSize(100, 20);
+        btnListar.setOnAction(new EventHandler&lt;ActionEvent&gt;() {
+            public void handle(ActionEvent evento) {
+                  GestorFX.bpPrincipal.setCenter(addTabela());
+            }
+        });
+        hbox.getChildren().addAll(btnListar);
+
+        return hbox;
+    }
+    @SuppressWarnings({ ""rawtypes"", ""unchecked"" })
+    private static TableView addTabela()
+    {
+        TableColumn colCodigo = new TableColumn();
+        colCodigo.setText(""Código"");
+        colCodigo.setMinWidth(150);
+        colCodigo.setCellValueFactory(new PropertyValueFactory(""clienteCodigo""));
+
+        TableColumn colFantasia = new TableColumn();
+        colFantasia.setText(""Nome Fantasia"");
+        colFantasia.setMinWidth(450);
+        colFantasia.setCellValueFactory(new PropertyValueFactory(""clienteFantasia""));
+
+        TableColumn colRazao = new TableColumn();
+        colRazao.setText(""Razão Social"");
+        colRazao.setMinWidth(450);
+        colRazao.setCellValueFactory(new PropertyValueFactory(""clienteRazao""));
+
+        TableView tabela = new TableView();
+        tabela.setItems(Negocio.Cliente.ListaCompleta());
+        tabela.getColumns().addAll(colCodigo, colFantasia, colRazao);
+
+        return tabela;
+    }
+}
+</code></pre>
+",<java><orientação-a-objetos><classes>
+Princípio aberto/fechado - como entender isso?,"<p>Em orientação a objetos existe o SOLID sendo que um dos princípios é o aberto/fechado que eu aprendi da seguinte forma: ""os componentes de software devem estar abertos para extensão e fechados para modificação"" sendo que componentes inclui classes, métodos, etc. Apesar de parecer uma boa ideia, eu não consigo entender como isso realmente funciona na prática.</p>
+
+<p>O que acontece é que eu consigo imaginar várias razões que podem requerer modificação de uma classe, entre elas mudança nos requisitos do sistema sendo desenvolvido. Apesar de eu estar a par dessa ideia, meu cliente não está e ele pode muito facilmente mudar de ideia em alguns pontos que exijam revisão na lógica em si dentro das classes.</p>
+
+<p>Nesses casos não consigo ver uma forma de resolver isso somente com herança. Se o que está mudando é realmente como o método deve funcionar, eu vou precisar modificar ele.</p>
+
+<p>Dessa forma, o que realmente o principio aberto/fechado quer dizer e como se usa ele na prática?</p>
+",<orientação-a-objetos><solid>
+Qual o papel dos padrões de arquitetura em orientação a objeto?,"<p>Essa pergunta parece ter uma resposta óbvia, mas eu confesso que ainda não peguei a ideia sozinho. Estou trabalhando com orientação a objetos desde 2011, principalmente voltado para desenvolvimento web. Logo que comecei já ouvi falar sobre MVC. Quando peguei um livro de MVC pra ler ele citava muitos outros padrões de arquitetura, entre eles o MVVM e o MVP.</p>
+
+<p>Mas qual o real papel desses padrões de arquitetura? Sempre que vamos fazer um projeto orientado a objetos escolhemos algum padrão pra basear ele? Claro que é possível criar um novo projeto e sair programando sem padrão nenhum, mas na prática sempre escolhe-se um padrão pra basear o projeto?</p>
+
+<p>Além disso, me parece que a decisão dos padrões se baseia em última instância não no modelo de domínio mas na interface com o usuário. Digo isso porque vi o seguinte: a motivação para o MVC na web é o fato do HTTP não manter estado, o fato da interface com o usuário ser na web. O MVVM aparece em cenários onde há estado, ou seja, o fato da interface com o usuário permitir isso, e por ai vai. Como é feita essa escolha de padrão?</p>
+",<orientação-a-objetos><padrões>
+Qual a diferença entre Struct e Class?,"<p>Qual a diferença entre Struct e Class?
+Que tipo de situação devo utilizar uma Struct invés de uma Class?</p>
+",<c#><orientação-a-objetos>
+"O que ""imutável"" realmente significa?","<p>Nessa <a href=""http://pt.stackoverflow.com/questions/14490/alocacao-de-memoria-em-c-tipos-valor-e-tipos-referencia"">pergunta</a> que fiz a respeito de tipos valor e tipos referência em C#, foi citado na resposta aceita que instâncias de structs devem ser objetos imutáveis. Lendo no <a href=""http://pt.wikipedia.org/wiki/Objeto_imut%C3%A1vel"">wikipedia</a> confirmei que um objeto imutável não deveria ter seu estado modificado depois de criado. Mas isso é confuso, porque afinal, se eu declaro uma variável seja de um tipo struct ou um tipo classe, eu posso modificar seu valor a qualquer momento, ou então ela seria uma constante.</p>
+
+<p>Na realidade, <code>int</code> é uma struct pelo que sei, então nesse caso se eu declaro uma variável do tipo <code>int</code> ela não deveria ser modificada se instâncias de structs são realmente imutáveis. Mas isso claramente não é verdade, eu posso fazer <code>int i = 1</code> e depois <code>i++</code> e só nisso já mudei o seu estado.</p>
+
+<p>Dessa forma, o que realmente significa ""objetos imutáveis"" e como esse conceito é um conceito útil em orientação a objetos?</p>
+",<c#><.net><orientação-a-objetos><imutabilidade>
+Qual a diferença entre métodos do Controller e do Helper?,"<p>Dúvida arquitetural e conceitual:</p>
+
+<p>Possuo um <em>model</em> <code>Item</code> que possuí atributos <code>nome_ptbr</code> e <code>nome_en</code>.</p>
+
+<p>Fiz o seguinte método:</p>
+
+<pre><code>def display_nome
+  nome_ptbr || nome_en
+end
+</code></pre>
+
+<p>Onde devo colocar esses métodos, no <em>controller</em> ou no <em>helper</em>? Qual a diferença entre um e outro?</p>
+",<ruby-on-rails><ruby><orientação-a-objetos><arquitetura-de-software>
+Representar coordenadas em vetor de Matlab,"<p>Estou com problemas na criação de um vetor de objetos em Matlab, a ideia é que seja um vetor de coordenadas, i.e. as posições x e y.
+O objetivo é ter um vetor para acessar as coordenadas nos loops facilmente, e ter atomicidade dos dados para ter consistência de qual posição é x ou y.
+Creio que tem que usar construtor.</p>
+
+<p>Dado um n de entrada será construído um array de coordenadas de tamanho n. No qual cada elemento terá seu próprio x e y.
+Ex:</p>
+
+<pre><code>n=2;
+vetor(n)=coord(0,0);
+vetor(1).x=5;vetor(1).y=3;
+vetor(2).x=2;vetor(2).y=4;
+</code></pre>
+
+<p>A questão principal é que quero deixar a instância vetor em uma outra classe, que terá que ter no construtor a alocação desse array de n posições.</p>
+",<orientação-a-objetos><matriz><matlab>
+Declaração Correta Classes Model MVC Ninject,"<p>Comecei a usar OO a pouco tempo e em todos projetos que eu vejo na net, eu vejo a seguinte maneira de declaração.</p>
+
+<pre><code>public class Trabalhador
+{
+    public int Id { get; set; }
+    public string Nome { get; set; }
+    public virtual ICollection Dependente { get; set; }
+    public virtual ICollection Dependente { get; set; }
+    public virtual ICollection LicencaMedica{ get; set; }
+}
+
+public class Dependente
+{
+    public int ID { get; set; }
+    public string Nome { get; set; }
+    public virtual Trabalhador Trabalhador { get; set; }
+}
+
+public class Ferias
+{
+    public int ID { get; set; }
+    public string Nome { get; set; }
+    public virtual Trabalhador Trabalhador { get; set; }
+}
+
+public class LicencaMedica
+{
+    public int ID { get; set; }
+    public string Nome { get; set; }
+    public virtual Trabalhador Trabalhador { get; set; }
+}
+</code></pre>
+
+<p>Entretanto estou trabalhando em um projeto em conjunto com outros desenvolvedores, e um deles defende com unhas e dentes que as minhas classes não devem possuir o ""virtual"" como atributo de navegação, defende ele que as classes Dependente, Ferias e Licença pelo fato de ja terem uma ICollection em Trabalhador, nao devem possuir nenhuma chave, pois serão todas acessiveis a partir da classe trabalhador, está correto isso do ponto de vista da OO? Expus minha opiniao e falei que isso estava errado, pois estaria meio que criando uma classe Root e tudo passaria por ela sem necessidade, meio que sobrecarregando uma classe com muita responsabilidade, a abordagem dele seria a seguinte:</p>
+
+<pre><code>public class Trabalhador
+{
+    public int Id { get; set; }
+    public string Nome { get; set; }
+    public virtual ICollection Dependente { get; set; }
+    public virtual ICollection Dependente { get; set; }
+    public virtual ICollection LicencaMedica{ get; set; }
+}
+
+public class Dependente
+{
+    public int? ID { get; set; }
+    public string Nome { get; set; }
+}
+
+public class Ferias
+{
+    public int? ID { get; set; }
+    public string Nome { get; set; }
+}
+
+public class LicencaMedica
+{
+    public int? ID { get; set; }
+    public string Nome { get; set; }
+}
+</code></pre>
+
+<p>Está correto isso do ponto de vista da OO? Pra mim ter acesso a um objeto da classe filha eu devo obrigatoriamente passar pela classe pai? Segundo ele o Ninject que acusa erro no sistema, pois o fato de instanciar a classe pai e depois instanciar a classe filha segundo ele daria um loop no sistema, por isso ele arranca todas as propriedade de navegação das classes filhas.</p>
+
+<p>(Nao estamos usando Entity, estamos usando ADO com SP no Banco). Tentei ser o mais especifico possivel, qual o problema de cada uma das abordagens?</p>
+",<c#><asp.net-mvc><orientação-a-objetos><classes>
+Usar função de uma classe dentro de outra classe PHP,"<p>tenho duas classes, qual a maneira correta de chamar uma função de outra classe, da maneira abaixo retorna erro</p>
+
+<pre><code>class DB {
+public function __construct($user, $password, $database, $host) {
+        $this-&gt;user = $user;
+        $this-&gt;password = $password;
+        $this-&gt;database = $database;
+        $this-&gt;host = $host;
+
+        $this-&gt;ConectarBanco();
+    }
+
+    protected function ConectarBanco() {
+        $this-&gt;mysqli = new mysqli($this-&gt;user, $this-&gt;password, $this-&gt;database, $this-&gt;host);
+        if (mysqli_connect_errno()) {
+            die('N&amp;atilde;o foi poss&amp;iacute;vel conectar-se ao banco de dados');
+            exit();
+        }
+    }
+
+    public function FecharBanco() {
+        $this-&gt;mysqli-&gt;close();
+    }
+
+    public function ExecutarSQL($sql) {
+        $this-&gt;result = $mysqli-&gt;query($sql);
+        return $this-&gt;result;
+    }
+
+    public function Consultar($dados) {
+        $this-&gt;newRow = array();
+        while($row = $mysqli-&gt;fetch_array($dados)) {
+            array_push($this-&gt;newRow,$this-&gt;row);
+        }
+        return $this-&gt;newRow;
+    }
+}
+
+class Acao{
+
+    public function fnAcao(){
+
+            $query = ""SELECT * FROM tabela"";
+
+            $result = DB::ConsultarSQL($query);
+
+        return $result;
+
+    }
+}
+</code></pre>
+",<php><orientação-a-objetos><classes>
+Mapeamento do controller para o domain model,"<p>Temos as seguintes situações em geral, considere objetos maiores que o exemplo. </p>
+
+<p><strong>Situação 1</strong><br>
+Podemos ter uma request que tem todos os parâmetros do account;<br>
+<code>{""id"":""1"";""name"":""test"",""some"":""xxx"".............}</code> e os outros campos. </p>
+
+<p><strong>Situação 2</strong><br>
+Podemos ter uma request que tem alguns parâmetros do account, por exemplo no caso de um update;<br>
+<code>{""id"":""1"";""name"":""testUpdated""}</code></p>
+
+<p><strong>Situação 3</strong><br>
+Podemos ter uma request que tem alguns parâmetros do account, como id mais tem outros como usuário junto;<br>
+<code>{""id"":""1"";""user"":""xxx"",""service"":""yyy""}</code> nesse caso cada pedaço da request vai virar um objeto. </p>
+
+<p>Exemplo de Dominio </p>
+
+<pre><code>public class Account {    
+    private Long id;
+    private String name ;
+    private String some ;    
+}
+</code></pre>
+
+<p>Vejo algumas opções; </p>
+
+<p>1 - Posso receber no controller esse AccountForm e setar as propriedades dele no objeto Account e outros se nescesasrio NO CONTROLLER; </p>
+
+<pre><code>+ atende as situações 1, 2 e 3 
++ separa a requisçao do objeto de dominio 
+- polui o controller com codigo de conversao 
+- controller fica cheio de setters.. se for uma classe maior como um objeto grande como um pedido fica bem confuso. 
+
+controller(AccountForm from){
+    Account account = new Account()
+    account.setNome=form.getNome();
+    account.setSome=form.getSome();
+    Other outher = new Other();
+    other.setSome(form.getSome());
+}
+</code></pre>
+
+<p>2 - Posso receber no controller esse AccountRequest ter um metodo nele mesmo como <code>AccountRequest.getAccount()</code> para devolver um model mapeado, nesse caso o mapeamento fica no proprio objeto de Request. </p>
+
+<pre><code>+ separa a requisçao do objeto de dominio 
++ encapsula a conversao em um lugar de facil acesso. 
++ atende situacao1 situacao2 e situacao3; 
++ um objeto burro que so tem os parametros da requisçao tem alguma funcionalidade; 
+- objeto de request tem duas responsabilidades representar a requisiçao e mapear para um model valido.
+
+controller(AccountForm accountRequest){
+   Account account = accountRequest.getAccount();
+   Outher outher = accountRequest.getOther();
+}
+</code></pre>
+
+<p>3 - Posso receber Account direto no controller onde ficara cheia de nulos. </p>
+
+<pre><code>+ elimino objeto de request 
++ alta simplicidade 
+- atende apenas a situacao1 situacao2 , por que request pode ter informações sobre vários objetos... o que não funcionaria. 
+- forte acoplamento.
+
+controller(Account account){
+    account.someMethod();
+}
+</code></pre>
+
+<p>4 - Externalizar esse mapeamento dos parametros da requisição para outro objeto mapeador por request.</p>
+
+<pre><code>+ isola logica do mapeamento 
+- complexidade ate para casos mais simples se usado como padrão para tudo por exemplo um find por id.
+- mais uma classe para cada request;
+</code></pre>
+
+<p>No caso de APi que tenha resposta fica pior ainda mais 2 classes. 
+falando em termos de request de response.... </p>
+
+<pre><code>request | mapper | model | mapper | response 
+AccountRequest, AccountRequestMapper,Account,AccountResponseMapper,AccountResponse........ 
+</code></pre>
+
+<p>Estou fazendo testes mais o Hibrido da opção 3 para casos simples(find por id ou updates).... com a opção 2 por exemplo para casos mais complexos... parece o ideal pelo que estou vendo, espero que com a opiniao de voces fique mais claro.. o que poderia ser melhor, porém na abordagem hibrida, o problema é que voce não tem o famoso ""PADRAO"" e tem que pensar em como fazer a cada caso,e vejo resistência em adotar algo assim. 
+O ruim do PADRAO é que gera arquitetura mostro para fazer um find por exemplo. </p>
+
+<p>O que vocês usam /O que seria ideal/ O que fica expressivo e de facil manutenção? </p>
+",<orientação-a-objetos><mvc><arquitetura-de-software>
+Qual o uso de uma variável estática ou final em java?,"<p>Qual a diferença da declaração <code>private static int var_nome</code> para <code>private final int var_nome</code> para <code>private int var_nome</code>? Como essas declarações podem influenciar no meu algoritmo?</p>
+",<java><orientação-a-objetos><variáveis><declaração-de-variável>
+Análise e Projeto em Javascript,"<p>Quando trabalhamos com linguagens orientadas a objetos como Java e C# temos a disposição todo um processo de análise e projeto que nos ajuda a saber como projetar a aplicação de forma a escrever códigos mais coesos, menos acoplados e que sejam mais fáceis de manter. O processo de análise e projeto orientados a objetos serve pra qualquer linguagem orientada a objetos e por isso esse processo nem depende da linguagem escolhida.</p>
+
+<p>No momento estou trabalhando, porém, com Javascript. Basicamente, tenho uma divisão em camadas de forma que o client da aplicação é feito com Javascript e o servidor (onde está realmente a lógica toda) é feito com C# e usa orientação a objetos.</p>
+
+<p>Enquanto a parte do servidor eu sei projetar e tudo mais, a do Javascript eu fico bastante perdido. Acontece que Javascript tem uma noção de objetos diferente. A linguagem não tem classes, não tem interfaces, não é fortemente tipada e isso me parece ser bastante impedimento pra usar o processo de análise e projeto de orientação a objetos como conheço no Javascript.</p>
+
+<p>Dessa forma, existe algum processo de análise e projeto pra Javascript? Principios, recomendações e padrões que nos permitam escrever código Javascript mais desacoplado, mais fácil de manter e com maior qualidade?</p>
+",<javascript><orientação-a-objetos>
+Erro ao fazer um insert dinâmico em PHP,"<p>O código que está a causar o erro:</p>
+
+<pre><code>public function Inserir($tabela,$sql){
+
+    ksort($sql);
+
+    $Campos_nome=  implode('`, `', array_keys($sql));
+    $Campos_valor= ': '. implode(', :', array_keys($sql));
+
+    $novo=$this-&gt;prepare(""INSERT INTO $tabela ( `$Campos_nome`)VALUES( $Campos_valor)"");
+
+    print ""INSERT INTO $tabela (` $Campos_nome`)VALUES( $Campos_valor)"";
+    foreach ($sql as $key =&gt; $valor) {
+        $novo-&gt;bindValue("":$key"",$valor);
+    }
+
+        $novo-&gt;execute();
+
+        if($novo-&gt;rowCount()&gt;0){
+            $novo-&gt;setFetchMode(PDO::FETCH_ASSOC);
+            $valor=$novo-&gt;fetchAll(); 
+        }
+}
+</code></pre>
+
+<p>A mensagem de erro recebida:</p>
+
+<blockquote>
+  <p>Warning: PDOStatement::execute(): SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens in /home/sam/Dropbox/Portal1/libs/Database.php on line 39</p>
+</blockquote>
+",<php><orientação-a-objetos><pdo>
+Usando um objeto em diferentes métodos no Objective C,"<p>Estou tentando trabalhar com objetos no iOS Objective C, e tive uma dúvida com relação a utilização.</p>
+
+<p>Eu criei um arquivo chamado <code>carro.h</code></p>
+
+<pre><code>#import &lt;Foundation/Foundation.h&gt;
+@interface carro : NSObject
+{
+    NSString *_marca;
+    NSString *_ano;  
+}
+@property (strong) NSString *marca;
+@property (strong) NSString *ano;
+@end
+</code></pre>
+
+<p>no arquivo <code>carro.m</code> eu tenho o seguinte</p>
+
+<pre><code>#import ""carro.h""
+@implementation busca
+@synthesize marca;
+@synthesize ano;
+@end
+</code></pre>
+
+<p>Eu tenho uma <code>ViewController</code> e quero usar esse objeto atribuindo valor ou resgatando o valor. Porém como fazer com que o mesmo objeto possa ser utilizando em diferentes métodos?</p>
+",<orientação-a-objetos><ios><objective-c>
+O quão úteis são as annotations em Java?,"<p>Quando eu estudei Java pela primeira vez, quando vi sobre Annotations só vi que elas são úteis para gerar metadados, mas não vi nada que influenciasse no comportamento do programa. Basicamente, só vi Annotations para marcar autores de classes, para o que a classe foi feita, etc...</p>
+
+<p>Mas lendo códigos em Java relevantes, vi muitas Annotations com usos que eu não conheço, aqui vai um exemplo de um Hello World usando Spring:</p>
+
+<p><a href=""http://projects.spring.io/spring-framework/#quick-start"">http://projects.spring.io/spring-framework/#quick-start</a></p>
+
+<p>Pelo que eu andei pesquisando, se bem usadas Annotations podem até mesmo serem mais flexíveis que os pré-processadores do C/C++!</p>
+
+<p>Quais são as utilidades gerais das Annotations em Java?</p>
+",<java><orientação-a-objetos><spring>
+Como passar dados(string) de uma classe para a TextField da Viewcontroller,"<p>Quero passar dados de uma classe do tipo <code>NSObject</code> para serem mostrados na minha <code>TextField Viewcontroller</code>. Tentei utilizar a função <code>prepareForSegue</code> mas não consegui.</p>
+
+<p>Alguém sabe como se passa os dados, mesmo que seja utilizando a função <code>prepareForSegue</code> ou outra forma de passar os dados.</p>
+",<orientação-a-objetos><objective-c><classes><xcode>
+Como passar valor do editText para atributo to tipo int no Android?,"<p>Tenho uma duvida em relação ao armazenamento de valor vindo do <code>EditText</code> para atributos do tipo <code>int</code> de uma classe. Para os atributos do tipo <code>String</code> faço assim:</p>
+
+<pre><code>objEquipamento.setMarcaModelo(edtMarcaModelo.getText().toString());
+</code></pre>
+
+<p>Mas e quando o meu atributo é do tipo <code>int</code>? e quero passar um número?
+tenho que converter o valor ou exite algum método para <code>int</code>?</p>
+",<java><android><orientação-a-objetos>
+ArrayList em JAVA,"<p>Tenho uma pergunta sobre ArrayList </p>
+
+<p><strong>Exemplo:</strong>  Fiz uma interface gráfica em Java para cadastrar jogadores em um <code>ArrayList</code>. após o cadastro, o jogador vai para um <code>Jlist</code>, ai que vem minha dúvida. Quero comprar esse jogador para o meu time, eu seleciono ele e clico em comprar e no caso esse método comprar eu só usei um remove. Queria remover ele da lista dos jogadores que estão à venda e colocar ele no meu <strong><em>Time</em></strong>?</p>
+",<java><orientação-a-objetos>
+Erro ao instanciar um objeto,"<p>Quando vou instanciar o objeto <code>Vendedor</code> aparece esse erro:</p>
+
+<pre><code>java.lang.NullPointerException
+    at Vendedor.&lt;init&gt;(Vendedor.java:9)
+</code></pre>
+
+<p>Gostaria de saber o que significa e como resolvo?</p>
+",<java><orientação-a-objetos>
+O que realmente é DDD e quando ele se aplica?,"<p>Quando estudei MVC pela primeira vez no livro falava muito sobre DDD (Domain Driven Design). Pelo que eu entendi na época, a ideia do DDD era simplesmente programar o software com foco no desenvolvimento da camada de domínio. </p>
+
+<p>Depois disso, lendo sobre o processo de análise e projeto em orientação a objetos tive a impressão de que sempre que programamos um software orientado a objetos damos essa ênfase na camada de domínio, começando por ela e usando os requisitos pra montar ela corretamente.</p>
+
+<p>Isso faz parecer que o DDD prega basicamente a mesma coisa que o processo de análise e projeto em orientação a objetos. Dessa forma, o que realmente é o DDD e quando ele se aplica de verdade? Quais as vantagens de se usar DDD em um projeto?</p>
+
+<p>Eu sei que existe um livro chamado ""Domain-Driven Design: Tackling Complexity in the Heart of Software"", mas por ser um livro muito extenso nunca consegui parar pra ler ele. Existe alguma referência mais resumida sobre o assunto?</p>
+",<orientação-a-objetos><modelagem><ddd>
+Nível de detalhamento de casos de uso,"<p>Estou começando a usar casos de uso pra documentar requisitos de sistemas orientados a objetos e estou com um pouco de dúvida quanto ao nível de detalhamento de um caso de uso. Basicamente, eu tenho dúvidas em relação a ""<em>o que deve constar no cenário</em>"". Vou dar dois exemplos disso: o primeiro deles é CRUD.</p>
+
+<p>É comum encontrar requisitos de um sistema como ""cadastrar/ler/editar/excluir produtos"", ou analogamente pra clientes. De qualquer forma, o requisito é basicamente ""fazer CRUD de tal entidade"". Eu realmente fico em dúvida no quanto detalher de um caso de uso desses. Eu tenho duas possibilidades: simplesmente escrever um caso de uso ""Manter Produtos"" com cenário contendo um único passo ""Manter dados dos produtos"", por exemplo. </p>
+
+<p>Ou posso fazer um caso de uso pra cada uma das operações, contendo todos os detalhes, como quais campos tem e tudo mais. No caso de CRUD qual dessas é a abordagem mais usada normalmente?</p>
+
+<p>Existem ainda outros pontos dos sistemas que eu nem sempre sei muito bem o que realmente precisa ser detalhado num caso de uso. Pra explicar melhor isso vou pegar um exemplo de um sistema que estou desenvolvendo agora (para controle de um restaurante). Basicamente, o dono do restaurante ao inicio de cada expediente precisa ir no programa e criar uma nova sessão, ou seja, ""inicializar as atividades do restaurante"" dentro do sistema.</p>
+
+<p>Esse caso de uso não é algo de CRUD, é realmente uma operação que um ator (o gerente) está interessado em fazer no sistema. Mas só consegui pensar em <em>um</em> passo: ""Gerente inicializa nova sessão"" e isso parece ser <em>muito</em> mais simplório do que deveria.</p>
+
+<p>Não sei se consegui explicar muito bem com o exemplo o tipo de situação que estou falando. São situações em que parece que o único passo realmente é o que o próprio titulo do caso de uso diz e nesses casos fica dificil saber o que realmente detalhar</p>
+
+<p>O quanto eu preciso detalhar em casos como esse? Apesar de ter dado esse exemplo, a pergunta é no geral mesmo, o exemplo é só pra ter algo concreto pra facilitar a pergunta.</p>
+
+<p>Uma vez li sobre isso e falava-se bastante sobre entender quem vai ler isso, se é a equipe de perguntas e respostas, ou outra equipe, etc. Como eu trabalho sozinho, gostaria de saber como se lida com isso em casos como o meu, no qual não tem esse nível de formalidade e os casos de uso são escritos mais pra documentar e organizar os requisitos.</p>
+",<orientação-a-objetos><projeto-de-software><uml><casos-de-uso>
+Valores nulos em check box's,"<p>Em minha aplicação, preciso que caso o Usuário desmarque todos os check box a ele informado , seja salvo um <code>Array nulo</code> ou <code>[].</code> </p>
+
+<p>Estou utilizando <code>params[:parametro1][:parametro2_ids] ||= []</code> após inicializar a minha Action UPDATE, porém se eu tentar desmarcar todos , o rails retorna no log:</p>
+
+<p>NoMethodError <code>(undefined method '[]' for nil:NilClass):.</code> Em condições normais da lógica , isso deveria ser funcional. Como posso implementar uma função caso não seja marcado nenhum valor ou desmarcado todos?</p>
+
+<p>Meu arquivo de Log pode ajudar:</p>
+
+<pre><code>Started GET ""/responsabilities/1/nested_knowledges?responsability_id=1"" for 127.0.0.1 at 2014-06-16 09:05:44 -0300
+Processing by ResponsabilitiesController#nested_knowledges as HTML
+  Parameters: {""responsability_id""=&gt;""1"", ""id""=&gt;""1""}
+  [1m[36mSetting Load (1.0ms)[0m  [1mSELECT `settings`.* FROM `settings` WHERE `settings`.`name` = 'session_lifetime' LIMIT 1[0m
+  [1m[35mSetting Load (0.0ms)[0m  SELECT `settings`.* FROM `settings` WHERE `settings`.`name` = 'session_timeout' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX(`settings`.`updated_on`) AS max_id FROM `settings` [0m
+Creating scope :sorted. Overwriting existing method User.sorted.
+  [1m[35mUser Load (0.0ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`type` IN ('User', 'AnonymousUser') AND `users`.`status` = 1 AND `users`.`id` = 1 LIMIT 1
+  Current user: admin (id=1)
+  [1m[36mResponsability Load (0.0ms)[0m  [1mSELECT `responsabilities`.* FROM `responsabilities` WHERE `responsabilities`.`id` = 1 ORDER BY nome ASC LIMIT 1[0m
+DEPRECATION WARNING: The InstanceMethods module inside ActiveSupport::Concern will be no longer included automatically. Please define instance methods directly in #&lt;Module:0x49c03b0&gt; instead. (called from realtime at c:/Ruby193/lib/ruby/1.9.1/benchmark.rb:295)
+  Rendered plugins/uc_rh/app/views/uc_rh/_form.html.erb (3.0ms)
+  [1m[35mKnowledge Load (0.0ms)[0m  SELECT `knowledges`.* FROM `knowledges` ORDER BY nome ASC
+  [1m[36mKnowledge Exists (1.0ms)[0m  [1mSELECT 1 AS one FROM `knowledges` INNER JOIN `knowledges_responsabilities` ON `knowledges`.`id` = `knowledges_responsabilities`.`knowledge_id` WHERE `knowledges_responsabilities`.`responsability_id` = 1 AND `knowledges`.`id` = 1 ORDER BY nome ASC LIMIT 1[0m
+  [1m[35mKnowledge Exists (1.0ms)[0m  SELECT 1 AS one FROM `knowledges` INNER JOIN `knowledges_responsabilities` ON `knowledges`.`id` = `knowledges_responsabilities`.`knowledge_id` WHERE `knowledges_responsabilities`.`responsability_id` = 1 AND `knowledges`.`id` = 3 ORDER BY nome ASC LIMIT 1
+  [1m[36mKnowledge Exists (0.0ms)[0m  [1mSELECT 1 AS one FROM `knowledges` INNER JOIN `knowledges_responsabilities` ON `knowledges`.`id` = `knowledges_responsabilities`.`knowledge_id` WHERE `knowledges_responsabilities`.`responsability_id` = 1 AND `knowledges`.`id` = 2 ORDER BY nome ASC LIMIT 1[0m
+  Rendered plugins/uc_rh/app/views/responsabilities/nested_knowledges.html.erb within layouts/base (529.0ms)
+  [1m[35mSetting Load (0.0ms)[0m  SELECT `settings`.* FROM `settings` WHERE `settings`.`name` = 'app_title' LIMIT 1
+  [1m[36mSetting Load (0.0ms)[0m  [1mSELECT `settings`.* FROM `settings` WHERE `settings`.`name` = 'ui_theme' LIMIT 1[0m
+  [1m[35mUserPreference Load (0.0ms)[0m  SELECT `user_preferences`.* FROM `user_preferences` WHERE `user_preferences`.`user_id` = 1 LIMIT 1
+  [1m[36mSQL (8.0ms)[0m  [1mSELECT `members`.`id` AS t0_r0, `members`.`user_id` AS t0_r1, `members`.`project_id` AS t0_r2, `members`.`created_on` AS t0_r3, `members`.`mail_notification` AS t0_r4, `projects`.`id` AS t1_r0, `projects`.`name` AS t1_r1, `projects`.`description` AS t1_r2, `projects`.`homepage` AS t1_r3, `projects`.`is_public` AS t1_r4, `projects`.`parent_id` AS t1_r5, `projects`.`created_on` AS t1_r6, `projects`.`updated_on` AS t1_r7, `projects`.`identifier` AS t1_r8, `projects`.`status` AS t1_r9, `projects`.`lft` AS t1_r10, `projects`.`rgt` AS t1_r11, `projects`.`inherit_members` AS t1_r12, `roles`.`id` AS t2_r0, `roles`.`name` AS t2_r1, `roles`.`position` AS t2_r2, `roles`.`assignable` AS t2_r3, `roles`.`builtin` AS t2_r4, `roles`.`permissions` AS t2_r5, `roles`.`issues_visibility` AS t2_r6 FROM `members` LEFT OUTER JOIN `projects` ON `projects`.`id` = `members`.`project_id` LEFT OUTER JOIN `member_roles` ON `member_roles`.`member_id` = `members`.`id` LEFT OUTER JOIN `roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `members`.`user_id` = 1 AND (projects.status&lt;&gt;9) ORDER BY projects.name[0m
+Completed 200 OK in 1218ms (Views: 836.0ms | ActiveRecord: 129.0ms)
+
+
+Started PUT ""/responsabilities/1"" for 127.0.0.1 at 2014-06-16 09:05:48 -0300
+Processing by ResponsabilitiesController#update as HTML
+  Parameters: {""utf8""=&gt;""✓"", ""authenticity_token""=&gt;""Rp/n7f94mkgQKUkySaGqp+lhcKuMiv8WqPsIIlzkZ24="", ""commit""=&gt;""Enviar"", ""id""=&gt;""1""}
+  [1m[35m (0.0ms)[0m  SELECT MAX(`settings`.`updated_on`) AS max_id FROM `settings` 
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`type` IN ('User', 'AnonymousUser') AND `users`.`status` = 1 AND `users`.`id` = 1 LIMIT 1[0m
+  Current user: admin (id=1)
+Completed 500 Internal Server Error in 4ms
+
+**NoMethodError (undefined method `[]' for nil:NilClass):
+  plugins/uc_rh/app/controllers/responsabilities_controller.rb:59:in `update'
+  actionpack (3.2.13) lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+  actionpack (3.2.13) lib/abstract_controller/base.rb:167:in `process_action'
+  actionpack (3.2.13) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (3.2.13) lib/abstract_controller/callbacks.rb:18:in `block in process_action'**
+  activesupport (3.2.13) lib/active_support/callbacks.rb:458:in `_run__296254661__process_action__268418134__callbacks'
+  activesupport (3.2.13) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.13) lib/active_support/callbacks.rb:385:in `_run_process_action_callbacks'
+  activesupport (3.2.13) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.13) lib/abstract_controller/callbacks.rb:17:in `process_action'
+  actionpack (3.2.13) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (3.2.13) lib/action_controller/metal/instrumentation.rb:30:in `block in process_action'
+  activesupport (3.2.13) lib/active_support/notifications.rb:123:in `block in instrument'
+  activesupport (3.2.13) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (3.2.13) lib/active_support/notifications.rb:123:in `instrument'
+  actionpack (3.2.13) lib/action_controller/metal/instrumentation.rb:29:in `process_action'
+  actionpack (3.2.13) lib/action_controller/metal/params_wrapper.rb:207:in `process_action'
+  activerecord (3.2.13) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (3.2.13) lib/abstract_controller/base.rb:121:in `process'
+  actionpack (3.2.13) lib/abstract_controller/rendering.rb:45:in `process'
+  actionpack (3.2.13) lib/action_controller/metal.rb:203:in `dispatch'
+  actionpack (3.2.13) lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+  actionpack (3.2.13) lib/action_controller/metal.rb:246:in `block in action'
+  actionpack (3.2.13) lib/action_dispatch/routing/route_set.rb:73:in `call'
+  actionpack (3.2.13) lib/action_dispatch/routing/route_set.rb:73:in `dispatch'
+  actionpack (3.2.13) lib/action_dispatch/routing/route_set.rb:36:in `call'
+  journey (1.0.4) lib/journey/router.rb:68:in `block in call'
+  journey (1.0.4) lib/journey/router.rb:56:in `each'
+  journey (1.0.4) lib/journey/router.rb:56:in `call'
+  actionpack (3.2.13) lib/action_dispatch/routing/route_set.rb:612:in `call'
+  rack-openid (1.4.1) lib/rack/openid.rb:99:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  rack (1.4.5) lib/rack/etag.rb:23:in `call'
+  rack (1.4.5) lib/rack/conditionalget.rb:35:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/head.rb:14:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/flash.rb:242:in `call'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:210:in `context'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:205:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/cookies.rb:341:in `call'
+  activerecord (3.2.13) lib/active_record/query_cache.rb:64:in `call'
+  activerecord (3.2.13) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.13) lib/active_support/callbacks.rb:405:in `_run__878222876__call__309816011__callbacks'
+  activesupport (3.2.13) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.13) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.13) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.13) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/reloader.rb:65:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.13) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.5) lib/rack/handler/webrick.rb:59:in `service'
+  c:/Ruby193/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  c:/Ruby193/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  c:/Ruby193/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+</code></pre>
+",<ruby-on-rails><ruby><orientação-a-objetos><redmine>
+Dicas para se transformar código procedural em orientado a objeto?,"<p>Tenho um sistema que está totalmente no estilo procedural, e quero saber quais são os pontos de que preciso identificar para transformar esse código em orientado a objeto.</p>
+",<php><orientação-a-objetos>
+Como usar um construtor com duas ou mais classes?,"<p>Estou em desenvolvimento de uma biblioteca de orientação-a-objetos. Criei um iterator para meu futuro container. Tenho <code>advance_iterator</code> e <code>regress_iterator</code>. Ambos dão origem a <code>bidirectional_iterator</code>. O código é:</p>
+
+<pre><code>#ifndef OBJSTD_ADVANCE_ITERATOR
+#define OBJSTD_ADVANCE_ITERATOR
+#include &lt;cstddef&gt;
+namespace objstd
+{
+    template &lt;typename data_type&gt; class advance_iterator
+    {
+        public:
+        advance_iterator(data_type* data_ref)
+        {
+            this-&gt;data_reference = data_ref;
+        }
+        advance_iterator(const advance_iterator&amp; it) = default;
+        advance_iterator(advance_iterator&amp;&amp; it) = default;
+        virtual bool operator &gt; (const advance_iterator&amp; it) const
+        {
+            return this-&gt;data_reference &gt; it.data_reference;
+        }
+        virtual bool operator &lt; (const advance_iterator&amp; it) const
+        {
+            return this-&gt;data_reference &lt; it.data_reference;
+        }
+        bool operator == (const advance_iterator&amp; it) const
+        {
+            return this-&gt;data_reference == it.data_reference;
+        }
+        bool operator != (const advance_iterator&amp; it) const
+        {
+            return this-&gt;data_reference != it.data_reference;
+        }
+        virtual bool operator &gt;= (const advance_iterator&amp; it) const
+        {
+            return (*this).operator&gt;(it) || (*this).operator==(it);
+        }
+        virtual bool operator &lt;= (const     advance_iterator&amp; it)const
+        {
+            return (*this).operator&lt;(it) || (*this).operator==(it);
+        }
+        virtual advance_iterator&amp; operator+=(const size_t skips)
+        {
+            this-&gt;data_reference += skips;
+            return *this;
+        }
+        virtual advance_iterator&amp; operator++()
+        {
+            *this += 1;
+            return *this;
+        }
+        virtual advance_iterator&amp; operator++(int)
+        {
+            advance_iterator&amp; state = *this;
+            this-&gt;operator++();
+            return state;
+        }
+        virtual advance_iterator operator+ (const size_t skips)
+        {
+            return this-&gt;data_reference + skips;
+        }
+        //must be declared virtual for non-conservational
+        virtual data_type&amp; operator*() const
+        {
+            return *this-&gt;data_reference;
+        }
+        protected:
+        data_type* data_reference;
+    };
+}
+
+#endif // OBJSTD_ADVANCE_ITERATOR
+</code></pre>
+
+<p><code>regress_iterator</code></p>
+
+<pre><code>#ifndef OBJSTD_REGRESS_ITERATOR
+#define OBJSTD_REGRESS_ITERATOR
+#include &lt;cstddef&gt;
+namespace objstd
+{
+    template &lt;typename data_type&gt; class regress_iterator
+    {
+        public:
+        regress_iterator(data_type* data_ref)
+        {
+            this-&gt;data_reference = data_ref;
+        }
+        regress_iterator(const regress_iterator&amp; it) = default;
+        regress_iterator(regress_iterator&amp;&amp; it) = default;
+        virtual bool operator &gt; (const regress_iterator&amp; it) const
+        {
+            return this-&gt;data_reference &gt; it.data_reference;
+        }
+        virtual bool operator &lt; (regress_iterator&amp; it) const
+        {
+            return this-&gt;data_reference &lt; it.data_reference;
+        }
+        bool operator == (regress_iterator&amp; it) const
+        {
+            return this-&gt;data_reference == it.data_reference;
+        }
+        bool operator != (regress_iterator&amp; it) const
+        {
+            return this-&gt;data_reference != it.data_reference;
+        }
+        virtual bool operator &gt;= (regress_iterator&amp; it) const
+        {
+            return (*this).operator&gt;(it) || (*this).operator==(it);
+        }
+        virtual bool operator &lt;= (regress_iterator&amp; it)const
+        {
+            return (*this).operator&lt;(it) || (*this).operator==(it);
+        }
+        virtual regress_iterator&amp; operator-=(size_t backwards)
+        {
+            this-&gt;data_reference -= backwards;
+            return *this;
+        }
+        virtual regress_iterator&amp; operator--()
+        {
+            *this -= 1;
+            return *this;
+        }
+        virtual regress_iterator&amp; operator--(int)
+        {
+            regress_iterator&amp; state = *this;
+            this-&gt;operator--();
+            return state;
+        }
+        virtual regress_iterator operator- (size_t backwards)
+        {
+            return this-&gt;data_reference - backwards;
+        }
+        //must be declared virtual for non-conservational
+        virtual data_type&amp; operator*() const
+        {
+            return *this-&gt;data_reference;
+        }
+        protected:
+        data_type* data_reference;
+    };
+}
+
+#endif // OBJSTD_REGRESS_ITERATOR
+</code></pre>
+
+<p>E <code>bidirectional_iterator</code> é definido assim:</p>
+
+<pre><code>#ifndef OBJSTD_BIDIRECTIONAL_ITERATOR
+#define OBJSTD_BIDIRECTIONAL_ITERATOR
+#include ""regress_iterator.hpp""
+#include ""advance_iterator.hpp""
+namespace objstd
+{
+    template &lt;typename data_type&gt; class bidirectional_iterator : public advance_iterator &lt;data_type&gt;, public regress_iterator &lt;data_type&gt;
+    {
+    };
+}
+
+#endif // OBJSTD_BIDIRECTIONAL_ITERATOR
+</code></pre>
+
+<p>O problema é ao criar uma instancia do tipo <code>bidirectional_iterator(ponteiro)</code>, pois o compilador não sabe como inicializar. O que estou fazendo de errado?</p>
+",<c++><orientação-a-objetos><c++11>
+Problemas ao acessar atributos de classe ao criar action listener com java,"<p>Bom eu tenho uma classe que estende um <code>JPanel</code>, nesse <code>JPanel</code> eu adiciono um <code>JButton</code> e utilizo o método <code>addActionListener</code> para setar um <code>ActionListener</code> pra esse <code>JButton</code>, mas quando estou criando o <code>ActionListener</code> não consigo acessar os atributos do <code>JPanel</code>, segue o código abaixo:</p>
+
+<pre><code>public class MemoriaView extends JPanel {
+    private GenericAPI api;
+    private JButton salvar;
+
+public MemoriaView(){
+    super();
+    this.setLayout(new MigLayout());
+    this.setSize(500,600);
+    this.api = new GenericAPI&lt;MemoriaModel&gt;();
+    this.salvar = new JButton(""Salvar"");
+    this.salvar.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent evt){
+                        /* Aqui quero pode acessar o this.api porem nao consigo */
+        }
+    });
+}
+</code></pre>
+",<java><orientação-a-objetos><actionlistener>
+Execução automática de método,"<p>Estou com um classe x que precisa executar um método y uma vez por dia. Entretanto, como fazer isto em PHP Orientado a objeto?</p>
+
+<p>P.S: Em PHP estruturado, utilizava crontab ou fcron para programar que uma determinada URL fosse executada em determinado horário. Naquele script, colocava as modificações necessárias.</p>
+",<php><orientação-a-objetos>
+Como restringir tipos herdados a partir de um nível de hierarquia?,"<p>Dado o modelo hipotético abaixo:</p>
+
+<pre><code>public abstract class Veiculo
+{
+    public Motor Motor { get; set; }
+}
+
+public class Aviao : Veiculo { }
+
+public abstract class Motor { }
+
+public class MotorCarro : Motor { }
+
+public class MotorAviao : Motor { }
+</code></pre>
+
+<p>É possível restringir o tipo de <code>Motor</code> para a classe <code>Aviao</code> como sendo apenas <code>MotorAviao</code> e seus derivados? Ou ainda, qual seria a melhor solução para esse cenário?</p>
+
+<h2>Edit</h2>
+
+<p>O mesmo cenário, mas com um atributo que é bem comum pra casos de agregação: uma lista de todos objetos agregados do outro lado do relacionamento. </p>
+
+<p>A classe <code>Motor</code> deveria conhecer todos veículos que a utilizam. Ficaria assim:</p>
+
+<pre><code>public abstract class Motor
+{
+    public virtual ICollection&lt;Veiculo&gt; Veiculos { get; set; }
+}
+</code></pre>
+",<c#><orientação-a-objetos>
+O que são metaclasses?,"<p>Algumas linguagens de programação modernas como o Ruby implementam as chamadas ""Metaclasses"".</p>
+
+<ul>
+<li>O que é isso?</li>
+<li>Pra que serve?</li>
+<li>Como e quando deve ser usada?</li>
+</ul>
+",<orientação-a-objetos>
+Java não possui herança múltipla?,"<p>Eu havia visto em algum lugar agora não me recordo, acho que foi em um curso sobre orientação a objetos, que Ruby possui. Mas em Java eu nunca vi. Será que é por causa disso que usa-se classes abstratas? Ou isto não tem sentido?</p>
+",<java><orientação-a-objetos><ruby>
+Como persistir o estado de uma fila de pedidos?,"<p>Estou trabalhando em uma aplicação C# que necessita de uma fila de itens do tipo <code>Pedido</code>. Basicamente sempre que um novo pedido é criado ele é colocado na fila e a aplicação mostra os pedidos na ordem sequencial que devem ser entregues. Quando um pedido é finalizado ele sai da fila.</p>
+
+<p>Por enquanto o que estou fazendo é basicamente manter uma propriedade <code>enum</code> status na classe pedido que quando o pedido é criado tem valor <code>StatusPedido.Enviado</code> e quando o pedido é entregue tem valor <code>StatusPedido.Entregue</code>. A fila, portanto, só inclui itens no estado enviado.</p>
+
+<p>Pra persistir isso, a principio não é dificil. Minha primeira ideia foi criar uma propriedade <code>DataModificacao</code> nos pedidos e então ordenar os pedidos pela data de modificação lembrando que filas são ""first in first out"". Dessa forma, a aplicação le os pedidos na base de dados, ordena e monta a fila.</p>
+
+<p>Até ai tudo bem, o problema é o seguinte: existe um requisito dos usuários serem capazes de reordenar a fila. Isso ocorre porque certas vezes um pedido que pode ser entregue mais rápido pode ser adiantado e passado na frente de outros.</p>
+
+<p>Fazer isso no código é facil. Basicamente é so trocar referências e tudo funciona. Mas e pra persistir isso? Só data de modificação não resolve mais, porque quando carrega-se os pedidos da base de dados não vai ter informação de quais foram adiantados. Pensei em uma nova propriedade que tem o ID do pedido que deve vir em seguida, e uma propriedade contendo uma referência para o próximo pedido mas não sei se é uma boa abordagem, porque isso parece mais um detalhe de implementação de persistência do que algo que faz parte do domínio mesmo.</p>
+
+<p>Além disso, um pedido quando está fora da fila (ou antes de ser integrado a fila, ou depois de ser entregue) já não tem mais esse próximo, portanto o próximo pedido não parece uma propriedade da classe <code>Pedido</code> mesmo já que ela só faz sentido em certos casos.</p>
+
+<p>Como eu posso fazer pra persistir esse tipo de coisa: uma fila que pode ser reordenada e que precisa ter sua ordenação persistida?</p>
+",<c#><banco-de-dados><orientação-a-objetos><estrutura-de-dados>
+O que é abstração?,"<p><em>Web</em> afora e também aqui no Stack, às vezes se fala em ""abstração"" quando o assunto é arquitetura/engenharia de <em>software</em> e orientação à objetos, principalmente.</p>
+
+<ul>
+<li>O que é a tal ""abstração""?</li>
+<li>Por que ela é importante?</li>
+<li>Como consegui-la na prática?</li>
+</ul>
+",<orientação-a-objetos><arquitetura-de-software><abstração>
+Métodos estáticos em Factory Method,"<p>Estou criando uma classe simples utilizando Factory Method e me surgiu a seguinte dúvida.</p>
+
+<p><strong>É recomendável ou fere as boas práticas a utilização de métodos estáticos em Factories?</strong></p>
+
+<p>Em muitos exemplos que encontrei por ai temos uma instância da classe de Factory, e não identifiquei nenhuma razão para a mesma precisar ser instanciada.</p>
+
+<pre><code>&lt;?php
+/* Factory and car interfaces */
+interface CarFactory {
+    public function makeCar();
+}
+
+interface Car {
+    public function getType();
+}
+
+/* Implementações da Factory e Car */
+class SedanFactory implements CarFactory {
+    public function makeCar() {
+        return new Sedan();
+    }
+}
+
+class Sedan implements Car {
+    public function getType() {
+        return 'Sedan';
+    }
+}
+
+/* Client */
+$factory = new SedanFactory();
+$car = $factory-&gt;makeCar();
+print $car-&gt;getType(); 
+</code></pre>
+
+<p><a href=""http://en.wikipedia.org/wiki/Factory_method_pattern"" rel=""nofollow"">Fonte</a></p>
+
+<p>Notem a diferença na implementação com métodos estáticos:</p>
+
+<pre><code>&lt;?php
+/* Factory and car interfaces */
+interface CarFactory {
+    public static function makeCar();
+}
+
+interface Car {
+    public function getType();
+}
+
+/* Implementações da Factory e Carro */
+class SedanFactory implements CarFactory {
+    public static function makeCar() {
+        return new Sedan();
+    }
+}
+
+class Sedan implements Car {
+    public function getType() {
+        return 'Sedan';
+    }
+}
+
+/* Client */
+$car = SedanFactory::makeCar();
+print $car-&gt;getType(); 
+</code></pre>
+",<php><orientação-a-objetos><design-pattern>
+"Como usar o sistema de ""append"" em WinAPI?","<p>Eu estou fazendo uma pequena biblioteca para Windows, e tudo estava bem até chegar nas janelas. O sistema que eu queria fazer era igual o do Qt: ""append"". Seria simples: uma classe virtual pura seria recebida em window.append(), e todos os meios gráficos (push button, label, listview, etc.) seriam herdados dessa classe. O problema é que para fazer isso, é necessário mudar o WindowProc antes de iniciar a janela, e se houvesse como fazer isso, ainda teria que ""desregistrar"" o handle e a classe da janela. O que posso fazer para lidar com isso?</p>
+
+<p>Exemplo:</p>
+
+<pre><code>LRESULT CALLBACK WindowProcedure(HWND window, MSG msg, WPARAM wParam, LPARAM lParam)
+{
+    switch(msg)
+    {
+        /* append */ case WM_CREATE:
+        //adicionar o meio grafico
+    }
+ }
+</code></pre>
+",<c++><orientação-a-objetos><windows><winapi>
+Utilizar muitas interfaces é uma má prática de programação?,"<p>olá, sou estudante em Sistemas de Informação e estou modelando um jogo, um pet virtual que tem suas necessidades e conversa com seu dono, abaixo segue a modelagem das classes e interfaces. </p>
+
+<p>Mostrei para um amigo formado em Ciência da Computação, ele achou que tem muitas interfaces, que não era necessário, eu argumentei que caso no futuro eu poderia dar manutenção e implementar pets da forma que eu quisesse sem muito esforço, podendo criar um pet híbrido entre animal e robo, e atribuindo a ele seus comportamentos através das interfaces, mas enfim ele veio com argumentos de desempenho da aplicação.</p>
+
+<p>Minha dúvida é se minha modelagem (que não está pronta, apenas um esboço) com tantas interfaces é uma má prática de programação? Quando devo utilizar uma interface?</p>
+
+<p><img src=""http://i.stack.imgur.com/li75I.png"" alt=""inserir a descrição da imagem aqui""></p>
+
+<p><a href=""http://postimg.org/image/s2nzv51fv/"">Link da imagem</a></p>
+",<orientação-a-objetos><arquitetura-de-software><interface>
+"O que significa ""introspecção em tempo de execução""?","<p>Procurando informações sobre um toolkit gráfico em Lua, encontrei uma explicação sobre o lgi (GTK) que apresentava uma grande vantagem: ""...pois ele foi escrito em C e com capacidade de introspecção em tempo de execução, o que facilita a
+criação de bindings para outras linguagens..."".
+Alguém pode me ajudar a entender melhor o que significa a ""introspecção em tempo de execução""?</p>
+",<orientação-a-objetos><lua>
+Composição e agregação: quais as diferenças e como usar?,"<p>Em orientação a objetos é comum que objetos de uma certa classe possuam referências a um ou mais objetos de outras classes. Um exemplo muito simples é um objeto de uma classe <code>Pedido</code> que possui referência a uma lista de <code>Itens</code>, de forma que cada objeto desse tipo possua referência a vários objetos de outro tipo.</p>
+
+<p>Acontece que em alguns casos chamam isso de composição e em outros casos chamam isso de agregação. Pesquisando li que composição é quando um dos objetos não existe independente do outro e agregação é quando os dois podem existir independentemente. É só isso mesmo?</p>
+
+<p>Mesmo se for só isso, eu ainda não consigo identificar quais as implicações disso na prática. Basicamente, nos dois casos basta ter uma propriedade no objeto cujo tipo é a classe do outro tipo. Não tem em código uma diferença entre agregação e composição, então quais as utilidades de diferenciar esses dois casos e qual a diferença dessas duas abordagens na prática?</p>
+",<orientação-a-objetos>
+Por que não é possível definir uma interface com métodos estáticos?,"<p>Gostaria de forçar algumas de minhas classes a ser implementada em Singleton, mas me deparei com a seguinte situação.</p>
+
+<pre><code>interface ICharacterSingleton{
+    static Characters getInstancia();
+}
+
+public static class Zero extends Characters implements ICharacterSingleton {        
+    private static Characters Instancia = null;
+    private Zero(){     
+        Layout.add(""   111  "");
+        Layout.add(""  1   1 "");
+        Layout.add(""  1   1 "");
+        Layout.add(""  1   1 "");
+        Layout.add(""  1   1 "");
+        Layout.add(""  1   1 "");
+        Layout.add(""  1   1 "");
+        Layout.add(""   111  "");                         
+    }
+
+    public static Characters getInstancia() {
+        if(Instancia == null)
+            Instancia = new Zero();         
+        return Instancia;
+    }               
+}
+</code></pre>
+
+<p>Não posso definir um método estático para uma interface? existe uma outra saída para essa situação?</p>
+",<java><orientação-a-objetos>
+Classes e metodos constutores,"<p>Quando eu crio uma classe eu sempre crio o método construtor da seguinte maneira:</p>
+
+<pre><code>class ClassName(object):
+
+    """"""docstring for ClassName""""""
+
+    def __init__(self, arg1, arg2, arg3):
+        self.arg1 = arg1
+        self.arg2 = arg2
+        self.arg3 = arg3
+</code></pre>
+
+<p>Porem durante meus estudos tenho visto métodos construtores do seguinte modo:</p>
+
+<pre><code>class ClassName(object):
+
+    """"""docstring for ClassName""""""
+
+    def __init__(self, arg):
+        super(ClassName, self).__init__()
+        self.arg = arg
+</code></pre>
+
+<p>Minha duvida é a com relação a adição da linha:</p>
+
+<pre><code>super(ClassName, self).__init__()
+</code></pre>
+
+<p>Por que essa linha de código é adicionada a alguns métodos construtores ?!</p>
+",<python><orientação-a-objetos><classes>
+Organização de projetos em pacotes,"<p>Estou realizando um estudo sobre Java e gostaria de aprender sem utilizar aquelas IDEs cheias de recursos que fazem tudo.
+Após várias tentativas de aprender a usar pacotes, criando-os manualmente, uma classe não está conseguindo enxergar outras fora do pacote. Segue um exemplo totalmente genérico:</p>
+
+<p>A estrutura de pastas é a seguinte:</p>
+
+<pre><code>-pacotes
+ Teste.java(classe com main)
+ --objeto
+   Texto.java
+</code></pre>
+
+<p>E os códigos dos arquivos são os seguintes:</p>
+
+<p>-> Teste.java</p>
+
+<pre><code>package pacotes;
+import pacotes.objeto.*;
+
+public class Teste{
+
+    public static void main(String[] args) {
+
+        Texto t = new Texto();
+    }
+}
+</code></pre>
+
+<p>-> Texto.java</p>
+
+<pre><code>package pacotes.objeto;
+
+public class Texto{
+
+    public Texto(){
+        System.out.println(""Construiu um objeto"");
+    }
+}
+</code></pre>
+
+<p>Ao compilar o arquivo Texto.java tudo ocorre normalmente, mas ao compilar o Teste.java fala o pacote 'pacotes.objeto' não existe, o que há de errado?</p>
+",<java><orientação-a-objetos>
+Qual a função de carácter ? no tipo de variável em c#,"<p>Vejo muitos códigos de terceiros e vejo frequentemente a utilização do sinal de interrogação no tipo da variável.</p>
+
+<p>Exemplo:</p>
+
+<pre><code>public bool? Status
+</code></pre>
+
+<p>Alguém poderia me explicar qual a diferença de não se ter esse sinal ? no tipo de dado bool.</p>
+",<c#><orientação-a-objetos>
+Relações muitos para muitos em serviço RESTful,"<p>Estou começando a trabalhar com serviços RESTful e estou com dúvidas sobre relações muitos para muitos. Por exemplo, suponha que eu tenha duas entidades <code>Cliente</code> e <code>Fornecedor</code> e que <code>Cliente</code> possua uma lista de fornecedores, os fornecedores dos quais ele compra e <code>Fornecedor</code> possua uma lista de clientes que compram dele. Algo assim </p>
+
+<pre><code>public class Cliente
+{
+    // Propriedades da classe Cliente
+
+   public IList&lt;Fornecedor&gt; Fornecedores { get; set; }
+}
+
+public class Fornecedor
+{
+    // Propriedades da classe Fornecedor
+
+   public IList&lt;Cliente&gt; Clientes { get; set; }
+}
+</code></pre>
+
+<p>Daí se quiser expor isso num serviço RESTful qual seria a melhor forma de fazer? Pensei em expor a seguinte URL <code>/clientes/{idCliente}/fornecedores</code> pra obter os fornecedores de um cliente e então adicionar ou remover fornecedores desse cliente, mas estou achando isso um opção ruim. </p>
+
+<p>Basicamente porque já existiria a url <code>/fornecedores</code> que gerencia os fornecedores em geral e colocando essa pros fornecedores de cada cliente me parece muito estranho.</p>
+
+<p>Dessa forma qual o jeito mais indicado de gerenciar relações muitos para muitos em api's restful?</p>
+",<orientação-a-objetos><rest><web-api-2>
+Java Desempenho de classes vazias e cheias de métodos,"<p>Se eu criar uma classe cujo objetivo a agrupar uma quantidade de métodos relacionados. Suponha uma Classe Boi{} e ela possuir diversos métodos mas nenhum elemento. </p>
+
+<p>Por exemplo:</p>
+
+<pre><code>public class Ruminante{
+      public String mugir(Animal animal){
+            return ""Muuu"";
+      }
+      public void comer(Mato grama){
+             //processa grama
+      }
+      public void darCabecada(Animal animal){
+
+      }
+      public void darCoice(Animal animal){
+
+      }
+}
+</code></pre>
+
+<p>E quando eu quiser chamar fizer:</p>
+
+<pre><code>public class Principal(){
+       Boi boi = new Boi();
+       Ruminante r = new Ruminante();
+       r.mugir(boi); 
+}
+</code></pre>
+
+<p>Qual a perda de desempenho? Há outras desvantagens em fazer desta forma? É muito pior do que se tudo na classe Ruminante fosse estático? </p>
+",<java><orientação-a-objetos><classes><objetos>
+Getters e setters são uma ilusão do encapsulamento?,"<p>É comum que se ensine que o certo é deixar os atributos da classe privados e criar <em>getters</em> e <em>setters</em> para eles, tudo por causa do encapsulamento.</p>
+
+<p>Isso não é a mesma coisa que deixar tudo público, já que você pode alterar e obter o valor livremente? Isso não cria apenas uma ilusão de encapsulamento? É recomendado ou não o seu uso? Por que?</p>
+",<orientação-a-objetos><encapsulamento><getters-setters>
+É possível chamar método internal(sem operador de visibilidade) de uma class herdada de um outro package?,"<p><strong>Problema</strong></p>
+
+<p>Estou tentando criar alguns comportamentos extras em alguns componentes nativos do Android.</p>
+
+<p>Para isso estou criando uma <code>class</code> acima do componente do Android e reescrevendo algumas situações que pretendo ter um comportamento diferente, e me deparei com uma situação que necessito em meu método customizado, chamar um método da <code>class</code> herdada (no caso o componente do Android), mas o método não está acessível para minha <code>class</code>, já que ele é internal e não <code>protected</code>, e minha <code>class</code> está em um outro <code>package</code>.</p>
+
+<p><strong>Perguntas?</strong></p>
+
+<ul>
+<li>Apesar de saber que atributos e métodos <code>internal</code> só são acessiveis
+para membros do mesmo <code>package</code> Java, gostaria de saber se há alguma
+forma de ter acesso a esses métodos a partir de uma <code>class</code> de um
+outro <code>package</code>?</li>
+<li>E opcionalmente, se há alguma outra forma de sobrescrever
+componentes nativos do Android, quem evitem esse tipo de problema?</li>
+</ul>
+
+<p><strong>Exemplo do que estou tentando fazer:</strong></p>
+
+<pre class=""lang-java prettyprint-override""><code>public class MeuAbsListView extends AdapterView&lt;ListAdapter&gt;{
+
+    public MeuAbsListView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    public void meuMetodoDisparadoPeloMeuEvento(){
+        // faz seu comportamento custumizado ... 
+
+        // e tem esse metodo 'rememberSyncState' do 'AdapterView' que preciso chamar
+        // só que ele é internal e não tenho acesso a ele, 
+        // já no AbsListView nativo é possivel pois ele é do mesmo package do AdapterView
+        rememberSyncState();
+    }   
+}
+</code></pre>
+
+<p>No código <a href=""https://github.com/android/platform_frameworks_base/blob/master/core/java/android/widget/AdapterView.java"" rel=""nofollow"">fonte do AdapterView do Android</a> o método está declarado assim:</p>
+
+<pre class=""lang-java prettyprint-override""><code>void rememberSyncState() {
+    // codigo do rememberSyncState ...
+}
+</code></pre>
+",<java><android><orientação-a-objetos>
+O que é associação simples em orientação a objetos?,"<p>Quando perguntei <a href=""http://pt.stackoverflow.com/questions/25619/composi%C3%A7%C3%A3o-e-agrega%C3%A7%C3%A3o-quais-as-diferen%C3%A7as-e-como-usar"">aqui</a> sobre composição e agregação eu estava achando que qualquer associação entre dois objetos se enquadrava nessas categorias (sem contar com herança). Mas aí na resposta vi que existe a chamada <em>associação simples</em>. Pesquisei na internet sobre isso e a maior parte do que achei era em relação a como representar isso em diagramas UML inves de propriamente o que esse tipo de associação representa.</p>
+
+<p>Olhando no wikipedia vi o seguinte</p>
+
+<blockquote>
+  <p><strong>Associação:</strong> é o mecanismo pelo qual um objeto utiliza os recursos de outro. Pode tratar-se de uma <em>associação simples</em> ""usa um"" ou de um acoplamento ""parte de"". Por exemplo: Um humano usa um telefone. A tecla ""1"" é parte de um telefone</p>
+</blockquote>
+
+<p>Dessa forma, invés de ser uma relação de parte/todo como nas relações de agregação e composição uma associação simples é uma relação de uso? Eu achei que relações de uso fossem representadas por agregações, já que nesses tipos de associações a parte existe independente do todo, então fiquei confuso.</p>
+
+<p>Assim o que realmente é a associação simples e como ela difere das outras formas de associação em orientação a objetos?</p>
+",<orientação-a-objetos>
+Chamar um método de uma classe Javascript (OOP),"<p>Bom pessoal gostaria de saber se é possivel acessar um metodo de uma classe(javascript) sem sem saber se a variavel por instancia-la.</p>
+
+<pre><code>function SDK(dynamicUrl) {
+    var data = 'DATA';
+    var atual = null;
+    var counter = 0;
+    this.onComplete = function (){ }
+    this.onError = function () { }
+    this.start = function ( ) {
+        alert('HUE BR')
+    }
+}
+//Tendando acessar o metodo
+SDK.start();
+</code></pre>
+
+<p>*Sei que poderia acessa-la criando uma variavel e instanciar a classe em questão, mas por uma limitação do projeto em questão isso não é possível T.T</p>
+
+<pre><code>var sdk = new SDK('HUE BR');
+sdk.start();
+</code></pre>
+
+<p>URL do script:
+<a href=""http://jsfiddle.net/8twxajLh/"" rel=""nofollow"">http://jsfiddle.net/8twxajLh/</a></p>
+",<javascript><orientação-a-objetos>
+Sobre Orientado a Objeto em PHP,"<p>Eu tenho meu arquivo <strong>conexao.php</strong> com o código abaixo:</p>
+
+<pre><code>$banco_hostname = ""localhost"";
+$banco_usuario=""root"";
+$banco_passwd="""";
+$banco_nome=""banquinho"";
+$conexao = new mysqli($banco_hostname,$banco_usuario,$banco_passwd,$banco_nome);
+</code></pre>
+
+<p>Ai no meu arquivo <strong>banco.oo.php</strong> com as classes (orientado a objeto) eu tenho:</p>
+
+<p>
+
+<pre><code>class autenticacao {
+    function SignUp($conexao,$nome_post,$email_post,$passwd_post,$k_post,$k) {
+        if( (!$nome_post) || (!$email_post) || (!$passwd_post) || (!$k_post) || ($k_post != $k) ){
+            header('location:index.php');
+        }
+        else{
+                // VERIFICA SE USUARIO OU EMAIL EXISTE CADASTRADO
+                $sql = $conexao-&gt;query(""SELECT email FROM usuarios WHERE email='$email_post'"");
+                if ($sql-&gt;num_rows==1){
+                    echo '&lt;div class=""alertaIndexMSG""&gt;Ocorreu um erro, este e-mail ja possui um cadastro no banco de dados...&lt;/div&gt;';
+                }
+                else {
+                    $acessos=1;
+                    $ip=$_SERVER[""REMOTE_ADDR""];
+                    // INSERE USUARIO AO BANCO DE DADOS
+                    $sql = $conexao-&gt;prepare(""INSERT usuarios SET nome = ?, email = ?, passwd = ?, ip = ?, acessos = ?"");
+                    $sql-&gt;bind_param('ssssi',$nome_post,$email_post,$passwd_post,$ip,$acessos);
+                    $sql-&gt;execute();
+                    $_SESSION[""message-signup""]=TRUE;
+                    $_SESSION[""autenticado""]=$email_post;
+                    $_SESSION[""usuario""]=$nome_post;
+                    header('location:index.php');
+                }
+        }
+    }
+}
+</code></pre>
+
+<p>Ai no meu arquivo <strong>index.php</strong> eu teria um formulário para o SignUp como exemplo</p>
+
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=""UTF-8""&gt;
+&lt;title&gt;Titulo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ &lt;!-- FORMULARIO DE SIGN UP AQUI --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>Ai no meu arquivo que <strong>processa o formulário de SignUp</strong> eu tenho:</p>
+
+<pre><code>include(""conexao.php"");
+include(""banco.oo.php"");
+if (isset($_POST[""signin""])){
+    $email=$_POST[""email""];
+    $passwd=md5($_POST[""passwd""]);
+    $OO = new autenticacao();
+    $OO -&gt; SignIn($conexao,$email,$passwd);
+}
+</code></pre>
+
+<p><em>Vamos então a minha dúvida/problema:</em></p>
+
+<p>Eu lembro que <strong>antes eu não precisava levar a variavel $conexao sempre em todo $OO -> SignIn($conexao,$email,$passwd);</strong> pois a mesma já estava puxando dentro do arquivo banco.oo.php quando inicia a classe acho que como herança da classe todas funções dela acabavam recebendo essa variavel que faz se conectar ao banco quando chama a classe, mas agora nao sei o que fiz errado no banco.oo.php que toda vez que chamo uma função tenho que sair levando essa variavel e recebendo ela lá na função pra se conectar ao banco.</p>
+
+<p>Qual meu erro na orientação a objeto que fiz?</p>
+",<php><mysql><orientação-a-objetos><mysqli>
+Disparar um evento usando JavaScript puro,"<p>Gostaria de saber como se despacha um evento usando JavaScript.
+Tentei usando o seguinte código:</p>
+
+<pre><code>var atual = document.getElementById('teste');
+atual.addEventListener('mouseover', function(){ alert('HUE HUE HUE BR') });
+atual.dispatchEvent('mouseover');
+</code></pre>
+
+<p>mas aí acontece um erro falando que o evento não existe:</p>
+
+<blockquote>
+  <p>Uncaught InvalidStateError: Failed to execute 'dispatchEvent' on 'EventTarget': The event provided is null. </p>
+</blockquote>
+
+<p><a href=""http://jsfiddle.net/6mx92ase/"" rel=""nofollow"">JSFiddle</a>.</p>
+",<javascript><html><orientação-a-objetos>
+Dúvida sobre métodos e classes estáticas,"<p>Tenho uma duvida sobre métodos e classes estáticas, dado o código abaixo:</p>
+
+<pre><code>    static List&lt;MaterialRCM&gt; mr = new List&lt;MaterialRCM&gt;();
+
+    [Authorize]
+    public void AddMaterial(int Qtd, int Id)
+    {
+        mr.Add(new MaterialRCM(Id, Qtd));
+    }
+</code></pre>
+
+<p>Agora, como classes e métodos estáticos não são tipos por referencia, se dois usuários utilizarem a mesma funcionalidade corre o risco de na lista ter dados dos dois usuários?
+Pra ficar mais claro, esse método é chamado via Ajax, cada vez que o usuário adiciona um material esse método é chamado e adiciona o Id do Material e a quantidade na lista, e se dois usuários estiverem solicitando materiais?</p>
+",<c#><asp.net-mvc><orientação-a-objetos>
+Trocar atributos de um Objeto para outro,"<p>Na minha aplicação java tenho um objeto declado como <code>Extrair extrair = new Extrair();</code>
+E eu uso esse objeto e seus atributos para meu servlet. Porém eu preciso passar esse objeto para o .jsp.
+No jsp eu uso <code>extrair = request.getAttribute();</code>, só que o método request retorna um Object e eu estou atribuindo um Object a um Extrair.</p>
+
+<p>Como posso resolver isso?</p>
+",<java><orientação-a-objetos><jsp>
+Object.create ou new Objetct() em Javascript? Qual a diferença entre os dois?,"<p>estou passando por uma dúvida técnica em Javascript:
+Qual a diferença entre Object.create e new Object()? Quais os casos em que tenho que adotar um ao invés do outro?
+Obrigado</p>
+",<javascript><orientação-a-objetos><instanciar-objeto>
+O que é herança diferencial?,"<p>Eu estava lendo <a href=""http://stackoverflow.com/questions/2709612/using-object-create-instead-of-new"">este artigo no SO em inglês</a> e me deparei com o termo <em>differential inheritance</em>.</p>
+
+<p>O que, exatamente, é herança diferencial?</p>
+
+<p>É possível termos um exemplo mínimo, preferencialmente em JavaScript?</p>
+",<javascript><orientação-a-objetos><herança>
+Forçar a declaração de propriedades,"<p>Estou implementando uma funcionalidade de filtros em algumas classes de minha aplicação através de <code>traits</code>.</p>
+
+<p>A função da <code>trait</code> recorrerá a variáveis da classe através de algumas propriedades definidas na classe:</p>
+
+<pre><code>&lt;?php
+
+trait FilterTrait {    
+    public function scopeApplyFilters($filters) {
+        foreach (self::$allowedFilters as $filter) {
+             // Executa método
+        }
+     }
+}
+
+class EstoqueMeta extends Eloquent {
+    use FilterTrait;
+    static public $allowedFilters = array('foo','bar');
+}
+</code></pre>
+
+<p>Gostaria de forçar a partir da <code>trait</code> que a propriedade seja definida na classe.
+Pensei implementar essa funcionalidade a partir de herança, porém eu perderia a flexibilidade de uso da <code>trait</code> em outras partes da minha aplicação.</p>
+
+<p><strong>Existe alguma forma de ""forçar"" a declaração das propriedades a partir da <code>trait</code>? Caso negativo, há alguma alternativa sem envolver herança?</strong></p>
+
+<hr>
+
+<p>Meu problema não é declarar a propriedade na <code>trait</code>, inclusive foi essa minha primeira tentativa, mas caso a classe tenha a mesma propriedade, acontecerá um erro de colisão com o nome das propriedades.</p>
+
+<pre><code>trait FilterTrait {    
+    public $allowedFilters = array();    
+    public function scopeApplyFilters($filters) {
+        foreach (self::$allowedFilters as $filter) {
+             // Executa método
+        }
+     }
+}
+
+class EstoqueMeta {
+    use FilterTrait;    
+    public $allowedFilters = array('foo', 'bar');
+}
+</code></pre>
+
+<blockquote>
+  <p>Fatal error:  EstoqueMeta and FilterTrait define the same property
+  ($allowedFilters) in the composition of EstoqueMeta. However, the
+  definition differs and is considered incompatible. Class was composed
+  in [...][...] on line 23</p>
+</blockquote>
+
+<p><a href=""http://sandbox.onlinephpfunctions.com/code/9f8649f894ac8708df7c1f43377189af49469a3f"" rel=""nofollow""><strong>Exemplo</strong></a></p>
+",<php><orientação-a-objetos><trait>
+Utilizar dados que estão no banco de dados,"<p>Estou criando um Quiz. Consegui criar a tela para criar as perguntas, esta gravando no banco de dados tudo certo. Só que agora vou fazer o ""jogo"" em si, portanto teria que pegar uma pergunta que está guardada no banco e retornar para a tela, como faço essa consulta no banco? <code>ResultSet</code> esta dando erro o código abaixo.</p>
+
+<pre><code> String SQL = ""Aqui montaria o SQL de Busca de Dificuldades no jogo
+ WHERE"" ;
+
+ String Nivel="" "";
+
+ if(JrbFácil.isSelected()){ 
+
+ SQL += ""DICICULDADE = FACIL""
+
+ }
+
+ if(JrbMédio.isSelected()){
+
+ SQL += ""DICICULDADE = MEDIO""
+
+ }
+
+ if(JrbDificil.isSelected()){
+
+ SQL += ""DICICULDADE = DIFICIL""
+
+ }
+
+ PreparedStatement stmt = this.connection.prepareStatement(""select *from quiz where id = ?"");
+
+ stmt.setInt(1, 1); 
+
+ ResultSet rs = stmt.executeQuery();
+</code></pre>
+",<java><orientação-a-objetos><jdbc>
+"Orientação a objetos no R: S3, S4 e Reference Class","<p>O R possui, entre outras, três principais formas de orientação a objetos:</p>
+
+<ul>
+<li>S3;</li>
+<li>S4; e,</li>
+<li>Reference Classes.</li>
+</ul>
+
+<p>Quais as principais diferenças entre os três métodos? </p>
+
+<p>E como implementá-los (de preferência fornecer um exemplo mínimo e simples com código implementando cada um)?</p>
+",<orientação-a-objetos><r><paradigmas>
+Como adicionar elementos concretos em runtime no padrão de projeto visitor?,"<p>Estou com uma dúvida referente ao <em>Design Pattern <strong>Visitor</em></strong>.</p>
+
+<p>Pelos meus estudos, se você quiser adicionar um novo elemento concreto ao padrão deve adicionar um novo método abstrato na interface do visitor e implementar esse método nos visitors concretos. Isso requer que o software esteja parado, ser recompilado... enfim.</p>
+
+<p>Há alguma variação de implementação deste padrão onde seja possível adicionar novos elementos concretos em <code>runtime</code>, como plugin, por exemplo?</p>
+",<orientação-a-objetos><design-pattern>
+O que são covariância e contravariância?,"<p>Vi algo do tipo <a href=""http://pt.stackoverflow.com/questions/2413/fun%C3%A7%C3%B5es-de-primeira-classe-por-que-tipos-de-entrada-devem-ser-contravariantes"">nesta pergunta</a> e sei isso se relaciona de alguma forma com orientação a objetos.</p>
+
+<p>O que são? Como afetam meu código, e como posso utilizá-las para codificar melhor?</p>
+",<orientação-a-objetos><variância>
+Qual o real conceito e utilidade de classes POCO?,"<p>Estou estudando e desenvolvendo um novo projeto e a pouco estudando sobre Windows Phone 7.1, vi que eles sugerem/indicam o uso de classes <strong>POCO</strong>, para mapeamento de banco de dados (Parece-me que o Windows Phone 7.1 utiliza de alguma versão compact do EF (Entity Framework)), não cheguei a estudar muito a fundo o caso do Windows Phone, pois este ainda não é o momento de estudar isso a fundo, só estudei o básico para entender seus conceitos.</p>
+
+<p>Mas o que gostaria de entender melhor é:</p>
+
+<ol>
+<li>O porque da utilização de classes POCO?</li>
+<li>Qual a vantagem que isso pode trazer?</li>
+<li>O porque de isso ser empregado em um Projeto?</li>
+<li>E o que é de fato classes POCO? (Conceitualmente falando)</li>
+</ol>
+",<orientação-a-objetos><classes><modelagem><poco>
+"Método Genérico de Localizar, utilizando ADO.NET e Procedures","<p>Estou procurando uma solução de um repositório genérico para um DAL com um método de Localizar genérico, para não ter redundância no meu código. Utilizando ADO.NET e Procedures.</p>
+
+<p>Achei algo nesse link:</p>
+
+<p><a href=""http://pt.stackoverflow.com/questions/4446/qual-seria-a-melhor-maneira-de-se-fazer-um-crud-para-um-framework-da-maneira-mai"">Qual seria a melhor maneira de se fazer um CRUD para um framework da maneira mais gen&#233;rica poss&#237;vel?</a></p>
+
+<p>Assinatura genérica:</p>
+
+<pre><code>List Selecionar(IEnumerable operadores);
+</code></pre>
+
+<p>Mas não entendi muito bem como trabalhar com essa lista de operadores. </p>
+
+<p>Uma vez que irei utilizar Procedure passando os parâmetros para minha Procedure, existe alguma maneira prática de eu passar os operadores para minha Procedure de maneira genérica utilizando o ADO.NET?</p>
+",<c#><orientação-a-objetos><ado.net><interface><genéricos>
+Construtores padrão Java,"<p>Como é o construtor padrão Java? É esse?</p>
+
+<pre><code>public Pessoa(){
+    super();
+}
+</code></pre>
+",<java><orientação-a-objetos><método><construtor>
+Herança em banco de dados relacionais,"<p>um dos grandes desafios em desenvolver um software baseado em orientação a objetos é abstrair os dados de sua base para objetos afim de poder melhor manipula-los, hoje os frameworks ORM disponíveis facilitam bastante esta abstração,o problema mesmo é quando começamos a modelar o sistema a partir de objetos e principalmente quando damos hierarquia a eles utilizando heranças, como representar essas hierarquias no banco de dados relacional?</p>
+
+<p>por exemplo</p>
+
+<pre><code>class veiculo
+class carro extends veiculo
+class moto extends veiculo
+</code></pre>
+
+<p>Qual a melhor maneira de representar estas hierarquias no banco de dados relacional, uma tabela para cada tipo? mesmo veiculo sendo uma classe abstrata?</p>
+",<banco-de-dados><orientação-a-objetos><design-pattern><modelagem>
+Quando e como implementar o Parcelable vs Serializable?,"<p>Após muito tempo utilizando a implementação Serializable nas minhas classes na plataforma Java(Android), descobri o Parcelable, mas fiquei na dúvida em relação as seguintes questões abaixo:</p>
+
+<p><strong>1. Quando utilizar (escolher entre) o Parcelable vs Serializable?</strong><br>
+ <strong>2. Como implementar o Parcelable e Serializable?</strong><br>
+ <strong>3. Quais são as diferenças de performance das duas implementações?</strong>     </p>
+",<java><android><orientação-a-objetos><classes><interface>
+Diferença de impedância objeto-relacional,"<p>Questionamento básico sobre <a href=""http://en.wikipedia.org/wiki/Object-relational_impedance_mismatch"" rel=""nofollow"">object-relational impedance mismatch</a>, um tópico com o qual tenho pouca experiência.</p>
+
+<ol>
+<li><p><strong>Ela realmente existe?</strong> <em>(Decerto que sim; <a href=""http://martinfowler.com/bliki/OrmHate.html"" rel=""nofollow"">Martin Fowler</a> e <a href=""http://blog.codinghorror.com/object-relational-mapping-is-the-vietnam-of-computer-science/"" rel=""nofollow"">Ted Neward</a> já falaram sobre o problema, mas será que ela realmente ocorre em todas as situações envolvendo objetos e banco de dados relacional?)</em></p></li>
+<li><p><strong>Se sim, em quais situações costuma ocorrer?</strong> <em>(Por exemplo, é um problema específico de sistemas em que o modelo de domínio guia o design do banco e não o contrário?)</em></p></li>
+<li><p><strong>De que formas tem sido solucionada?</strong> <em>(Existem diferentes ""sabores"" de ORM, bem como soluções baseadas em retirar o ""O"" ou o ""R"" da equação)</em></p></li>
+<li><p><strong>Quais as limitações dessas soluções?</strong></p></li>
+</ol>
+",<orientação-a-objetos><orm><modelo-relacional>
+Propriedade Private / Protected JS / jQuery,"<p>É possivel fazer um objeto no js/jQuery onde seja visivel apenas usando o metódo, por exemplo get / set?
+Um exemplo de um objeto:</p>
+
+<p>se eu der um <code>console.log(pessoa.documeto)</code>, ele vai exibir os valores, mas o que eu queria é ver se existe como deixa-lo 'private' ou 'protected' igual ao PHP e outros.</p>
+
+<pre><code>var pessoa = {
+        nome    : '' , //Publico
+        idade   : '' ,  //Publico
+        documentos : [
+                //Protegido / Privado
+                {
+                    CPF : {
+                num         : '' , 
+                dataemissao : '' ,
+                ufemissao   : '' ,
+                obrigatorio : true ,
+                status      : ''
+            } ,
+            RG : {
+                num : '' ,
+                dataemissao : '' ,
+                ufemissao   : '' ,
+                obrigatorio : '' ,
+                status      : false
+            }
+                }
+        ] ,
+        parentes : [
+                {
+            pai : {
+                nome    : ''    ,
+                idade   : ''    ,
+                cpf     : ''    ,
+            } ,
+            mae : {
+                nome    : ''    ,
+                idade   : ''    ,
+                cpf     : ''    ,
+            },
+            irmaos : [
+                {
+                    nome : ''   ,
+                    idade : ''  ,
+                    cpf : ''
+                }
+            ]
+               }
+        ] ,
+        //Metodos
+        get : function(propriedade){
+            /*
+            * Pega a propridade e tal,
+            * mas nao vou descrever isso aqui agora =D
+            */
+        } ,
+        set : function(proriedade , valor){
+            /*
+            * Seta a propriedade e bla, bla, bla...
+            */
+        }
+     };
+</code></pre>
+",<javascript><jquery><orientação-a-objetos>
+O que é a assinatura de um método?,"<p>Uma assinatura do método comum ou construtor é composta por seu nome + quantidade de parâmetros + tipo dos parâmetros?</p>
+",<c#><java><c++><orientação-a-objetos><método>
+Como nomear um teste unitário quando utilizamos TDD?,"<p>É comum utilizarmos substantivos para nomearmos: classes (Carro, Veiculo, NotaFiscal); verbos de ação (no infinitivo ou não) para nomes de métodos (CalcularTotal/CalculaTotal, LerTodasAsLinhas, FecharConexao, AbrirPorta/AbrePorta); interrogações para retornos booleanos (Enable, MustCalculate, ShouldDoSomething, EstaAberta, DisparouExcecao, EstaGravado, EstaAtivo). Essas são recomendações da OMG (para UML).</p>
+
+<p>Porém, e quanto aos teste unitários? Existe algum padrão, guia para nomear os teste unitários?</p>
+
+<p>A seguir, alguns exemplos de nomes que encontrei em alguns código que já tive contato:</p>
+
+<ul>
+<li><strong>Deve_retornar_zero</strong>: não diz a situação, nem o motivo, e nem o que está sendo testado, apenas mostra o comportamento desejado.</li>
+<li><strong>Nao_deve_ter_sobre_nome_ao_informar_...</strong>: tenta descrever um comportamento, mas esse nomes geralmente ficam bem grandes.</li>
+<li><strong>IntParse</strong>: nesse caso, é um teste para o método Parse(...) da classe Int.</li>
+</ul>
+
+<p>Já vi nomes separados por <em>underline</em>, sem separação mas escritos em camelcase, e muitas outras formas.</p>
+
+<p>A minha dúvida é: existem guias/sugestões de melhores práticas para nomearmos testes unitários quanto utilizamos TDD?</p>
+",<orientação-a-objetos><tdd><nomenclatura>
+Como adicionar métodos static em interface?,"<p>Tenho meu seguinte método:</p>
+
+<pre><code> public static CloudStorageAccount GetAccount()
+</code></pre>
+
+<p>E na minha <code>Interface</code>:</p>
+
+<pre><code>  public interface IAzureStorangeService
+  {
+    CloudStorageAccount GetAccount()
+  }
+</code></pre>
+
+<p>Porém o compilador acusa que não foi implementado o método na minha classe</p>
+",<c#><orientação-a-objetos><interface><método>
+Método para Executar ao destruir instância de uma classe,"<p>Existe alguma forma de executar um método automaticamente ao destruir uma instancia de uma classe. Eu tenho uma classe genérica de SQL, onde no construtor eu chamo um método que abre a conexão. Só que eu quero fechar essa conexão automaticamente também, sem precisar ter que criar um método que fecha a conexão e chamar ele dentro de vários outros métodos da classe. Veja abaixo:</p>
+
+<pre><code>public class SQL
+{
+      SQL(ObjConn obj)
+      {
+          AbrirConexao(obj);
+      }
+
+      public static void AbrirConexao(ObjConn objConn)
+     {
+         Conexao.ConnectionString = objConn.Acesso == ""0"" ? Utils.GetConnectionStringNerCard(objConn) : Utils.GetConnectionStringAutorizador(objConn);
+         if (Conexao.State != ConnectionState.Open)
+         Conexao.Open();
+     }
+ }
+</code></pre>
+
+<p>Vejam que eu crio o construtor e chamo o método de Abrir Conexão.</p>
+
+<p>Existe algum método nativo que ele é chamado automaticamente pelo .NET ao destruir a instancia de uma classe?</p>
+",<c#><.net><orientação-a-objetos><design-pattern>
+Uso do equals e herança,"<p>Eu tenho uma classe pai e nela eu tenho um <code>equals</code> e tenho outras classes filhas dessa minha classe pai e nelas eu quero sobrescrever o <code>equals</code> para comparar atributos particulares dessas classes filhas porem também quero fazer uso do <code>equals</code> do meu pai para comparar os atributos herdados pela minhas filhas, como faria isso sem ter que reescrever tudo?</p>
+
+<pre><code>public class Pai {
+
+   String nome;
+
+   @Override
+   public boolean equals(Object obj) {
+      Pai other = (Pai) obj;
+      return(this.nome.equals(other.nome);
+   }
+
+}
+
+public class Filha extends Pai {
+        int atributoEspecifico`;
+
+        @Override
+        public boolean equals(Object obj) {
+            // como comparo aquele atributo do meu pai também?
+            Filha other = (Filha) obj;
+            return this.atributoEspecifico == other.atributoEspecifico;
+        }
+    }
+</code></pre>
+",<java><orientação-a-objetos>
+Herança ou Dependência?,"<p>Bom, minha pergunta é o seguinte. Estou refatorando um sistema onde tenho uma integração com uma API REST, existe uma classe chamada <code>Marketplace</code> (Que faz as consultas a API) a qual atualmente estendo da classe <code>Curl</code> (Que é uma interface simplificada para o curl do PHP).</p>
+
+<p>A questão é, a classe <code>Marketplace</code> deveria mesmo ser estendida de da classe  <code>Curl</code> ou talvez <code>Curl</code> deveria ser uma dependência da classe <code>Marketplace</code>?</p>
+
+<p>Classe <code>Marketplace</code> atual estendida (Ilustrativa e simplificada...)</p>
+
+<pre><code>&lt;?php
+class Marketplace extends Curl
+{
+    public function getOffers()
+    {
+        $this-&gt;get('/marketplace/offers');
+
+        return $this-&gt;getResponseBody();
+    }
+}
+</code></pre>
+
+<p>Ou <code>Marketplace</code> com dependência</p>
+
+<pre><code>&lt;?php
+class Marketplace
+{
+    private $_curl;
+
+    public function __construct(Curl $curl)
+    {
+        $this-&gt;_curl = $curl;
+    }
+
+    public function getOffers()
+    {
+        $this-&gt;_curl-&gt;get('/marketplace/offers');
+
+        return $this-&gt;_curl-&gt;getResponseBody();
+    }
+}
+</code></pre>
+
+<p>Qual seria, digamos uma estrutura melhor? E se possível o porque..</p>
+",<php><orientação-a-objetos><herança><curl>
+Definição de método não genérico?,"<p>Em</p>
+
+<pre><code>public partial class frmAltInfo : Form
+</code></pre>
+
+<p>Ocorre o erro:</p>
+
+<blockquote>
+  <p>Extension method must be defined in a non-generic static class</p>
+</blockquote>
+
+<p>Não entendo o que pode ser e nem como resolver.</p>
+
+<p>Aqui estava o erro:</p>
+
+<pre><code>public static string TextNoFormatting(this MaskedTextBox _mask)
+
+{
+  _mask.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+    String retString = _mask.Text;
+    _mask.TextMaskFormat = MaskFormat.IncludePromptAndLiterals;
+    return retString;
+}
+</code></pre>
+",<c#><orientação-a-objetos><extension-method>
+Confuso sobre forma correta de Herança em JavaScript,"<p>Estou estudando formas de aplicar Orientação a Objeto em JavaScript. Percebi que existem várias maneiras de fazer Herança em JavaScript. Fiz esse que achei simples e funcionou. Mas ela realmente está dentro dos padrões? está correta?</p>
+
+<p>Segue o Código:</p>
+
+<pre><code>    function humano(){
+        var nome;
+        this.pensar = function(){
+            return ""Estou pensando"";
+        }
+
+    }
+
+    function animal(){
+        this.comer = function(){
+            return ""Vou COMER!"";
+        }
+    }
+
+
+    humano.prototype = new animal();
+
+    var pablo = new humano();
+    pablo.nome = ""Pablo"";
+
+    console.log(pablo.pensar());
+    console.log(pablo.comer());
+    console.log(""Meu nome é "" + pablo.nome);
+</code></pre>
+
+<p>Estudando mais, agora cheguei no seguinte código para Herança, essa seria uma forma avançada de herança em JavaScript? (obs.: As propriedades extras criadas foram para testar a passagem das propriedades por herança)</p>
+
+<pre><code>    var obj = {};
+    var coisa = {
+        nome: 'Rafael',
+        idade: '35'
+    };
+
+    obj.y = 55;
+
+    Object.defineProperty(obj,'x',{value: 1, writable: false, enumerable: false, configurable: true});
+
+    Object.defineProperty(obj,'x',{get: function(){ return obj.y}});
+
+    Object.defineProperty(Object.prototype,""extend"",{
+        writable: true,
+        enumerable: false,
+        configurable: true,
+        value: function(o){
+
+            var names = Object.getOwnPropertyNames(o);
+
+            for(var i = 0; i &lt; names.length; i++ ){
+                if(names[i] in this) continue;
+
+                var desc = Object.getOwnPropertyDescriptor(o,names[i]);
+
+                Object.defineProperty(this,names[i],desc);
+            }
+        }
+    })
+
+    obj.extend(coisa);
+    coisa.extend(obj);
+</code></pre>
+
+<p>Qual a melhor maneira? Obrigado</p>
+",<javascript><orientação-a-objetos><herança><protótipo>
+Por que todo mundo odeia herança múltipla em C++ e qual sua diferença para mixins?,"<p>Sempre ouvi dizer que herança múltipla em C++ é um caos. Por que? Não seria tecnicamente a mesma coisa que utilizar mixins em linguagens como o Ruby?</p>
+
+<p>E o que é a tal classe abstrata do Java? É um mixin do Java?</p>
+",<java><c++><orientação-a-objetos><ruby><herança>
+O que é Protótipo Javascript?,"<p>Vejo em varios instanciamentos de objetos nativos um '.protoype' no meio antes de um método ou atributo mas não sei o que são EXATAMENTE. </p>
+
+<p>A unica coisa que sei é que é a forma do JavaScript de formar heranças sem classes, só que eu não consigo entender esse conceito e nem usar. </p>
+
+<p>Ja li essa resposta > <a href=""http://pt.stackoverflow.com/questions/15239/como-funcionam-prot%C3%B3tipos-em-javascript"">Como funcionam prot&#243;tipos em JavaScript?</a></p>
+
+<p>So que não consegui entender 100%. Poderiam me explicar de um ponto de vista + fácil?</p>
+",<javascript><orientação-a-objetos><herança><protótipo>
+Ao utilizar recursão método retorna 0,"<p>Tenho o seguinte código:</p>
+
+<pre><code>public int lerInt() {
+    String entrada = """";
+    int saida = 0;
+    try {
+        entrada = input.readLine();
+    } catch (IOException e) {
+        System.out.println(""Falha critica."");
+    }
+    try {
+        saida = Integer.parseInt(entrada);
+    } catch (NumberFormatException e) {
+        System.out.println(""Você digitou uma entrada invalida."");
+        lerInt();
+    }
+    return saida;
+}
+</code></pre>
+
+<p>Supondo que o usuário digite algo com letra, ele cairia no <code>NumberFormatException</code> e teria que digitar de novo. Porém na segunda tentativa o método retorna 0, independente do número que ele digitar.</p>
+
+<p>Eu precisava que ele fosse executado até o usuário digitar algo valido, e não sei porque ele está retornando 0.</p>
+",<java><orientação-a-objetos><recursão>
+Quando usar Setters e Getters?,"<p>Estou estudando OOP e na parte de encapsulamento fiquei com uma dúvida sobre quando usar getters e setters, além de poder validar o parâmetro passado, qual a utilidade de se usar?</p>
+
+<p>Eu poderia simplesmente ""pegar"" o dado pelo <code>__construct</code>.</p>
+
+<p>ex:</p>
+
+<pre><code>public function __construct ($valor1 , $valor2) { 
+    $this-&gt;valor1 = $valor1;
+    $this-&gt;valor2 = $valor2;
+}
+</code></pre>
+
+<p>e</p>
+
+<pre><code>function setValor($valor){
+    $this-valor = $valor;
+}
+</code></pre>
+",<php><orientação-a-objetos><getters><setters>
+O que significa runtime dependencies of objects?,"<p>Qual o significado de runtime dependencies of objects em programação orientada a objetos? Me deparei com essa questão estudando C++.</p>
+",<c++><orientação-a-objetos>
+Inicialização de classe,"<p>Existe alguma função de inicialização de classes para c++.
+Em Lua, usando a biblioteca classlib há a função __init, e em python também.
+EX:</p>
+
+<pre><code>require ""classlib""
+
+Human = class();
+
+function Human:__init(name, age)
+  self.name = name
+  self.age = age
+end
+
+gabriel = Human(""Gabriel"", 16)
+
+print(gabriel.name, gabriel.age)
+</code></pre>
+
+<p>Em c++ tive que fazer assim: </p>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string.h&gt;
+using namespace std;
+class human {
+    public:
+        string name;
+        int age;
+        void SET(string, int);
+};
+
+    void human::SET(string name, int age){
+        this-&gt;name = name;
+        this-&gt;age = age;
+    }
+int main (){
+    human gabriel;
+    gabriel.SET(""Gabriel Sales"", 16);
+    cout &lt;&lt; gabriel.name;
+    return 0;
+}
+</code></pre>
+",<c++><orientação-a-objetos><classes><construtor>
+Como salvar dados em um array global,"<p>Estou estudando PHP, e até o momento desenvolvi um pequeno sistema que ""monta"" as views do site e etc.</p>
+
+<p>Mas me deparei com um problema extremamente chato que não consigo resolver. Preciso de uma função para mostrar os erros que ocorrerem no sistema.</p>
+
+<p>O problema é que quando uso o <code>echo</code> para mostrar as mensagens, ele mostra a mensagem no meio do template (logo no começo da tag <code>body</code>), e não onde as mensagens de erro devem aparecer, que é dentro da tag <code>main</code>.</p>
+
+<p>A solução que encontrei para isso, foi criar um array <code>$errors</code> e salvar dentro dele as mensagens de erro que eu precisar mostrar. E então eu faço uma função dentro da tag <code>main</code> para dar o <code>echo</code> nessas mensagens de erro.</p>
+
+<p>O problema é que estou trabalhando com classes para fazer o sistema. E não consigo passar esse array entre as classes do sistema. Por exemplo, estou trabalhando numa função na classe <code>Database</code> e quero guardar um erro que aconteceu ali mas a função do <code>echo</code> só é mostrada na classe <code>System</code>.</p>
+
+<p>Vejam meu código até agora:</p>
+
+<blockquote>
+  <p>system.php</p>
+</blockquote>
+
+<p>
+
+<pre><code>new System;
+
+class System {
+
+    public function __construct() {
+
+        define('config', 'config.php');
+
+        if(file_exists(config)) {
+            require_once(config);
+        }
+        else {
+            header('Content-Type: text/html; charset=utf-8');
+            echo ""&lt;title&gt;Painel de administração - Erro&lt;/title&gt;"";
+            die('Arquivo de configuração não localizado. Contate o administrator do sistema.');
+        }
+
+        foreach($required_consts as $value){
+            if(!defined($value)) {
+                header('Content-Type: text/html; charset=utf-8');
+                echo ""&lt;title&gt;Painel de administração - Erro&lt;/title&gt;"";
+                die('&lt;strong&gt;Uma configuração do sistema está ausente:&lt;/strong&gt; ' . $value);
+            }
+        }
+
+        require_once('database.php');
+        new Database;
+        (new Database)-&gt;setup();
+
+        require_once('views.php');
+        new View($menu, $errors);
+
+    }
+
+    public function error($message) {
+        foreach($message as $error) {
+            echo ""&lt;p class='alert alert-danger'&gt;$error&lt;/p&gt;"";
+        }
+    }
+
+    public function success($message) {
+        foreach($message as $success) {
+            return ""&lt;p class='alert alert-success'&gt;$success&lt;/p&gt;"";
+        }
+    }
+
+}
+</code></pre>
+
+<blockquote>
+  <p>database.php</p>
+</blockquote>
+
+<pre><code>&lt;?php
+
+class Database extends System {
+
+    public function __construct() {
+        $this-&gt;mysqli = new mysqli(host, db_user, db_pass) or die ('Não foi possível conectar ao MySQL: ' . mysqli_connect_error() );
+    }
+
+    public function setup() {
+        $this-&gt;createDatabase();
+    }
+
+    public function createDatabase() {
+//      $this-&gt;mysqli-&gt;query(""DROP DATABASE IF EXISTS "" . db_name );
+        $this-&gt;mysqli-&gt;query(""CREATE DATABASE IF NOT EXISTS "" . db_name );
+
+        if($this-&gt;mysqli-&gt;error) {
+            return $this-&gt;mysqli-&gt;error;
+        }
+        else {
+            echo ""Banco de dados criado com sucesso.&lt;br&gt;"";
+            $this-&gt;createTables();
+        }
+    }
+
+    public function createTables() {
+        $this-&gt;database = new mysqli(host, db_user, db_pass, db_name) or die ('Não foi possível conectar ao Banco de Dados: ' . mysqli_connect_error() );
+        $database = db_name;
+        $table = users_table;
+        $this-&gt;database-&gt;query(""
+            CREATE TABLE IF NOT EXISTS users 
+            (
+                id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
+                name VARCHAR(255) NOT NULL,
+                email VARCHAR(80) NOT NULL,
+                pass CHAR(255) NOT NULL,
+                active CHAR(1) NOT NULL,
+                admin CHAR(1) NOT NULL,
+                register_date TIMESTAMP NOT NULL,
+                PRIMARY KEY (id),
+                UNIQUE(email)
+            )
+            CHARACTER SET utf8 COLLATE utf8_general_ci;
+        "");
+
+        if($this-&gt;mysqli-&gt;error) {
+            echo $this-&gt;mysqli-&gt;error;
+        }
+        else {
+            //echo ""Tabelas criadas com sucesso."";
+            $this-&gt;success(['Tabelas criadas com sucesso.']);
+            $errors[] = 'Tabelas criadas com sucesso.';
+            $this-&gt;registerAdmin();
+        }
+    }
+
+    public function registerAdmin() {
+
+        $query = ""SELECT name FROM users WHERE id = 1 AND name IS NOT NULL LIMIT 1"";
+        $result = $this-&gt;database-&gt;query($query);
+        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        if(!$row) {
+            $query = ""INSERT INTO users(name, email, pass, active, admin) VALUES ('Admin', 'example@example.com', md5('adminteste'), 1, 1)"";
+            $this-&gt;database-&gt;query($query);
+        }
+    }
+
+
+}
+</code></pre>
+
+<p>Tudo funciona perfeito até essa parte de mostrar os erros. Estou fazendo os testes para a função no <code>else</code> do arquivo <code>database.php</code>.</p>
+
+<pre><code>    else {
+        //echo ""Tabelas criadas com sucesso."";
+        $this-&gt;success(['Tabelas criadas com sucesso.']);
+        $errors[] = 'Tabelas criadas com sucesso.';
+        $this-&gt;registerAdmin();
+    }
+</code></pre>
+
+<p>Alguém poderia me dar uma 'luz'? Ainda sou novo no conceito de <code>POO</code>.</p>
+",<php><array><orientação-a-objetos>
+"Getters e Setters só podem ""andar"" juntos?","<p>Estou estudando Orientação a Objetos e estou tendo algumas dúvidas na parte de encapsulamento. Por exemplo:</p>
+
+<pre><code>Class Url {
+
+    private $url;
+
+    public function setUrl($url) {
+
+        if (filter_var($url, FILTER_VALIDATE_URL)) {
+            $this -&gt; url = $url;
+        } else {
+            $this-&gt;url= false;
+        }
+    }
+
+    public function getUrl(){
+
+        return $this-&gt;url;
+
+    }
+
+
+}
+</code></pre>
+
+<p>Como eu preciso validar a URl eu criei este <em>setter</em>, já que é uma melhor prática do que fazer a validação no construtor, correto?</p>
+
+<p>Usarei ele fora da classe, mas esse <em>getter</em> não, então preciso mesmo criar ambos? Porque eu poderia usar a variável <strong>$url</strong> no contexto da classe, já que só usarei ela dentro da classe mesmo.</p>
+
+<p>Aproveitando essa pergunta, entendi que eu só criaria o setter/getter se eu fosse alterar o valor da variável ao longo da aplicação, correto? Caso contrário eu poderia simplesmente ""construí-la"" no construtor? Exemplo:</p>
+
+<pre><code>public function __construct ($url) {
+
+    $this-&gt;url = $url;
+
+}
+</code></pre>
+",<php><orientação-a-objetos>
+Quando usar método mágico __contructor ou set e get,"<p>Minha dúvida é com relação constructor,por exemplo, tenho uma classe com nome, idade.
+o correto é usar __construtor para passar valores a eles ou usar set e get ?</p>
+",<php><orientação-a-objetos>
+Posso declarar um construtor nas classes filhas quando a classe mãe é abstrata e já tem um construtor?,"<p>Minha dúvida é a seguinte: Se posso declarar um construtor em uma classe <code>abstract</code> e também nas classes filhas. E também como acessar os valores deles. Por exemplo:</p>
+
+<pre class=""lang-php prettyprint-override""><code>abstract class Animal {
+    private $nome;
+    private $idade;
+
+    public funtion __construct($nome, $idade) {
+        $this-&gt;nome = $nome;
+        $this-&gt;idade = $idade;
+    }
+}
+</code></pre>
+
+<p>E na classe filha, que herda da classe <code>Animal</code>:</p>
+
+<pre class=""lang-php prettyprint-override""><code>class Cachorro extends Animal {
+    private $corPelo;
+
+    public function __construct($corPelo) {
+        $this-&gt;corPelo = $corPelo;
+    }
+}
+</code></pre>
+
+<p>E quando tento instanciar chamo a classe <code>Cachorro</code> instanciando os valores para <code>Animal</code>:</p>
+
+<pre class=""lang-php prettyprint-override""><code>$dog = new Cachorro('belinha', 4, 'preto');
+</code></pre>
+
+<p>Porém, dessa forma não consigo acessar a <code>corPelo</code> da classe filha <code>Cachorro</code>, apenas os valores da classe mãe <code>Animal</code>.</p>
+
+<p>Preciso da ajuda de vocês para saber o que estou fazendo errado.</p>
+",<php><orientação-a-objetos>
+como representar na uml metodos sobrescritos,"<p>Minha duvida está em como representa na uml de classe quando um método deve ser sobrescrito.
+Se basta apenas repetir o método da classe-pai para a classe-filha ou existe outra forma ou ainda, quem sabe, não se deve(se bem que acho isso pouco prático) ?</p>
+
+<p>desde já muito obrigado
+há me desculpem se eu estiver incomodando com tantas perguntas, mas estou estudando UML e POO e quero aprender e fazer da forma correta, :) </p>
+",<orientação-a-objetos><uml>
+posso usar uma varável para sobrescrever um método?,"<p>Quando vou reescrever um método, em PHP, posso usar uma variável para receber o método ?<br>
+fiz o exemplo abaixo e funcionou normalmente, porém não sei se isso é correto ou se é a melhor forma de reescrever um método da classe-pai.</p>
+
+<pre><code>abstract class Animal{
+  ...
+  public function dadosAnimal(){
+    $dados  = "" Nome: "". $this-&gt;nome;
+    $dados .= ""Idade: "". $this-&gt;idade;
+
+    return $dados;
+  }
+
+class Cachorro extends Animal(){
+   ...
+   public function dadosAnimal(){
+     //Posso fazer ou vai contra algum principio ou patter ?
+     $dados = parent:: dadosAnimal();
+     $dados .= "" Cor do pelo: "". $this-&gt;corPelo;
+
+     return $dados;
+}
+</code></pre>
+
+<hr>
+
+<p>o que eu quero é não ter que ficar repetindo o mesmo código da classe pai nas classes filhas e também ter o beneficio de alterar alguma coisa apenas na classe pai e a mudança se refletir para todos as classes filhas que usam o método do classe pai.</p>
+
+<p>evitar isso: </p>
+
+<pre><code>public function dadosAnimal(){
+    parent::dadosAnimal();
+    //Copiar o método inteiro da classe-pai
+    $dados = ""&lt;br/&gt; Nome: "". $this-&gt;nome;
+    $dados .= ""&lt;br/&gt; Idade: "". $this-&gt;idade;
+    //reescrever, adicionando isso
+    $dados .= ""&lt;br/&gt; Cor do pêlo: "". $this-&gt;corPelo;
+
+    return $dados; 
+</code></pre>
+",<php><orientação-a-objetos>
+não consigio usar objeto para adicionar a um atributo,"<p>quando faço o código a baixo recebe esse erro: </p>
+
+<blockquote>
+  <p>Object of class Cliente could not be converted to string in ...\animal.class.php </p>
+</blockquote>
+
+<p>Fiz um resumo do meu código, para vc poderem analisar.
+Nessa parte não me permite passar um objeto para ser usado na propriedade ""dono""</p>
+
+<blockquote>
+  <p>$dog = new Cachorro('Rex',$ana);</p>
+</blockquote>
+
+<p>porém quando uso string 'ana' ex.:</p>
+
+<blockquote>
+  <p>$dog = new Cachorro('Rex','ana');</p>
+</blockquote>
+
+<p>funciona normalmente e me retorna o ""ana"" como dona do animal</p>
+
+<pre><code>//classe Cliente
+class Cliente{
+    public $nome;
+
+public function __construct($nome){
+        $this-&gt;nome     = $nome;
+    }
+}
+
+abstract Animal{
+    protected $nome;
+    protected $dono;
+
+   public function __construct($nome,$dono){
+       $this-&gt;nome      = $nome;
+       $this-&gt;dono  = $dono;
+   }
+
+  public function getDono(){
+        return $this-&gt;dono ;
+    }
+}
+//Essa classe foi implementada, porém nada está afetando e a deixei ""isolei"" para ter   certeza
+class Cachorro extends Animal{
+
+}
+
+$ana = new Cliente('ana');
+$dog = new Cachorro('Rex','ana' );
+echo ""Dono: "". $dog-&gt;getDono();
+</code></pre>
+",<php><orientação-a-objetos>
+Implementação de CRUD genérico,"<p>Tenho a seguinte classe <code>CRUD</code> que é genérica:</p>
+
+<pre><code>public abstract class CRUD
+{
+    protected string tabela = null;
+    protected object classe = null;
+
+    public CRUD() {}
+
+    public virtual void insert() { //código }
+    public virtual void select() { //código }
+}
+</code></pre>
+
+<p>Criei outra classe quer herda da classe <code>CRUD</code>:</p>
+
+<pre><code>public abstract class PessoaCRUD : CRUD
+{
+   public PessoaCRUD()
+   {
+       tabela = ""TBUsuarios"";
+       classe = this;    
+   }
+
+   //sobrescrita do metódo da classe pai
+   public void insert() { //código }
+}
+</code></pre>
+
+<p>E Tenho minha classe Pessoa que herda de PessoaCRUD:</p>
+
+<pre><code>public class Pessoa : PessoaCRUD
+{
+    public string Nome { get; set; }
+    public int Idade { get; set; }
+}
+</code></pre>
+
+<p>E quando preciso usar a classe pessoa ficara algo assim:</p>
+
+<pre><code>Pessoa pessoa = new Pessoa();
+
+pessoa.Nome = ""Julia"";
+pessoa.Idade = 23;
+pessoa.Insert();
+</code></pre>
+
+<p>A princípio está funcionando, mas fiquei com dúvida, poderia fazer a classe <code>Pessoa</code> herda da classe <code>CRUD</code>, porém caso algum método necessite de sobrescrita ele teria quer ser implementado na classe <code>Pessoa</code>, e não querendo poluir a classe <code>Pessoa</code> com métodos relacionados ao <code>CRUD</code> criei a classe <code>PessoaCRUD</code>. </p>
+
+<p>Está correto implementar assim? caso contrário qual seria uma abordagem melhor, levando em consideração padrões de projeto?</p>
+",<c#><sql><orientação-a-objetos><design-pattern><crud>
+Entity framework auto relacionamento habilitar delete em cascata,"<p>Como criar uma deleção em cascata, em um auto-relacionamento usando o <code>fluent api</code> e habilitar isso no <code>entity framework</code>.</p>
+
+<p>Código:</p>
+
+<pre><code> Public class Usuario {
+
+    public int UsuarioID { get; set; }
+    public int? ObjPaiID { get; set; }
+    public virtual Usuario ObjPai { get; set; }
+    public virtual IList&lt;Usuario&gt; ListaPartes { get; set; }
+}
+</code></pre>
+
+<p>Contexto:</p>
+
+<pre><code>//Auto-relacionamento Projeto
+   modelBuilder.Entity&lt;Usuario&gt;()
+   .HasOptional(p =&gt; p.ObjPai)
+   .WithMany(p =&gt; p.ListaPartes)
+   .HasForeignKey(p =&gt; p.ObjPaiID);
+</code></pre>
+",<c#><entity-framework><orientação-a-objetos>
+Implementar Interfaces,"<p>Tenho a classe abstrata <code>ClasseA</code> e 2 classes filhas <code>ClasseB</code> e <code>ClasseC</code>, depois tenho uma interface <code>IClasse</code> que é implementada em <code>ClasseA</code> e <code>ClasseB</code>.</p>
+
+<p>Na interface tenho o método <code>metodo1</code> que recebe uma instância da <code>ClasseA</code>, mas nas implementações desse método nas classes filhas de <code>ClasseA</code> eu preciso que o <code>metodo1</code> receba uma instância da sua respectiva classe, por exemplo na implementação em <code>ClasseB</code> o método deve receber uma instância <code>ClasseB</code>, na implementação em <code>ClasseC</code> ele deve receber uma instância <code>ClasseC</code>.</p>
+
+<p>Não sei ao certo mas isso não devia funcionar por serem classes filhas de ClasseA? </p>
+",<c#><orientação-a-objetos>
+Problema em receber o retorno de um objeto,"<p>Criei uma classe para baixar dados de um web service.
+E faço os seguintes passos para teste:</p>
+
+<p>Instancio a classe de download em viewDidLoad de ViewController e depois executo o método, como no código abaixo:</p>
+
+<pre><code>    - (void)viewDidLoad {
+        [super viewDidLoad];
+        GDRequestURL* getData = [[GDRequestURL alloc]init];
+        [getData getDataFromURL];
+        // Aqui instancio um objeto para receber o retorno.
+        NSMutableArray* restultado = [[NSMutableArray alloc]init];
+
+        //NEste ponto faço a execução para receber o retorno dos dados.
+        restultado = [getData retornaResultado];
+  }
+</code></pre>
+
+<p>Porém o retorno é nil. </p>
+",<ios><orientação-a-objetos><objective-c>
+Regras de negócio sempre são relacionadas à validação?,"<p>Desde que comecei a estudar orientação a objetos ouço muito sobre as regras de negócio. Basicamente, pelo que entendi até hoje, um objeto deve ter métodos encapsulado as regras de negócio e a modificação do seu estado deve ser feita através desses métodos e não através de acesso direto à seus atributos. Pelo que eu percebi existe tanta ênfase nisso que um objeto sem métodos é até chamado de anêmico.</p>
+
+<p>O problema maior é que eu até hoje não entendi muito bem o que são realmente essas regras de negócio. Todos os exemplos que eu vi, as regras de negócio tem a ver com validação. Um desses exemplos é uma classe <code>Usuario</code> representando um usuário de um sistema, e as regras de negócio impostas no exemplo tem a ver com validações dos dados (garantir que sejam informados dados requeridos, garantir que o e-mail seja um e-mail válido, etc).</p>
+
+<p>Outro exemplo muito usado é de sistema bancário e aí as regras de negócio são outra vez validações: por exemplo verificar se o saldo da conta é suficiente pra fazer um saque e etc. Dessa forma parece que as regras de negócio <em>sempre</em> são validações pra verificar se certa operação pode ou não ser realizada ou verificar se os dados informados são realmente consistentes.</p>
+
+<p>Essa impressão está correta? As tais regras de negócio sempre tem a ver com validações? Se não, o que realmente são as regras de negócio?</p>
+",<orientação-a-objetos>
+"API's web, REST e Orientação a Objetos","<p>Estou começando a estudar API's web um pouco mais a fundo e fiquei um pouco em dúvida com a seguinte questão: trabalho com ASP.NET WebAPI e, portanto, com orientação a objetos. Tenho na minha solução um projeto de domínio contendo os tipos do domínio com seus comportamentos codificados neles e tudo mais.</p>
+
+<p>O que acontece é que lendo sobre API's ouvi falar sobre o Richardson Maturity Model que categoriza as API's em quatro níveis:</p>
+
+<ul>
+<li>Nível 0 (RPC): Usamos o HTTP só como meio de enviar chamadas a funções no servidor. Temos só uma URI.</li>
+<li>Nível 1: Dividimos a aplicação em recursos e temos várias URI's, uma pra cada recurso, mas usamos ainda a URI pra descrever a ação a ser executada.</li>
+<li>Nível 2: Usamos os métodos do HTTP pra descrever a ação a ser executada em cada recurso e a ação não faz mais parte da URI.</li>
+<li>Nível 3: Uso de hypermedia pra dizer o que pode ser feito depois da ação a ser tomada.</li>
+</ul>
+
+<p>Pelo que eu entendi do livro o ideal é ter o nível o maior possível. Acontece que me parece que ao atiginir o nível 2 o uso da orientação a objetos fica comprometido.</p>
+
+<p>O que eu já li por aí, foi algumas pessoas dizendo que o REST e o HTTP serve só pra transferir estado de recursos e isso vai contra a ideia da orientação a objetos de modificar o estado dos objetos através dos métodos deles invés de simplesmente acessar os campos. Ou seja, usando orientação a objetos direito, ao invés de acessar os campos de um objeto, executamos um método e como consequência o estado do objeto pode mudar. Uma API que já está no nível 2 do RMM, por outro lado, modificaria o estado de um recurso enviando uma requisição PUT que simplesmente trocaria os valores dos campos.</p>
+
+<p>Pesquisei um pouco sobre isso e vi um vídeo do Jim Webber falando que a ideia é que usemos o HTTP pra realmente transferir documentos entre o client e o servidor mas sendo que essas transferências tenham efeitos colaterais provocando ações no servidor. Pensei um pouco sobre isso e queria saber se entendi corretamente a forma de conciliar Web API's, REST e Orientação a Objetos.</p>
+
+<p>O que pensei foi o seguinte: supondo que o sistema precise gerenciar contas bancárias e tenha um tipo <code>Account</code> representando uma conta e um tipo <code>Transaction</code> representando uma transação. Temos então um método no tipo <code>Account</code> que recebe outra conta e um valor e realiza uma transferência. Seria algo como:</p>
+
+<pre><code>Transaction transferTransaction = account.Transfer(anotherAccount, amount);
+</code></pre>
+
+<p>Isso, pelo que eu entendo, seria o jeito de fazer isso na orientação a objetos. Não vamos lidar com os campos dos tipos diretamente, vamos deixar a lógica de negócio dentro dos tipos do domínio.</p>
+
+<p>O ponto, entretanto, é o seguinte: ao chegar no nível 2 do RMM me parece que eu teria que fazer o seguinte na Web API: criar um resource <code>transaction</code> representando uma transação e então realizar um POST que cria uma transação enviando os dados das contas envolvidas e do valor. Algo como:</p>
+
+<pre><code>POST /api/transactions HTTP/1.1
+Headers
+
+{
+    ""originAccountId"": ""1"",
+    ""destinyAccountId"": ""2"",
+    ""amount"": ""50""
+}
+</code></pre>
+
+<p>Daí no servidor teríamos um método mais ou menos assim (bem simplificado, sem tratamento de exceções ou outras coisas):</p>
+
+<pre><code>public IHttpActionResult TransferFunds([FromBody] TransferDto transferDto)
+{
+    Account originAccount = accountRepository.Get(transferDto.originAccountId);
+    Account destinyAccount = accountRepository.Get(transferDto.destinyAccountId);
+    Transaction transferTransaction = originAccount.Transfer(destinyAccount, transferDto.amount);
+    transactionsRepository.AddTransaction(transferTransaction);
+    return Created(location, transferTransaction);
+}
+</code></pre>
+
+<p>Dessa forma, temos resources, usamos os métodos HTTP, mas ainda assim deixamos a lógica de negócio encapsulada no domínio. A ideia é que transferimos uma representação de uma transação pro servidor e como efeito colateral desse envio de documento, o servidor realiza ações no domínio da aplicação.</p>
+
+<p>É essa realmente a ideia pra trabalhar com Web API's, REST e Orientação a Objetos? Existe nisso que eu fiz algum problema? Existem outros problemas pra conciliar REST e Orientação a Objetos?</p>
+",<orientação-a-objetos><web><rest><web-api-2>
+O que são e como identificar agregados em DDD?,"<p>Em DDD existe a noção de agregado. Uma definição que já vi por aí é a seguinte</p>
+
+<blockquote>
+  <p>Compostos de Entidades ou Objetos de Valores que são encapsulados numa única classe. O Agregado serve para manter a integridade do modelo. Elegemos uma classe para servir de raiz do Agregado. Quando algum cliente quiser manipular dados de uma das classes que compõem o Agregado, essa manipulação só poderá ser feita através da raiz.</p>
+</blockquote>
+
+<p>Então basicamente a ideia de agregados em DDD é equivalente a ideia de composição em orientação a objetos? A relação de composição entre dois objetos é basicamente quando um atua como parte e o outro atua como todo. Desse jeito, quando fazemos uma composição está fazendo um agregado, sendo que o ""todo"" é o agregado? E nesse caso o que é a raiz?</p>
+
+<p>O que realmente são agregados? Além disso, como identificamos agregados ao fazer o modelo de domínio?</p>
+",<orientação-a-objetos><ddd>
+O que é a camada de serviços em DDD?,"<p>Lendo sobre DDD ouvi falar sobre a camada de serviços e estou com um pouco de dúvida em relação a isso porque pelo que li um serviço pode contar lógica de negócio. Basicamente a definição que vi é essa:</p>
+
+<blockquote>
+  <p>Serviços são classes que contém lógica de negócio, mas que não pertence a nenhuma Entidade ou Objetos de Valores. É importante ressaltar que Serviços não guardam estado, ou seja, toda chamada a um mesmo serviço, dada uma mesma pré-condição, deve retornar sempre o mesmo resultado.</p>
+</blockquote>
+
+<p>Num outro texto li que existem três tipos de serviços: serviços de aplicação, serviços de infraestrutura e serviços de domínio, sendo que o tipo de serviço que estamos tratando na camada de serviços do DDD são os serviços de domínio.</p>
+
+<p>O que me deixa em dúvida é o fato de tais serviços conterem lógica de negócio. A lógica de negócio não deve ser completamente contida nos tipos do domínio? O que realmente são esses serviços de domínio e como podemos identificar eles?</p>
+",<orientação-a-objetos><services><ddd>
+Qual o overhead de utilizar orientação a objetos?,"<p>Na empresa onde trabalho atualmente somos fortemente encorajados a evitar programação orientada a objetos tanto para projetos antigos como para projetos novos.<br>Para projetos antigos concordo que seja uma má pratica começar a inserir orientação a objetos em um projeto totalmente estrutural, porém para projetos novos acredito ser mais produtivo utilizar OOP.</p>
+
+<p>Questionando a situação recebi como resposta da empresa: orientação a objetos é pesada e lenta, portanto recomendamos não utilizar.</p>
+
+<p>1 - Qual o overhead de se utilizar orientação a objetos vs programação procedural?
+<br>2 - Considerando que boas práticas de programação são seguidas, é mais produtivo utilizar orientação a objetos ou programação procedural?</p>
+",<php><orientação-a-objetos><arquitetura-de-software><característica-linguagem>
+Qual a diferença ao chamar uma função com parênteses e sem no urls.py com Django 1.7?,"<p>No mapeamento do meu urls.py eu utilizo desde funções comuns até views baseadas em classes.</p>
+
+<p>Quero saber qual a diferença de chamar a view com ou sem parênteses, tendo em vista que se eu tenho a entrada <code>url(r'^$', base_views.index_view)</code>, colocar os parênteses ao chamar a função correspondente (que na declaração recebe apenas um objeto <em>request</em>) lança um <em>TypeError</em> com a seguinte mensagem: <strong>index_view() missing 1 required positional argument: 'request'</strong>.</p>
+
+<p>Já na entrada <code>url(r'^authors/$', AuthorViews.AuthorView.as_view)</code>, quando removo os parênteses ele lança o mesmo erro citado acima com a mensagem: <strong>as_view() takes 1 positional argument but 2 were given</strong>.</p>
+
+<p>Eu entendo que o problema é que ao chamar uma das funções, os argumentos da mesma  não são supridos  como na declaração, mas, não entendo como a função url do Django passa esses parâmetros nem porque os parênteses fazem diferença.</p>
+",<python><orientação-a-objetos><django><funções><view>
