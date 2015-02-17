@@ -15,17 +15,21 @@ public class AngularSimilarity {
 		Map<String, Float> mapVectorCategoria = vectorCategoria.getVector();
 		Map<String, Float> mapVectorPergunta = vectorPergunta.getVector();
 		
-		for (String token : mapVectorCategoria.keySet()) {
-			if (mapVectorPergunta.containsKey(token)) {
-				numerador = numerador + mapVectorCategoria.get(token) * mapVectorPergunta.get(token);
-				denominador1 = denominador1 + Math.pow(mapVectorCategoria.get(token), 2);
-				denominador2 = denominador2 + Math.pow(mapVectorPergunta.get(token), 2);
+		for (String tokenCategoria : mapVectorCategoria.keySet()) {
+			if (mapVectorPergunta.containsKey(tokenCategoria)) {
+				numerador = numerador + mapVectorCategoria.get(tokenCategoria) * mapVectorPergunta.get(tokenCategoria);
 			}
+			denominador1 = denominador1 + Math.pow(mapVectorCategoria.get(tokenCategoria), 2);
+		}
+		for (String tokenPergunta : mapVectorPergunta.keySet()) {
+			denominador2 = denominador2 + Math.pow(mapVectorPergunta.get(tokenPergunta), 2);
 		}
 		
 		denominador = Math.sqrt(denominador1) * Math.sqrt(denominador2); 
 		
+		if (denominador == 0.0f) {
+			return 0.0f;
+		}
 		return numerador/denominador;
 	}
-	
 }
