@@ -6,9 +6,12 @@ import br.edu.doc.analisador.extractor.Extractor;
 import br.edu.doc.analisador.util.CsvFileReader;
 import br.edu.doc.analisador.util.InQuestion;
 import br.edu.doc.analisador.util.Vector;
+<<<<<<< HEAD
 
 
 import br.edu.doc.analisador.util.TreatmentStackOverflow;
+=======
+>>>>>>> branch 'master' of https://github.com/JoaquimCMH/Analyzer.git
 
 
 public class Principal {
@@ -21,9 +24,11 @@ public class Principal {
 		}
 		
 		System.out.println(auxVector);
+<<<<<<< HEAD
 		
 		String tag = "<Java><Php>";
 		System.out.println(new TreatmentStackOverflow().replaceAndClearTag(tag));
+=======
+>>>>>>> branch 'master' of https://github.com/JoaquimCMH/Analyzer.git
 	}
-	
 }
