@@ -25,4 +25,5 @@ public class Vector {
 	public String toString() {
 		return vector.toString();
 	}
+	
 }
