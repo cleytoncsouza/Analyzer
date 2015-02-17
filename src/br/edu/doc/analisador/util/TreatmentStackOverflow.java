@@ -18,10 +18,17 @@ public class TreatmentStackOverflow {
 					content = removeCharAt(content, posicaoInicial);
 				}
 			}
-			
+
 		}
 		return html2text(content);
 
+	}
+
+	public String replaceAndClearTag (String tag){
+		tag = tag.replace("><", ", ");
+		tag = removeChar(tag, '<');
+		tag = removeChar(tag, '>');
+		return tag;
 	}
 
 	public String removeCharAt(String s, int pos) {
@@ -32,4 +39,12 @@ public class TreatmentStackOverflow {
 		return Jsoup.parse(html).text();
 	}
 
+	public String removeChar(String s, char c) {
+		String r = "";
+		for (int i = 0; i < s.length(); i++) {
+			if (s.charAt(i) != c)
+				r += s.charAt(i);
+		}
+		return r;
+	}
 }
