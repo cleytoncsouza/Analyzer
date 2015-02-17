@@ -1,36 +1,25 @@
 package br.edu.doc.analisador.main;
 
-import br.edu.doc.analisador.analysers.Analyser;
-import br.edu.doc.analisador.analysers.ChainOfAnalysers;
-import br.edu.doc.analisador.analysers.ExistsInterrogationMarkAnalyser;
-import br.edu.doc.analisador.analysers.ExistsVocativeAnalyser;
-import br.edu.doc.analisador.analysers.IsOpinionRequestAnalyser;
-import br.edu.doc.analisador.analysers.TextIsTooLongAnalyser;
-import br.edu.doc.analisador.correctors.Corrector;
-import br.edu.doc.analisador.util.TreatmentStackOverflow;
+import java.util.List;
+
+import br.edu.doc.analisador.extractor.Extractor;
+import br.edu.doc.analisador.util.CsvFileReader;
+import br.edu.doc.analisador.util.InQuestion;
+import br.edu.doc.analisador.util.Vector;
+
+
 
 
 public class Principal {
 
 	public static void main(String[] args) {
-	
-//		String question = "onde devo ir comer hoje?";
-//		
-//		Analyser[] analysers = {
-//								new ExistsInterrogationMarkAnalyser(), 
-//								new ExistsVocativeAnalyser(),
-//								new IsOpinionRequestAnalyser(),
-//								new TextIsTooLongAnalyser()
-//								};
-//		
-//		ChainOfAnalysers chainOfAnalysers = new ChainOfAnalysers(analysers);
-//		
-//		Corrector[] correctors = chainOfAnalysers.correct(question);
+		List<InQuestion> questions = new CsvFileReader().readCsvFile("./extra/orientação-a-objetos_test.csv");
+		Vector auxVector = null;
+		for (InQuestion inQuestion : questions) {
+			auxVector = Extractor.vector(inQuestion.getContent());
+		}
 		
-		String tag = "<Java><Php>";
-		System.out.println(new TreatmentStackOverflow().replaceAndClearTag(tag));
-		
-		
+		System.out.println(auxVector);
 	}
 	
 }
